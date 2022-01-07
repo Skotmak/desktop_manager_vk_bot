@@ -210,3 +210,7 @@ class WorkGui(Gui):
             self.ui.l_day.setText('Суббота (нечётная неделя)')
         self.base_changes()
         return
+
+
+    ''' TAB 3 '''
+    
