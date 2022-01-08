@@ -72,7 +72,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
@@ -616,12 +616,12 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          <row/>
          <column>
           <property name="text">
-           <string>Текст сообщения</string>
+           <string>Дата сообщения</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Дата сообщения</string>
+           <string>Текст сообщения</string>
           </property>
          </column>
         </widget>
@@ -643,7 +643,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
         <attribute name="title">
          <string>Список студентов</string>
         </attribute>
-        <widget class="QTableWidget" name="tableWidget">
+        <widget class="QTableWidget" name="stud_tab">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -669,6 +669,9 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          </property>
          <property name="sizeAdjustPolicy">
           <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="showGrid">
+          <bool>true</bool>
          </property>
          <property name="rowCount">
           <number>23</number>
@@ -748,7 +751,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          </column>
          <item row="0" column="0">
           <property name="text">
-           <string>Кочетков</string>
+           <string/>
           </property>
           <property name="textAlignment">
            <set>AlignCenter</set>
@@ -756,7 +759,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          </item>
          <item row="0" column="1">
           <property name="text">
-           <string>Максим</string>
+           <string/>
           </property>
           <property name="textAlignment">
            <set>AlignCenter</set>
@@ -764,7 +767,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          </item>
          <item row="0" column="2">
           <property name="text">
-           <string>Владимирович</string>
+           <string/>
           </property>
           <property name="textAlignment">
            <set>AlignCenter</set>
@@ -772,7 +775,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          </item>
          <item row="0" column="3">
           <property name="text">
-           <string>58261561651</string>
+           <string/>
           </property>
           <property name="textAlignment">
            <set>AlignCenter</set>
@@ -791,6 +794,53 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
            <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
          </item>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>Page</string>
+        </attribute>
+        <widget class="QTreeWidget" name="treeWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>771</width>
+           <height>221</height>
+          </rect>
+         </property>
+         <attribute name="headerCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="headerHighlightSections">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="headerShowSortIndicator" stdset="0">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="headerStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Фамилия</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Имя</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Отчество</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Номер студенческого</string>
+          </property>
+         </column>
         </widget>
        </widget>
       </widget>
