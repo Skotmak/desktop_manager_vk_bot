@@ -72,7 +72,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
@@ -572,7 +572,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
           <string>Выберите дату сообщения:</string>
          </property>
         </widget>
-        <widget class="QTreeWidget" name="treeWidget_2">
+        <widget class="QTreeWidget" name="TW_temp">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -597,7 +597,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
         <attribute name="title">
          <string>Список студентов</string>
         </attribute>
-        <widget class="QTreeWidget" name="treeWidget">
+        <widget class="QTreeWidget" name="stud_tab">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -638,6 +638,34 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
            <string>Номер студенческого</string>
           </property>
          </column>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>620</x>
+           <y>20</y>
+           <width>120</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Добавить
+студента</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="geometry">
+          <rect>
+           <x>620</x>
+           <y>110</y>
+           <width>120</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Удалить
+студента</string>
+         </property>
         </widget>
        </widget>
       </widget>

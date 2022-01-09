@@ -2,6 +2,8 @@ from main import Gui
 from window_work import *
 from PyQt5.QtWidgets import QTableWidgetItem
 
+# разработай окно добавление студентов
+
 class WorkGui(Gui):
     def __init__(self, parent=None):
         super().__init__()
@@ -27,11 +29,7 @@ class WorkGui(Gui):
         # Действия при инициализации второй вкладки
         # подсчёт записей во второй вкладке
         self.count_temp = self.coll_temp.find().count()
-        self.ui.TW_temp.setRowCount(self.count_temp)
-
-        # Добавление заголовков
-        self.ui.TW_temp.horizontalHeader().setVisible(True)
-        self.ui.TW_temp.verticalHeader().setVisible(True)
+        
 
         # Загрузка списка учащихся
         self.download_tab(tab=2)
@@ -41,27 +39,15 @@ class WorkGui(Gui):
         # Действия при инициализации третьей вкладки
         # подсчёт записей в третьей вкладке
         self.count_stud = self.coll_stud.find().count()
-        self.ui.stud_tab.setRowCount(self.count_stud)
-
-        # Добавление заголовков
-        self.ui.stud_tab.horizontalHeader().setVisible(True)
-        self.ui.stud_tab.verticalHeader().setVisible(True)
+        
         
         # Загрузка списка учащихся
         self.download_tab(tab=3)
-
-        ''' Tab 4 '''
-        self.download_tab(tab=4)
         
 
         ''' End tab '''
 
-
-        #self.ui.TW_temp.horizontalHeader().setSectionResizeMode(3, QHeaderView.Stretch)
-        #self.ui.TW_temp.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
-        # обнови дизайн документ там ошибка в заголовках
-        #self.ui.TW_temp.sizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents) проблема в том что не могу поменять ширину столбцов. попоробуй через дизайнер поменять этот параметр
-
+       
         ''' TAB 1 '''
         ''' 0 - чётная неделя   1 - не чётная неделя '''
         self.ui.b_mon_0.clicked.connect(lambda day: self.get_monday(day=0))
@@ -94,29 +80,19 @@ class WorkGui(Gui):
 
 
     def download_tab(self, tab):
-        if tab == 3:
-            self.n_stud = 0
-            for n_stud in range(0, self.count_stud):
-                res_stud = self.coll_stud.find_one({"_id": n_stud})
-                self.l_name = res_stud["l_name"]
-                self.f_name = res_stud["f_name"]
-                self.m_name = res_stud["m_name"]
-                self.number = res_stud["number"]
-                self.ui.stud_tab.setItem(self.n_stud, 0, QTableWidgetItem(self.l_name))
-                self.ui.stud_tab.setItem(self.n_stud, 1,  QTableWidgetItem(self.f_name))
-                self.ui.stud_tab.setItem(self.n_stud, 2, QTableWidgetItem(self.m_name))
-                self.ui.stud_tab.setItem(self.n_stud, 3,  QTableWidgetItem(self.number))
-                self.n_stud += 1
-        elif tab == 2:
+        if tab == 2:
             self.n_temp = 0
             for n_temp in range(0, self.count_temp):
+                item_2 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
+                self.ui.TW_temp.addTopLevelItem(item_2)
                 res_temp = self.coll_temp.find_one({"_id": n_temp})
                 self.date_temp = res_temp["date"]
                 self.text_temp = res_temp["text"]
-                self.ui.TW_temp.setItem(self.n_temp, 0, QTableWidgetItem(self.date_temp))
-                self.ui.TW_temp.setItem(self.n_temp, 1,  QTableWidgetItem(self.text_temp))
+                self.ui.TW_temp.topLevelItem(n_temp).setText(0, self.date_temp)
+                self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
                 self.n_temp += 1
-        elif tab == 4: # (РАБОТАЕТ!!!! ДОДЕЛАЙ ДЛЯ 3 И 2 ВКЛАДКИ!!!)
+                
+        elif tab == 3: # (РАБОТАЕТ!!!! ДОДЕЛАЙ ДЛЯ 3 И 2 ВКЛАДКИ!!!)
             '''
             item_1 = QtWidgets.QTreeWidgetItem(self.ui.treeWidget)
             self.ui.treeWidget.addTopLevelItem(item_1)
@@ -124,17 +100,17 @@ class WorkGui(Gui):
             '''
             self.n_stud = 0
             for n_stud in range(0, self.count_stud):
-                item_1 = QtWidgets.QTreeWidgetItem(self.ui.treeWidget)
-                self.ui.treeWidget.addTopLevelItem(item_1)
+                item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
+                self.ui.stud_tab.addTopLevelItem(item_1)
                 res_stud = self.coll_stud.find_one({"_id": n_stud})
                 self.l_name = res_stud["l_name"]
                 self.f_name = res_stud["f_name"]
                 self.m_name = res_stud["m_name"]
                 self.number = res_stud["number"]
-                self.ui.treeWidget.topLevelItem(n_stud).setText(0, self.l_name)
-                self.ui.treeWidget.topLevelItem(n_stud).setText(1, self.f_name)
-                self.ui.treeWidget.topLevelItem(n_stud).setText(2, self.m_name)
-                self.ui.treeWidget.topLevelItem(n_stud).setText(3, self.number)
+                self.ui.stud_tab.topLevelItem(n_stud).setText(0, self.l_name)
+                self.ui.stud_tab.topLevelItem(n_stud).setText(1, self.f_name)
+                self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_name)
+                self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.number)
                 self.n_stud += 1
 
         return
