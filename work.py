@@ -1,15 +1,21 @@
+import PyQt5
 from main import Gui
+from PyQt5.QtCore import *
 from window_work import *
 from PyQt5.QtWidgets import QTableWidgetItem
+from add_stud import AddStudGui
+from window_add_stud import *
 
-# разработай окно добавление студентов
+
 
 class WorkGui(Gui):
     def __init__(self, parent=None):
+        self.add_stud = AddStudGui()
         super().__init__()
         self.ui = Ui_MainWindow2()
         self.ui.setupUi(self)
         self.centerOnScreen()
+        self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
         self.db = Gui.client.timetable
         self.db_stud = Gui.client.stuff
         self.coll = self.db.ussual
@@ -19,35 +25,18 @@ class WorkGui(Gui):
         #self.current_id_temp = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
+        
 
         # Ставит дату по умолчанию на текущую дату
         self.today = QtCore.QDate.currentDate()
         self.ui.DE_temp.setDate(self.today)
 
 
-        ''' Tab 2 '''
-        # Действия при инициализации второй вкладки
-        # подсчёт записей во второй вкладке
-        self.count_temp = self.coll_temp.find().count()
+        # Загрузка таблиц 2 и 3
+        self.download_tab(tab=2, refresh=0)
+        self.download_tab(tab=3, refresh=0)
         
 
-        # Загрузка списка учащихся
-        self.download_tab(tab=2)
-        
-
-        ''' Tab 3 '''
-        # Действия при инициализации третьей вкладки
-        # подсчёт записей в третьей вкладке
-        self.count_stud = self.coll_stud.find().count()
-        
-        
-        # Загрузка списка учащихся
-        self.download_tab(tab=3)
-        
-
-        ''' End tab '''
-
-       
         ''' TAB 1 '''
         ''' 0 - чётная неделя   1 - не чётная неделя '''
         self.ui.b_mon_0.clicked.connect(lambda day: self.get_monday(day=0))
@@ -65,44 +54,92 @@ class WorkGui(Gui):
         self.ui.b_sat_1.clicked.connect(lambda day: self.get_saturday(day=1))
 
         self.ui.plainTextEdit.textChanged.connect(lambda lab_stat=self.ui.l_status: self.get_focus(lab_stat))
-
         self.ui.clear_PTE.clicked.connect(lambda tab_num: self.clear_button(tab_num=1))
         self.ui.send_changes.clicked.connect(self.send_changes_to_db)
 
         ''' TAB 2 '''
         self.ui.PTE_temp.textChanged.connect(lambda lab_stat=self.ui.l_status_2: self.get_focus(lab_stat))
-
         self.ui.send_chages_temp.clicked.connect(self.send_temp)
         self.ui.clear_PTE_temp.clicked.connect(lambda tab_num: self.clear_button(tab_num=2))
         self.ui.delete_temp_note.clicked.connect(self.delete_temp)
+        self.ui.refresh_btn_tab2.clicked.connect(lambda tab: self.download_tab(tab=2, refresh=1))
+        
+
+
+        ''' TAB 3 '''
+        self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
+        self.ui.refresh_btn_tab3.clicked.connect(lambda tab: self.download_tab(tab=3, refresh=1))
+        # self.ui.delete_stud_btn.clicked.connect(lambda tab: self.delete_all_items_in_tab(del_tab=3)) Доделай функцию delete_all_items_in_tab на удаление определённой строки
+
 
         ''' End tab '''
 
 
-    def download_tab(self, tab):
+        ''' Функции '''
+    
+    def delete_all_items_in_tab(self, del_tab): # https://stackoverflow.com/questions/13062327/how-to-delete-qtreewidgetitem Доделай на удаление определённой строки
+        if del_tab == 2:
+            '''
+            self.temp_tab_items = 0
+            for temp_tab_items in range(0, self.count_temp):
+                self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 0)
+                self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 1)
+                self.temp_tab_items += 1
+            '''
+            return
+        elif del_tab == 3:
+            '''
+            self.stud_tab_items = 0
+            for stud_tab_items in range(0, self.count_stud):
+                self.ui.stud_tab.clear()
+                
+                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 0)
+                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 1)
+                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 2)
+                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 3)
+                
+                self.stud_tab_items += 1
+            '''
+            return
+
+
+    def open_window_add_stud(self):
+        self.add_stud.show()
+
+    def download_tab(self, tab, refresh):
         if tab == 2:
+            '''
+            self.count_temp = self.coll_temp.find().count()
+            if refresh == 1:
+                self.ui.TW_temp.clear()
+                print('deteted tab 2')
             self.n_temp = 0
             for n_temp in range(0, self.count_temp):
                 item_2 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
                 self.ui.TW_temp.addTopLevelItem(item_2)
-                res_temp = self.coll_temp.find_one({"_id": n_temp})
+                res_temp = self.coll_temp.find({"roleEvent": 'temp'})
                 self.date_temp = res_temp["date"]
                 self.text_temp = res_temp["text"]
                 self.ui.TW_temp.topLevelItem(n_temp).setText(0, self.date_temp)
                 self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
                 self.n_temp += 1
-                
-        elif tab == 3: # (РАБОТАЕТ!!!! ДОДЕЛАЙ ДЛЯ 3 И 2 ВКЛАДКИ!!!)
             '''
-            item_1 = QtWidgets.QTreeWidgetItem(self.ui.treeWidget)
-            self.ui.treeWidget.addTopLevelItem(item_1)
-            self.ui.treeWidget.topLevelItem(3).setText(3, "hi")
-            '''
+            print('downloaded tab 2')     
+        elif tab == 3: 
+            self.count_stud = self.coll_stud.find().count()
+            if refresh == 1:
+                self.ui.stud_tab.clear()
+                print('deteted tab 3')
             self.n_stud = 0
             for n_stud in range(0, self.count_stud):
                 item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
                 self.ui.stud_tab.addTopLevelItem(item_1)
-                res_stud = self.coll_stud.find_one({"_id": n_stud})
+                res_stud = self.coll_stud.find({"role": "student"}) # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! не работает поиск здесь
+                #'''
+                print('-----------------')
+                print(res_stud)
+                print('-----------------')
+                #'''
                 self.l_name = res_stud["l_name"]
                 self.f_name = res_stud["f_name"]
                 self.m_name = res_stud["m_name"]
@@ -112,7 +149,7 @@ class WorkGui(Gui):
                 self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_name)
                 self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.number)
                 self.n_stud += 1
-
+            print('downloaded tab 3')
         return
 
 
@@ -276,3 +313,4 @@ class WorkGui(Gui):
 
     ''' TAB 3 '''
     
+

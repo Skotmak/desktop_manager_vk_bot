@@ -72,7 +72,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
@@ -592,6 +592,19 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
          </column>
         </widget>
+        <widget class="QPushButton" name="refresh_btn_tab2">
+         <property name="geometry">
+          <rect>
+           <x>660</x>
+           <y>120</y>
+           <width>120</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Обновить</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -639,7 +652,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
          </column>
         </widget>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="add_stud_btn">
          <property name="geometry">
           <rect>
            <x>620</x>
@@ -653,7 +666,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
 студента</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="delete_stud_btn">
          <property name="geometry">
           <rect>
            <x>620</x>
@@ -665,6 +678,33 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
          <property name="text">
           <string>Удалить
 студента</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="refresh_btn_tab3">
+         <property name="geometry">
+          <rect>
+           <x>620</x>
+           <y>200</y>
+           <width>120</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Обновить</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>620</x>
+           <y>290</y>
+           <width>120</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Изменение
+данных</string>
          </property>
         </widget>
        </widget>

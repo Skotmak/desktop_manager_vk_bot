@@ -6,6 +6,7 @@ from window_auth import *
 from work import *
 
 
+
 class Gui(QtWidgets.QMainWindow):
     client = pymongo.MongoClient("mongodb+srv://user:2467531max@cluster0.najw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
@@ -15,12 +16,15 @@ class Gui(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle("Авторизация в \"Бот РУДН\"")
         self.centerOnScreen()
+        self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
         self.authorization_status = False
         self.auth_win_status = True
         #self.client = pymongo.MongoClient("mongodb+srv://user:2467531max@cluster0.najw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
         self.ui.pushButton.clicked.connect(self.login)
         self.ui.pushButton.setAutoDefault(True)
         self.ui.pushButton_2.clicked.connect(self.register)
+
+        
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if self.auth_win_status == True and event.type() == QtCore.QEvent.KeyPress:
@@ -60,7 +64,7 @@ class Gui(QtWidgets.QMainWindow):
                     message_log = "Успешная авторизация!"
                     QtWidgets.QMessageBox.about(self, "Уведомление", message_log)
                     self.authorization_status = True
-                    window.close()
+                    self.close()
                     self.auth_win_status = False
                     work.show()
                     if login == "max":
@@ -116,4 +120,5 @@ if __name__ == '__main__':
     window = Gui()
     window.show()
     work = WorkGui()
+    
     sys.exit(app.exec_())
