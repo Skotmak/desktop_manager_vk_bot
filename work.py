@@ -1,3 +1,4 @@
+#from typing import Counter
 import PyQt5
 from main import Gui
 from PyQt5.QtCore import *
@@ -6,7 +7,7 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from add_stud import AddStudGui
 from window_add_stud import *
 
-
+all_students = False
 
 class WorkGui(Gui):
     def __init__(self, parent=None):
@@ -25,6 +26,7 @@ class WorkGui(Gui):
         #self.current_id_temp = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
+        
         
 
         # Ставит дату по умолчанию на текущую дату
@@ -104,8 +106,13 @@ class WorkGui(Gui):
 
 
     def open_window_add_stud(self):
-        self.add_stud.show()
+        if all_students == True:
+            message_error_stud = "Превышено количество студентов!\nПожалуйста, проверьте актуальность стдентов"
+            QtWidgets.QMessageBox.critical(self, "Ошибка", message_error_stud)
+        else:
+            self.add_stud.show()
 
+    
     def download_tab(self, tab, refresh):
         if tab == 2:
             '''
@@ -127,31 +134,41 @@ class WorkGui(Gui):
             print('downloaded tab 2')     
         elif tab == 3: 
             self.count_stud = self.coll_stud.find().count()
+            #if self.count_stud >= 50:
+                #all_students = True
             if refresh == 1:
                 self.ui.stud_tab.clear()
                 print('deteted tab 3')
             self.n_stud = 0
-            for n_stud in range(0, self.count_stud):
-                item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
-                self.ui.stud_tab.addTopLevelItem(item_1)
-                res_stud = self.coll_stud.find({"role": "student"}) # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! не работает поиск здесь
-                #'''
-                print('-----------------')
-                print(res_stud)
-                print('-----------------')
-                #'''
-                self.l_name = res_stud["l_name"]
-                self.f_name = res_stud["f_name"]
-                self.m_name = res_stud["m_name"]
-                self.number = res_stud["number"]
-                self.ui.stud_tab.topLevelItem(n_stud).setText(0, self.l_name)
-                self.ui.stud_tab.topLevelItem(n_stud).setText(1, self.f_name)
-                self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_name)
-                self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.number)
-                self.n_stud += 1
+            self.true_count_stud = 0
+            while self.true_count_stud != self.count_stud:
+                for n_stud in range(0, 50):
+                    item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
+                    self.ui.stud_tab.addTopLevelItem(item_1)
+                    res_stud = self.coll_stud.find_one({"_id": n_stud})
+                    #''!'
+                    print('-----------------')
+                    print(n_stud, " = ", res_stud)
+                    print('-----------------')
+                    #''!'
+                    if res_stud == None:
+                        n_stud += 1
+                    else:
+                        self.l_name = res_stud["l_name"]
+                        self.f_name = res_stud["f_name"]
+                        self.m_name = res_stud["m_name"]
+                        self.number = res_stud["number"]
+                        self.ui.stud_tab.topLevelItem(n_stud).setText(0, self.l_name)
+                        self.ui.stud_tab.topLevelItem(n_stud).setText(1, self.f_name)
+                        self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_name)
+                        self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.number)
+                        self.n_stud += 1
+                        self.true_count_stud += 1
+                        if self.true_count_stud == self.count_stud:
+                            break
             print('downloaded tab 3')
         return
-
+    
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if self.auth_win_status == True and event.type() == QtCore.QEvent.KeyPress:
@@ -313,4 +330,3 @@ class WorkGui(Gui):
 
     ''' TAB 3 '''
     
-

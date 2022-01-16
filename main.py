@@ -7,6 +7,7 @@ from work import *
 
 
 
+
 class Gui(QtWidgets.QMainWindow):
     client = pymongo.MongoClient("mongodb+srv://user:2467531max@cluster0.najw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 

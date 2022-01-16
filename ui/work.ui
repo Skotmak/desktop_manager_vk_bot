@@ -72,7 +72,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
@@ -581,6 +581,9 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
            <height>241</height>
           </rect>
          </property>
+         <attribute name="headerShowSortIndicator" stdset="0">
+          <bool>true</bool>
+         </attribute>
          <column>
           <property name="text">
            <string>Дата события</string>
@@ -619,6 +622,9 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
            <height>611</height>
           </rect>
          </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
          <attribute name="headerCascadingSectionResizes">
           <bool>false</bool>
          </attribute>
@@ -626,7 +632,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
           <bool>false</bool>
          </attribute>
          <attribute name="headerShowSortIndicator" stdset="0">
-          <bool>false</bool>
+          <bool>true</bool>
          </attribute>
          <attribute name="headerStretchLastSection">
           <bool>true</bool>

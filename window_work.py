@@ -195,6 +195,7 @@ class Ui_MainWindow2(object):
         self.TW_temp = QtWidgets.QTreeWidget(self.tab_2)
         self.TW_temp.setGeometry(QtCore.QRect(0, 30, 651, 241))
         self.TW_temp.setObjectName("TW_temp")
+        self.TW_temp.header().setSortIndicatorShown(True)
         self.refresh_btn_tab2 = QtWidgets.QPushButton(self.tab_2)
         self.refresh_btn_tab2.setGeometry(QtCore.QRect(660, 120, 120, 80))
         self.refresh_btn_tab2.setObjectName("refresh_btn_tab2")
@@ -203,10 +204,11 @@ class Ui_MainWindow2(object):
         self.tab.setObjectName("tab")
         self.stud_tab = QtWidgets.QTreeWidget(self.tab)
         self.stud_tab.setGeometry(QtCore.QRect(0, 0, 611, 611))
+        self.stud_tab.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.stud_tab.setObjectName("stud_tab")
         self.stud_tab.header().setCascadingSectionResizes(False)
         self.stud_tab.header().setHighlightSections(False)
-        self.stud_tab.header().setSortIndicatorShown(False)
+        self.stud_tab.header().setSortIndicatorShown(True)
         self.stud_tab.header().setStretchLastSection(True)
         self.add_stud_btn = QtWidgets.QPushButton(self.tab)
         self.add_stud_btn.setGeometry(QtCore.QRect(620, 20, 120, 80))
@@ -225,7 +227,7 @@ class Ui_MainWindow2(object):
         MainWindow2.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow2)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow2)
 
     def retranslateUi(self, MainWindow2):
