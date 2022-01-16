@@ -9,7 +9,11 @@ from window_add_stud import *
 
 all_students = False
 
+
 class WorkGui(Gui):
+
+    refresh_tab3 = False
+    
     def __init__(self, parent=None):
         self.add_stud = AddStudGui()
         super().__init__()
@@ -26,7 +30,9 @@ class WorkGui(Gui):
         #self.current_id_temp = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
-        
+        if self.refresh_tab3 != False:
+            self.download_tab(tab=3, refresh=1)
+            self.refresh_tab3 = False
         
 
         # Ставит дату по умолчанию на текущую дату

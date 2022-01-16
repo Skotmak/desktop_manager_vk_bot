@@ -22,6 +22,7 @@ class AddStudGui(Gui):
         self.ui.close_btn.clicked.connect(self.close_add_stud)
         self.ui.add_btn.clicked.connect(self.add_new_stud)
         self.ui.clean_pte_btn.clicked.connect(self.clear_button_stud)
+        
 
         
         
@@ -53,6 +54,13 @@ class AddStudGui(Gui):
         self.ui.pte_number.setText('')
         self.ui.status_new_stud.setText('')
         #work.download_tab(tab=3, refresh=1)
+        # нихрена не видит WorkGui() и в этом вся проблема
+
+
+        self.kek()
+        #kek = WorkGui()
+        #kek.refresh_tab3 = True
+        
         return
 
 
@@ -76,6 +84,11 @@ class AddStudGui(Gui):
                 print('x = ', x)
                 print('Success!')
                 # Добавь сюда обновление таблицы после добавления студента
+                #self.WorkGui(Gui).refresh_tab3 = True
+                self.kek()
+                print('переменная refresh_tab3 изменена')
+                message_add_stud = "Добавлен студент с номером: " + str(x)
+                QtWidgets.QMessageBox.critical(self, "Ошибка", message_add_stud)
                 self.close()
                 break
             else:
@@ -90,7 +103,7 @@ class AddStudGui(Gui):
 
 
         
-        
+
         
         
         

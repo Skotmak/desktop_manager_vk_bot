@@ -10,6 +10,7 @@ from work import *
 
 class Gui(QtWidgets.QMainWindow):
     client = pymongo.MongoClient("mongodb+srv://user:2467531max@cluster0.najw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    
 
     def __init__(self, parent=None):
         super().__init__()
@@ -24,6 +25,9 @@ class Gui(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.login)
         self.ui.pushButton.setAutoDefault(True)
         self.ui.pushButton_2.clicked.connect(self.register)
+        
+        
+        
 
         
 
@@ -68,6 +72,7 @@ class Gui(QtWidgets.QMainWindow):
                     self.close()
                     self.auth_win_status = False
                     work.show()
+                    print(work)
                     if login == "max":
                         work.ui.l_name.setText("Привет, Макс!")
                     elif login == "maftuna":
@@ -92,7 +97,7 @@ class Gui(QtWidgets.QMainWindow):
         message_reg = "Регистрация временно не работает!"
         QtWidgets.QMessageBox.critical(self, "Ошибка", message_reg)
         ''' ! Регистрация не настроена ! '''
-'''
+    '''
         if self.authorization_status is False:
             result = self.check_data()
             if result == "value_exists":
@@ -113,13 +118,24 @@ class Gui(QtWidgets.QMainWindow):
         else:
             message = "Вы уже авторизованы!"
             QtWidgets.QMessageBox.about(self, "Ошибка", message)
-'''
+    '''
 
+
+    def kek(self):
+        
+        message_gui = "wow kek! "
+        QtWidgets.QMessageBox.critical(self, "Ошибка", message_gui)
+        #work = WorkGui()
+        print(work)  # Не видит больше этот класс
+        work.download_tab(tab=3, refresh=1)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
+    #window.close()    
     work = WorkGui()
+    #work.show()
     
     sys.exit(app.exec_())
+
