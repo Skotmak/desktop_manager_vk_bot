@@ -3,14 +3,13 @@ import pymongo #pip install pymongo[srv]
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from window_auth import *
-from work import *
+import work #from work import *
 
 
 
 
 class Gui(QtWidgets.QMainWindow):
     client = pymongo.MongoClient("mongodb+srv://user:2467531max@cluster0.najw2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    
 
     def __init__(self, parent=None):
         super().__init__()
@@ -27,10 +26,6 @@ class Gui(QtWidgets.QMainWindow):
         self.ui.pushButton_2.clicked.connect(self.register)
         
         
-        
-
-        
-
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if self.auth_win_status == True and event.type() == QtCore.QEvent.KeyPress:
             if event.key() == 16777220 or event.key() == 16777221: # (F12 16777275) (ENTER 16777220 or 16777221 - this for NUMPAD)
@@ -72,7 +67,6 @@ class Gui(QtWidgets.QMainWindow):
                     self.close()
                     self.auth_win_status = False
                     work.show()
-                    print(work)
                     if login == "max":
                         work.ui.l_name.setText("Привет, Макс!")
                     elif login == "maftuna":
@@ -120,22 +114,25 @@ class Gui(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.about(self, "Ошибка", message)
     '''
 
-
-    def kek(self):
+    '''
+    def kek(self): удали как получится сделать функцию обновления после добавления студентов
         
         message_gui = "wow kek! "
         QtWidgets.QMessageBox.critical(self, "Ошибка", message_gui)
         #work = WorkGui()
+        print("--- --- ---")
         print(work)  # Не видит больше этот класс
-        work.download_tab(tab=3, refresh=1)
+        print("--- --- ---")
+        #work.WorkGui().download_tab(3, 1)
+    '''       
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
-    #window.close()    
-    work = WorkGui()
-    #work.show()
+    window.close()    
+    work = work.WorkGui()
+    work.show()
     
     sys.exit(app.exec_())
 

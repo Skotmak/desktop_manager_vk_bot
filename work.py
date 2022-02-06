@@ -1,38 +1,31 @@
-#from typing import Counter
-import PyQt5
-from main import Gui
+#import PyQt5
+import main
 from PyQt5.QtCore import *
-from window_work import *
+import window_work
 from PyQt5.QtWidgets import QTableWidgetItem
-from add_stud import AddStudGui
+import add_stud
 from window_add_stud import *
 
 all_students = False
 
-
-class WorkGui(Gui):
-
-    refresh_tab3 = False
-    
+class WorkGui(main.Gui):
     def __init__(self, parent=None):
-        self.add_stud = AddStudGui()
+        self.add_stud = add_stud.AddStudGui()
         super().__init__()
-        self.ui = Ui_MainWindow2()
+        self.ui = window_work.Ui_MainWindow2()
         self.ui.setupUi(self)
         self.centerOnScreen()
         self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
-        self.db = Gui.client.timetable
-        self.db_stud = Gui.client.stuff
+        self.db = main.Gui.client.timetable
+        self.db_stud = main.Gui.client.stuff
         self.coll = self.db.ussual
         self.coll_temp = self.db.temp
         self.coll_stud = self.db_stud.students
         self.current_id = 0
-        #self.current_id_temp = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
-        if self.refresh_tab3 != False:
-            self.download_tab(tab=3, refresh=1)
-            self.refresh_tab3 = False
+        
+
         
 
         # Ставит дату по умолчанию на текущую дату
@@ -41,8 +34,8 @@ class WorkGui(Gui):
 
 
         # Загрузка таблиц 2 и 3
-        self.download_tab(tab=2, refresh=0)
-        self.download_tab(tab=3, refresh=0)
+        ###self.download_tab(tab=2, refresh=0)
+        ###self.download_tab(tab=3, refresh=0)
         
 
         ''' TAB 1 '''
@@ -72,11 +65,10 @@ class WorkGui(Gui):
         self.ui.delete_temp_note.clicked.connect(self.delete_temp)
         self.ui.refresh_btn_tab2.clicked.connect(lambda tab: self.download_tab(tab=2, refresh=1))
         
-
-
         ''' TAB 3 '''
         self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
         self.ui.refresh_btn_tab3.clicked.connect(lambda tab: self.download_tab(tab=3, refresh=1))
+        
         # self.ui.delete_stud_btn.clicked.connect(lambda tab: self.delete_all_items_in_tab(del_tab=3)) Доделай функцию delete_all_items_in_tab на удаление определённой строки
 
 
@@ -137,14 +129,16 @@ class WorkGui(Gui):
                 self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
                 self.n_temp += 1
             '''
-            print('downloaded tab 2')     
+            #print('downloaded tab 2')     
         elif tab == 3: 
             self.count_stud = self.coll_stud.find().count()
-            #if self.count_stud >= 50:
-                #all_students = True
+            if self.count_stud >= 50:
+                self.all_students = True
             if refresh == 1:
                 self.ui.stud_tab.clear()
+                print("--- --- ---")
                 print('deteted tab 3')
+                print("--- --- ---")
             self.n_stud = 0
             self.true_count_stud = 0
             while self.true_count_stud != self.count_stud:
@@ -168,12 +162,14 @@ class WorkGui(Gui):
                         self.ui.stud_tab.topLevelItem(n_stud).setText(1, self.f_name)
                         self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_name)
                         self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.number)
+                        # !!!!!!!!!! Всё норм но при обновлении окно не обновляется
                         self.n_stud += 1
                         self.true_count_stud += 1
                         if self.true_count_stud == self.count_stud:
                             break
             print('downloaded tab 3')
         return
+        
     
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
@@ -335,4 +331,78 @@ class WorkGui(Gui):
 
 
     ''' TAB 3 '''
-    
+
+
+
+
+'''
+db_stud = main.Gui.client.stuff
+coll_stud = db_stud.students
+
+def download_tab(tab, refresh):
+    #self_work = WorkGui()
+    if 1 == 1:
+        if tab == 2:
+            ''!'
+            self.count_temp = self.coll_temp.find().count()
+            if refresh == 1:
+                self.ui.TW_temp.clear()
+                print('deteted tab 2')
+            self.n_temp = 0
+            for n_temp in range(0, self.count_temp):
+                item_2 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
+                self.ui.TW_temp.addTopLevelItem(item_2)
+                res_temp = self.coll_temp.find({"roleEvent": 'temp'})
+                self.date_temp = res_temp["date"]
+                self.text_temp = res_temp["text"]
+                self.ui.TW_temp.topLevelItem(n_temp).setText(0, self.date_temp)
+                self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
+                self.n_temp += 1
+            ''!'
+            #print('downloaded tab 2')     
+        elif tab == 3: 
+            count_stud = coll_stud.find().count()
+            if count_stud >= 50:
+                all_students = True
+            if refresh == 1:
+                WorkGui().ui.stud_tab.clear()
+                print("--- --- ---")
+                print('deteted tab 3')
+                print("--- --- ---")
+            n_stud = 0
+            true_count_stud = 0
+            while true_count_stud != count_stud:
+                for n_stud in range(0, 50):
+                    item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.stud_tab) # self.ui.stud_tab
+                    WorkGui().ui.stud_tab.addTopLevelItem(WorkGui().item_1)
+                    res_stud = coll_stud.find_one({"_id": n_stud})
+                    #''!'
+                    print('-----------------')
+                    print(n_stud, " = ", res_stud)
+                    print('-----------------')
+                    #''!'
+                    if res_stud == None:
+                        n_stud += 1
+                    else:
+                        l_name = res_stud["l_name"]
+                        f_name = res_stud["f_name"]
+                        m_name = res_stud["m_name"]
+                        number = res_stud["number"]
+                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(0, l_name)
+                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(1, f_name)
+                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(2, m_name)
+                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(3, number)
+                        n_stud += 1
+                        true_count_stud += 1
+                        if true_count_stud == count_stud:
+                            break
+            print('downloaded tab 3')
+        return
+'''
+
+
+if __name__ == '__main__':  
+    self_work = WorkGui()
+    #self_work.download_tab(tab=2, refresh=0)
+
+    #download_tab(tab=3, refresh=0)
