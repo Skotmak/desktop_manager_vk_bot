@@ -16,11 +16,11 @@ class WorkGui(main.Gui):
         self.ui.setupUi(self)
         self.centerOnScreen()
         self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
-        self.db = main.Gui.client.timetable
-        self.db_stud = main.Gui.client.stuff
-        self.coll = self.db.ussual
-        self.coll_temp = self.db.temp
-        self.coll_stud = self.db_stud.students
+        #self.db = main.Gui.client.timetable
+        #self.db_stud = main.Gui.client.stuff
+        #self.coll = self.db.ussual
+        #self.coll_temp = self.db.temp
+        #self.coll_stud = self.db_stud.students
         self.current_id = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)

@@ -14,8 +14,8 @@ class AddStudGui(main.Gui):
         self.ui.setupUi(self)
         self.centerOnScreen()
         self.setWindowModality(Qt.ApplicationModal) # эта функция блокирует использование другого окна пока это окно работает
-        self.db_stud = main.Gui().client.stuff
-        self.coll_stud = self.db_stud.students
+        #self.db_stud = main.Gui().client.stuff 
+        #self.coll_stud = self.db_stud.students
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
 
         self.ui.close_btn.clicked.connect(self.close_add_stud)
