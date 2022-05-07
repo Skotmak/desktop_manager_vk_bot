@@ -44,6 +44,7 @@ class Gui(QtWidgets.QMainWindow):
         login = self.ui.lineEdit.text()
         passw = self.ui.lineEdit_2.text()
         cur1 = self.client.cursor()
+        search_login = 0
         # Пытаемся найти ник в коллекции
         if login and passw:
             for search_login in cur1.execute("""SELECT login FROM users WHERE login = (?)""", (login,)):
@@ -64,6 +65,7 @@ class Gui(QtWidgets.QMainWindow):
                 login = self.ui.lineEdit.text()
                 passw = self.ui.lineEdit_2.text()
                 cur1 = self.client.cursor()
+                user_document = 0
                 for user_document in cur1.execute("""SELECT password FROM users WHERE password = ?""", (passw,)):
                     print('***', user_document, '***')
                 if user_document and passw == user_document[0]:
