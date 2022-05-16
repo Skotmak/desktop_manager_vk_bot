@@ -53,6 +53,8 @@ class Gui(QtWidgets.QMainWindow):
             if search_login:  # Если нашли значение
                 return "value_exists"
             else:  # Если значения нет
+                print(search_login)
+                print(login)
                 return "value_not_found"
         # Если данные не заполнены
         else:
@@ -70,6 +72,7 @@ class Gui(QtWidgets.QMainWindow):
                     print('***', user_document, '***')
                 if user_document and passw == user_document[0]:
                     message_log = "Успешная авторизация!"
+                    print('----- success login -----')
                     QtWidgets.QMessageBox.about(
                         self, "Уведомление", message_log)
                     self.authorization_status = True
@@ -139,8 +142,8 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
-    # window.close() # ! это закрывает первое окно с авторизацией
+    window.close()  # ! это закрывает первое окно с авторизацией
     work = work.WorkGui()
-    # work.show() # ! это открывает второе окно с рабочей областью
+    work.show()  # ! это открывает второе окно с рабочей областью
 
     sys.exit(app.exec_())
