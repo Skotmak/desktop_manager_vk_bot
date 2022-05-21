@@ -34,6 +34,7 @@ class WorkGui(main.Gui):
         # Загрузка таблиц 2 и 3
         ###self.download_tab(tab=2, refresh=0)
         ###self.download_tab(tab=3, refresh=0)
+        self.download_tab(tab=2, refresh=0)
         self.download_tab(tab=3, refresh=0)
 
         ''' TAB 1 '''
@@ -130,15 +131,54 @@ class WorkGui(main.Gui):
                 self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
                 self.n_temp += 1
             '''
-            #print('downloaded tab 2')
+            
+            timetable_temp_cursor = self.client.cursor()
+            timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
+            temp_results = timetable_temp_cursor.fetchall()
+            self.count_temp_event = len(temp_results)
+            print("count temp event: ", self.count_temp_event)
+            timetable_temp_cursor.close()
+            if refresh == 1:
+                self.ui.TW_temp.clear()
+                print("--- --- ---")
+                print('deteted tab 2')
+                print("--- --- ---")
+            #self.res_stud_tab2 = 0
+            for n_stud_tab2 in range(0, self.count_temp_event):
+                item_1 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
+                self.ui.TW_temp.addTopLevelItem(item_1)
+                cursor_download_tab2 = self.client.cursor()
+                print(n_stud_tab2)
+                cursor_download_tab2.execute(
+                    """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
+                self.res_stud_tab2 = cursor_download_tab2.fetchone()
+                print('***', self.res_stud_tab2, '***')
+                cursor_download_tab2.close()
+                print('-----------------')
+                print(n_stud_tab2, " = ", self.res_stud_tab2[0])
+                print('-----------------')
+                if self.res_stud_tab2 == None:
+                    n_stud_tab2 += 1
+                else:
+                    self.text_event_temp = self.res_stud_tab2[1]
+                    print('text_event_temp = ' + self.text_event_temp)
+                    self.date_event_temp = self.res_stud_tab2[2]
+                    print('date_event_temp = ' + self.date_event_temp)
+                    self.ui.TW_temp.topLevelItem(
+                        n_stud_tab2).setText(0, self.res_stud_tab2[2])
+                    self.ui.TW_temp.topLevelItem(
+                        n_stud_tab2).setText(1, self.res_stud_tab2[1])
+                    # !!!!!!!!!! Всё норм но при обновлении окно не обновляется
+                    n_stud_tab2 += 1
+            print('downloaded tab 2')
+            
         elif tab == 3:
-            # self.count_stud = self.coll_stud.find().count()
-            cursor = self.client.cursor()
-            cursor.execute("""SELECT * FROM students""")
-            results = cursor.fetchall()
+            stud_cursor = self.client.cursor()
+            stud_cursor.execute("""SELECT * FROM students""")
+            results = stud_cursor.fetchall()
             self.count_stud = len(results)
-            print("count: ", self.count_stud)
-            cursor.close()
+            print("count students: ", self.count_stud)
+            stud_cursor.close()
             if self.count_stud >= 50:
                 self.all_students = True
             if refresh == 1:
@@ -148,81 +188,47 @@ class WorkGui(main.Gui):
                 print("--- --- ---")
             #self.n_stud = 0
             self.true_count_stud = 0
-            self.res_stud = 0
+            self.res_stud_tab3 = 0
             while self.true_count_stud != self.count_stud:
-                for n_stud in range(0, 50):
+                for n_stud_tab3 in range(0, 50):
                     item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
                     self.ui.stud_tab.addTopLevelItem(item_1)
-                    cursor_download_tab = self.client.cursor()
-                    #res_stud = self.coll_stud.find_one({"_id": n_stud})
-                    #self.search_stud = 0
-                    '''
-                    for self.search_stud in cursor_download_tab.execute("""SELECT * FROM students"""):
-                        print('1***1', self.search_stud, '1***1')
-                        self.res_stud = cursor_download_tab.fetchone()
-                        print('2***2', self.res_stud, '2***2')
-                    '''
-                    # for self.res_stud in cursor_download_tab.execute("""SELECT * FROM students WHERE id_students = (?)""", (n_stud,)):
-                    # self.search_stud =
-                    print(n_stud)
-                    cursor_download_tab.execute(
-                        """SELECT * FROM students WHERE id_students = (?)""", (n_stud,))
-                    self.res_stud = cursor_download_tab.fetchone()
-                    print('***', self.res_stud, '***')
-                    #    print('***', self.res_stud, '***')
-                    cursor_download_tab.close()
-                    # ''!'
+                    cursor_download_tab3 = self.client.cursor()
+                    print(n_stud_tab3)
+                    cursor_download_tab3.execute(
+                        """SELECT * FROM students WHERE id_students = (?)""", (n_stud_tab3,))
+                    self.res_stud_tab3 = cursor_download_tab3.fetchone()
+                    print('***', self.res_stud_tab3, '***')
+                    cursor_download_tab3.close()
                     print('-----------------')
-                    print(n_stud, " = ", self.res_stud[0])
+                    print(n_stud_tab3, " = ", self.res_stud_tab3[0])
                     print('-----------------')
-                    # ''!'
-                    if self.res_stud == None:
-                        n_stud += 1
+                    if self.res_stud_tab3 == None:
+                        n_stud_tab3 += 1
                     else:
-                        #self.l_name = res_stud["l_name"]
-                        #self.f_name = res_stud["f_name"]
-                        #self.m_name = res_stud["m_name"]
-                        #self.number = res_stud["number"]
-                        self.l_nameSQL = str(self.res_stud[2])
+                        self.l_nameSQL = str(self.res_stud_tab3[2])
                         print('l_name = ' + self.l_nameSQL)
-                        self.f_nameSQL = str(self.res_stud[1])
+                        self.f_nameSQL = str(self.res_stud_tab3[1])
                         print('f_name = ' + self.f_nameSQL)
-                        self.m_nameSQL = str(self.res_stud[3])
+                        self.m_nameSQL = str(self.res_stud_tab3[3])
                         print('m_name = ' + self.m_nameSQL)
-                        self.numberSQL = str(self.res_stud[4])
+                        self.numberSQL = str(self.res_stud_tab3[4])
                         print('number = ', self.numberSQL)
-                        '''
-                        self.ui.stud_tab.topLevelItem(n_stud).setText(0, self.l_nameSQL)
-                        self.ui.stud_tab.topLevelItem(n_stud).setText(1, self.f_nameSQL)
-                        self.ui.stud_tab.topLevelItem(n_stud).setText(2, self.m_nameSQL)
-                        self.ui.stud_tab.topLevelItem(n_stud).setText(3, self.numberSQL)
-                        '''
-                        '''
-                        tree = self.ui.stud_tab  # replace every 'tree' with your QTreeWidget
-                        strings = [n_stud, self.l_nameSQL, self.f_nameSQL, self.m_nameSQL, self.numberSQL]
-                        l = []  # list of QTreeWidgetItem to add
-                        for i in strings:
-                            l.append(QtWidgets.QTreeWidgetItem(i))  # create QTreeWidgetItem's and append them
-                        tree.addTopLevelItems(l)  # add everything to the tree
-                        '''
-                        #rowcount = self.ui.stud_tab.topLevelItemCount()
-                        '''self.ui.stud_tab.addTopLevelItem(
-                           QtWidgets.QTreeWidgetItem(n_stud))'''
                         self.ui.stud_tab.topLevelItem(
-                            n_stud).setText(0, self.l_nameSQL)
+                            n_stud_tab3).setText(0, self.l_nameSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud).setText(1, self.f_nameSQL)
+                            n_stud_tab3).setText(1, self.f_nameSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud).setText(2, self.m_nameSQL)
+                            n_stud_tab3).setText(2, self.m_nameSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud).setText(3, self.numberSQL)
-
+                            n_stud_tab3).setText(3, self.numberSQL)
                         # !!!!!!!!!! Всё норм но при обновлении окно не обновляется
-                        n_stud += 1
+                        n_stud_tab3 += 1
                         self.true_count_stud += 1
                         if self.true_count_stud == self.count_stud:
                             break
             print('downloaded tab 3')
+            
         return
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
