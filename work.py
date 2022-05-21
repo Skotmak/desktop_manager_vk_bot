@@ -257,9 +257,18 @@ class WorkGui(main.Gui):
     def send_changes_to_db(self):
         if self.current_id != 0:
             self.text = self.ui.plainTextEdit.toPlainText()
-            current = {"_id": str(self.current_id)}
-            new_data = {"$set": {"shedule": self.text}}
-            self.coll.update_one(current, new_data)
+            #current = {"_id": str(self.current_id)}
+            #new_data = {"$set": {"shedule": self.text}}
+            #self.coll.update_one(current, new_data)
+            
+            self.send_id_message_tab1 = self.current_id
+            self.send_id_and_text = (self.text, self.send_id_message_tab1)
+            cursor_send_day = self.client.cursor()
+            cursor_send_day.execute(
+                """UPDATE timetable_ussual SET text_event_ussual = ? WHERE id_event_ussual = ?""", self.send_id_and_text)
+            self.client.commit()
+            cursor_send_day.close()
+
             self.ui.l_status.setText('Изменения приняты!')
             return
         else:
