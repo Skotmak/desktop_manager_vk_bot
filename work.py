@@ -114,24 +114,7 @@ class WorkGui(main.Gui):
             self.add_stud.show()
 
     def download_tab(self, tab, refresh):
-        if tab == 2:
-            '''
-            self.count_temp = self.coll_temp.find().count()
-            if refresh == 1:
-                self.ui.TW_temp.clear()
-                print('deteted tab 2')
-            self.n_temp = 0
-            for n_temp in range(0, self.count_temp):
-                item_2 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
-                self.ui.TW_temp.addTopLevelItem(item_2)
-                res_temp = self.coll_temp.find({"roleEvent": 'temp'})
-                self.date_temp = res_temp["date"]
-                self.text_temp = res_temp["text"]
-                self.ui.TW_temp.topLevelItem(n_temp).setText(0, self.date_temp)
-                self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
-                self.n_temp += 1
-            '''
-            
+        if tab == 2:         
             timetable_temp_cursor = self.client.cursor()
             timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
             temp_results = timetable_temp_cursor.fetchall()
@@ -143,12 +126,10 @@ class WorkGui(main.Gui):
                 print("--- --- ---")
                 print('deteted tab 2')
                 print("--- --- ---")
-            #self.res_stud_tab2 = 0
             for n_stud_tab2 in range(0, self.count_temp_event):
                 item_1 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
                 self.ui.TW_temp.addTopLevelItem(item_1)
                 cursor_download_tab2 = self.client.cursor()
-                print(n_stud_tab2)
                 cursor_download_tab2.execute(
                     """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
                 self.res_stud_tab2 = cursor_download_tab2.fetchone()
@@ -168,10 +149,8 @@ class WorkGui(main.Gui):
                         n_stud_tab2).setText(0, self.res_stud_tab2[2])
                     self.ui.TW_temp.topLevelItem(
                         n_stud_tab2).setText(1, self.res_stud_tab2[1])
-                    # !!!!!!!!!! Всё норм но при обновлении окно не обновляется
                     n_stud_tab2 += 1
             print('downloaded tab 2')
-            
         elif tab == 3:
             stud_cursor = self.client.cursor()
             stud_cursor.execute("""SELECT * FROM students""")
@@ -186,7 +165,6 @@ class WorkGui(main.Gui):
                 print("--- --- ---")
                 print('deteted tab 3')
                 print("--- --- ---")
-            #self.n_stud = 0
             self.true_count_stud = 0
             self.res_stud_tab3 = 0
             while self.true_count_stud != self.count_stud:
@@ -222,13 +200,11 @@ class WorkGui(main.Gui):
                             n_stud_tab3).setText(2, self.m_nameSQL)
                         self.ui.stud_tab.topLevelItem(
                             n_stud_tab3).setText(3, self.numberSQL)
-                        # !!!!!!!!!! Всё норм но при обновлении окно не обновляется
                         n_stud_tab3 += 1
                         self.true_count_stud += 1
                         if self.true_count_stud == self.count_stud:
                             break
             print('downloaded tab 3')
-            
         return
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
@@ -298,85 +274,146 @@ class WorkGui(main.Gui):
     # 0 - чётная неделя, 1 - не чётная неделя
     def get_monday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "10"})
             self.current_id = 10
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Понедельник (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "11"})
             self.current_id = 11
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Понедельник (нечётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
     def get_tuesday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "20"})
             self.current_id = 20
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Вторник (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "21"})
             self.current_id = 21
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Вторник (нечётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
     def get_wednesday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "30"})
             self.current_id = 30
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Среда (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "31"})
             self.current_id = 31
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Среда (нечётная неделя)')
+
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
     def get_thursday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "40"})
             self.current_id = 40
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Четверг (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "41"})
             self.current_id = 41
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Четверг (нечётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
     def get_friday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "50"})
             self.current_id = 50
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Пятница (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "51"})
             self.current_id = 51
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Пятница (нечётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
     def get_saturday(self, day):
         if day == 0:
-            res = self.coll.find_one({"_id": "60"})
             self.current_id = 60
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Суббота (чётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         elif day == 1:
-            res = self.coll.find_one({"_id": "61"})
             self.current_id = 61
-            self.ui.plainTextEdit.setPlainText(res["shedule"])
             self.ui.l_day.setText('Суббота (нечётная неделя)')
+            cursor_get_day = self.client.cursor()
+            cursor_get_day.execute(
+                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+            self.res_timetable = cursor_get_day.fetchone()
+            print('***', self.res_timetable, '***')
+            cursor_get_day.close()
+            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
         return
 
