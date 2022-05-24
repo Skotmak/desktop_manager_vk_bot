@@ -178,12 +178,12 @@ class WorkGui(main.Gui):
                     self.res_stud_tab3 = cursor_download_tab3.fetchone()
                     print('***', self.res_stud_tab3, '***')
                     cursor_download_tab3.close()
-                    print('-----------------')
-                    print(n_stud_tab3, " = ", self.res_stud_tab3[0])
-                    print('-----------------')
                     if self.res_stud_tab3 == None:
                         n_stud_tab3 += 1
                     else:
+                        print('-----------------')
+                        print(n_stud_tab3, " = ", self.res_stud_tab3[0])
+                        print('-----------------')
                         self.l_nameSQL = str(self.res_stud_tab3[2])
                         print('l_name = ' + self.l_nameSQL)
                         self.f_nameSQL = str(self.res_stud_tab3[1])
