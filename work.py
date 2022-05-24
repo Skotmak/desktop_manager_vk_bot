@@ -1,4 +1,3 @@
-#import PyQt5
 import main
 from PyQt5.QtCore import *
 import window_work
@@ -18,11 +17,6 @@ class WorkGui(main.Gui):
         self.centerOnScreen()
         self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint |
                             QtCore.Qt.WindowCloseButtonHint)
-        #self.db = main.Gui.client.timetable
-        #self.db_stud = main.Gui.client.stuff
-        #self.coll = self.db.ussual
-        #self.coll_temp = self.db.temp
-        #self.coll_stud = self.db_stud.students
         self.current_id = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
@@ -32,10 +26,10 @@ class WorkGui(main.Gui):
         self.ui.DE_temp.setDate(self.today)
 
         # Загрузка таблиц 2 и 3
-        ###self.download_tab(tab=2, refresh=0)
-        ###self.download_tab(tab=3, refresh=0)
-        self.download_tab(tab=2, refresh=0)
-        self.download_tab(tab=3, refresh=0)
+        if main.frirst_update_on_start == 0:
+            self.download_tab(tab=2, refresh=0)
+            self.download_tab(tab=3, refresh=0)
+            main.frirst_update_on_start += 1
 
         ''' TAB 1 '''
         ''' 0 - чётная неделя   1 - не чётная неделя '''
@@ -73,12 +67,17 @@ class WorkGui(main.Gui):
         self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
         self.ui.refresh_btn_tab3.clicked.connect(
             lambda tab: self.download_tab(tab=3, refresh=1))
+        self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
 
         # self.ui.delete_stud_btn.clicked.connect(lambda tab: self.delete_all_items_in_tab(del_tab=3)) Доделай функцию delete_all_items_in_tab на удаление определённой строки
 
         ''' End tab '''
 
         ''' Функции '''
+
+    def onItemClicked(self):
+        sel_item = self.ui.stud_tab.currentItem()
+        print(sel_item.text(0))
 
     # https://stackoverflow.com/questions/13062327/how-to-delete-qtreewidgetitem Доделай на удаление определённой строки
     def delete_all_items_in_tab(self, del_tab):
@@ -114,12 +113,12 @@ class WorkGui(main.Gui):
             self.add_stud.show()
 
     def download_tab(self, tab, refresh):
-        if tab == 2:         
+        if tab == 2:
             timetable_temp_cursor = self.client.cursor()
             timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
             temp_results = timetable_temp_cursor.fetchall()
             self.count_temp_event = len(temp_results)
-            print("count temp event: ", self.count_temp_event)
+            #print("count temp event: ", self.count_temp_event)
             timetable_temp_cursor.close()
             if refresh == 1:
                 self.ui.TW_temp.clear()
@@ -133,18 +132,18 @@ class WorkGui(main.Gui):
                 cursor_download_tab2.execute(
                     """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
                 self.res_stud_tab2 = cursor_download_tab2.fetchone()
-                print('***', self.res_stud_tab2, '***')
+                #print('***', self.res_stud_tab2, '***')
                 cursor_download_tab2.close()
-                print('-----------------')
-                print(n_stud_tab2, " = ", self.res_stud_tab2[0])
-                print('-----------------')
+                # print('-----------------')
+                #print(n_stud_tab2, " = ", self.res_stud_tab2[0])
+                # print('-----------------')
                 if self.res_stud_tab2 == None:
                     n_stud_tab2 += 1
                 else:
                     self.text_event_temp = self.res_stud_tab2[1]
-                    print('text_event_temp = ' + self.text_event_temp)
+                    #print('text_event_temp = ' + self.text_event_temp)
                     self.date_event_temp = self.res_stud_tab2[2]
-                    print('date_event_temp = ' + self.date_event_temp)
+                    #print('date_event_temp = ' + self.date_event_temp)
                     self.ui.TW_temp.topLevelItem(
                         n_stud_tab2).setText(0, self.res_stud_tab2[2])
                     self.ui.TW_temp.topLevelItem(
@@ -156,11 +155,12 @@ class WorkGui(main.Gui):
             stud_cursor.execute("""SELECT * FROM students""")
             results = stud_cursor.fetchall()
             self.count_stud = len(results)
-            print("count students: ", self.count_stud)
+            #print("count students: ", self.count_stud)
             stud_cursor.close()
             if self.count_stud >= 50:
                 self.all_students = True
             if refresh == 1:
+                # self.ui.stud_tab.takeTopLevelItem(self.ui.stud_tab.indexOfTopLevelItem(0))
                 self.ui.stud_tab.clear()
                 print("--- --- ---")
                 print('deteted tab 3')
@@ -172,34 +172,38 @@ class WorkGui(main.Gui):
                     item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
                     self.ui.stud_tab.addTopLevelItem(item_1)
                     cursor_download_tab3 = self.client.cursor()
-                    print(n_stud_tab3)
+                    # print(n_stud_tab3)
                     cursor_download_tab3.execute(
                         """SELECT * FROM students WHERE id_students = (?)""", (n_stud_tab3,))
                     self.res_stud_tab3 = cursor_download_tab3.fetchone()
-                    print('***', self.res_stud_tab3, '***')
+                    #print('***', self.res_stud_tab3, '***')
                     cursor_download_tab3.close()
                     if self.res_stud_tab3 == None:
                         n_stud_tab3 += 1
                     else:
-                        print('-----------------')
-                        print(n_stud_tab3, " = ", self.res_stud_tab3[0])
-                        print('-----------------')
+                        # print('-----------------')
+                        #print(n_stud_tab3, " = ", self.res_stud_tab3[0])
+                        # print('-----------------')
+                        self.ID_SQL = str(self.res_stud_tab3[0])
+                        #print('ID = ' + self.ID_SQL)
                         self.l_nameSQL = str(self.res_stud_tab3[2])
-                        print('l_name = ' + self.l_nameSQL)
+                        #print('l_name = ' + self.l_nameSQL)
                         self.f_nameSQL = str(self.res_stud_tab3[1])
-                        print('f_name = ' + self.f_nameSQL)
+                        #print('f_name = ' + self.f_nameSQL)
                         self.m_nameSQL = str(self.res_stud_tab3[3])
-                        print('m_name = ' + self.m_nameSQL)
+                        #print('m_name = ' + self.m_nameSQL)
                         self.numberSQL = str(self.res_stud_tab3[4])
-                        print('number = ', self.numberSQL)
+                        #print('number = ', self.numberSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(0, self.l_nameSQL)
+                            n_stud_tab3).setText(0, self.ID_SQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(1, self.f_nameSQL)
+                            n_stud_tab3).setText(1, self.l_nameSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(2, self.m_nameSQL)
+                            n_stud_tab3).setText(2, self.f_nameSQL)
                         self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(3, self.numberSQL)
+                            n_stud_tab3).setText(3, self.m_nameSQL)
+                        self.ui.stud_tab.topLevelItem(
+                            n_stud_tab3).setText(4, self.numberSQL)
                         n_stud_tab3 += 1
                         self.true_count_stud += 1
                         if self.true_count_stud == self.count_stud:
@@ -257,10 +261,6 @@ class WorkGui(main.Gui):
     def send_changes_to_db(self):
         if self.current_id != 0:
             self.text = self.ui.plainTextEdit.toPlainText()
-            #current = {"_id": str(self.current_id)}
-            #new_data = {"$set": {"shedule": self.text}}
-            #self.coll.update_one(current, new_data)
-            
             self.send_id_message_tab1 = self.current_id
             self.send_id_and_text = (self.text, self.send_id_message_tab1)
             cursor_send_day = self.client.cursor()
@@ -268,7 +268,6 @@ class WorkGui(main.Gui):
                 """UPDATE timetable_ussual SET text_event_ussual = ? WHERE id_event_ussual = ?""", self.send_id_and_text)
             self.client.commit()
             cursor_send_day.close()
-
             self.ui.l_status.setText('Изменения приняты!')
             return
         else:
@@ -343,7 +342,6 @@ class WorkGui(main.Gui):
         elif day == 1:
             self.current_id = 31
             self.ui.l_day.setText('Среда (нечётная неделя)')
-
             cursor_get_day = self.client.cursor()
             cursor_get_day.execute(
                 """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
@@ -430,70 +428,100 @@ class WorkGui(main.Gui):
 
 
 '''
-db_stud = main.Gui.client.stuff
-coll_stud = db_stud.students
-
-def download_tab(tab, refresh):
-    #self_work = WorkGui()
-    if 1 == 1:
-        if tab == 2:
-            ''!'
-            self.count_temp = self.coll_temp.find().count()
-            if refresh == 1:
-                self.ui.TW_temp.clear()
-                print('deteted tab 2')
-            self.n_temp = 0
-            for n_temp in range(0, self.count_temp):
-                item_2 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
-                self.ui.TW_temp.addTopLevelItem(item_2)
-                res_temp = self.coll_temp.find({"roleEvent": 'temp'})
-                self.date_temp = res_temp["date"]
-                self.text_temp = res_temp["text"]
-                self.ui.TW_temp.topLevelItem(n_temp).setText(0, self.date_temp)
-                self.ui.TW_temp.topLevelItem(n_temp).setText(1, self.text_temp)
-                self.n_temp += 1
-            ''!'
-            #print('downloaded tab 2')     
-        elif tab == 3: 
-            count_stud = coll_stud.find().count()
-            if count_stud >= 50:
-                all_students = True
-            if refresh == 1:
-                WorkGui().ui.stud_tab.clear()
-                print("--- --- ---")
-                print('deteted tab 3')
-                print("--- --- ---")
-            n_stud = 0
-            true_count_stud = 0
-            while true_count_stud != count_stud:
-                for n_stud in range(0, 50):
-                    item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.stud_tab) # self.ui.stud_tab
-                    WorkGui().ui.stud_tab.addTopLevelItem(WorkGui().item_1)
-                    res_stud = coll_stud.find_one({"_id": n_stud})
-                    #''!'
-                    print('-----------------')
-                    print(n_stud, " = ", res_stud)
-                    print('-----------------')
-                    #''!'
-                    if res_stud == None:
-                        n_stud += 1
-                    else:
-                        l_name = res_stud["l_name"]
-                        f_name = res_stud["f_name"]
-                        m_name = res_stud["m_name"]
-                        number = res_stud["number"]
-                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(0, l_name)
-                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(1, f_name)
-                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(2, m_name)
-                        WorkGui().ui.stud_tab.topLevelItem(n_stud).setText(3, number)
-                        n_stud += 1
-                        true_count_stud += 1
-                        if true_count_stud == count_stud:
-                            break
-            print('downloaded tab 3')
-        return
+def download_tab_add(tab, refresh):
+    if tab == 2:         
+        timetable_temp_cursor = WorkGui().client.cursor()
+        timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
+        temp_results = timetable_temp_cursor.fetchall()
+        count_temp_event = len(temp_results)
+        #print("count temp event: ", self.count_temp_event)
+        timetable_temp_cursor.close()
+        if refresh == 1:
+            WorkGui().ui.TW_temp.clear()
+            print("--- --- ---")
+            print('deteted tab 2')
+            print("--- --- ---")
+        for n_stud_tab2 in range(0, WorkGui().count_temp_event):
+            item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.TW_temp)
+            WorkGui().ui.TW_temp.addTopLevelItem(item_1)
+            cursor_download_tab2 = WorkGui().client.cursor()
+            cursor_download_tab2.execute(
+                """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
+            WorkGui().res_stud_tab2 = cursor_download_tab2.fetchone()
+            #print('***', self.res_stud_tab2, '***')
+            cursor_download_tab2.close()
+            #print('-----------------')
+            #print(n_stud_tab2, " = ", self.res_stud_tab2[0])
+            #print('-----------------')
+            if WorkGui().res_stud_tab2 == None:
+                n_stud_tab2 += 1
+            else:
+                WorkGui().text_event_temp = WorkGui().res_stud_tab2[1]
+                #print('text_event_temp = ' + self.text_event_temp)
+                WorkGui().date_event_temp = WorkGui().res_stud_tab2[2]
+                #print('date_event_temp = ' + self.date_event_temp)
+                WorkGui().ui.TW_temp.topLevelItem(
+                    n_stud_tab2).setText(0, WorkGui().res_stud_tab2[2])
+                WorkGui().ui.TW_temp.topLevelItem(
+                    n_stud_tab2).setText(1, WorkGui().res_stud_tab2[1])
+                n_stud_tab2 += 1
+        print('downloaded tab 2')
+    elif tab == 3:
+        stud_cursor = WorkGui().client.cursor()
+        stud_cursor.execute("""SELECT * FROM students""")
+        results = stud_cursor.fetchall()
+        WorkGui().count_stud = len(results)
+        #print("count students: ", self.count_stud)
+        stud_cursor.close()
+        if WorkGui().count_stud >= 50:
+            WorkGui().all_students = True
+        if refresh == 1:
+            WorkGui().ui.stud_tab.clear()
+            print("--- --- ---")
+            print('deteted tab 3')
+            print("--- --- ---")
+        WorkGui().true_count_stud = 0
+        WorkGui().res_stud_tab3 = 0
+        while WorkGui().true_count_stud != WorkGui().count_stud:
+            for n_stud_tab3 in range(0, 50):
+                item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.stud_tab)
+                WorkGui().ui.stud_tab.addTopLevelItem(item_1)
+                cursor_download_tab3 = WorkGui().client.cursor()
+                #print(n_stud_tab3)
+                cursor_download_tab3.execute(
+                    """SELECT * FROM students WHERE id_students = (?)""", (n_stud_tab3,))
+                WorkGui().res_stud_tab3 = cursor_download_tab3.fetchone()
+                #print('***', self.res_stud_tab3, '***')
+                cursor_download_tab3.close()
+                if WorkGui().res_stud_tab3 == None:
+                    n_stud_tab3 += 1
+                else:
+                    #print('-----------------')
+                    #print(n_stud_tab3, " = ", self.res_stud_tab3[0])
+                    #print('-----------------')
+                    WorkGui().l_nameSQL = str(WorkGui().res_stud_tab3[2])
+                    #print('l_name = ' + self.l_nameSQL)
+                    WorkGui().f_nameSQL = str(WorkGui().res_stud_tab3[1])
+                    #print('f_name = ' + self.f_nameSQL)
+                    WorkGui().m_nameSQL = str(WorkGui().res_stud_tab3[3])
+                    #print('m_name = ' + self.m_nameSQL)
+                    WorkGui().numberSQL = str(WorkGui().res_stud_tab3[4])
+                    #print('number = ', self.numberSQL)
+                    WorkGui().ui.stud_tab.topLevelItem(
+                        n_stud_tab3).setText(0, WorkGui().l_nameSQL)
+                    WorkGui().ui.stud_tab.topLevelItem(
+                        n_stud_tab3).setText(1, WorkGui().f_nameSQL)
+                    WorkGui().ui.stud_tab.topLevelItem(
+                        n_stud_tab3).setText(2, WorkGui().m_nameSQL)
+                    WorkGui().ui.stud_tab.topLevelItem(
+                        n_stud_tab3).setText(3, WorkGui().numberSQL)
+                    n_stud_tab3 += 1
+                    WorkGui().true_count_stud += 1
+                    if WorkGui().true_count_stud == WorkGui().count_stud:
+                        break
+        print('downloaded tab 3')
+    return
 '''
-
 
 if __name__ == '__main__':
     self_work = WorkGui()

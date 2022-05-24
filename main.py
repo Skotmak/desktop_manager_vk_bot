@@ -9,9 +9,11 @@ import sqlite3
 import traceback
 import sys
 
+frirst_update_on_start = 0
 
 class Gui(QtWidgets.QMainWindow):
     client = sqlite3.connect('vk_bot_db.db')
+    
 
     def __init__(self, parent=None):
         super().__init__()
