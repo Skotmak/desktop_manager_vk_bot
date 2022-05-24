@@ -63,8 +63,12 @@ class WorkGui(main.Gui):
         self.ui.refresh_btn_tab2.clicked.connect(
             lambda tab: self.download_tab(tab=2, refresh=1))
 
-        ''' TAB 3 '''
+        ''' TAB 3 '''  # настрой удаление по айди когда кликаешь. нужно настроить кнопку, в функции удаления написать запрос и сделать чтобы удалялось
+        # https://www.youtube.com/watch?v=82v2ZR-g6wY
+        # https://www.youtube.com/watch?v=dqg0L7Qw3ko
+        # https://ru.stackoverflow.com/questions/1056619/pyqt5-qtreewidget-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B8%D0%BA%D0%B0-%D0%BF%D0%BE-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BC-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0
         self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
+        self.ui.delete_stud_btn.clicked.connect(lambda del_tab, id_sel_item: self.delete_item_in_tab(del_tab=3, id_sel_item))
         self.ui.refresh_btn_tab3.clicked.connect(
             lambda tab: self.download_tab(tab=3, refresh=1))
         self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
@@ -80,7 +84,7 @@ class WorkGui(main.Gui):
         print(sel_item.text(0))
 
     # https://stackoverflow.com/questions/13062327/how-to-delete-qtreewidgetitem Доделай на удаление определённой строки
-    def delete_all_items_in_tab(self, del_tab):
+    def delete_item_in_tab(self, del_tab):
         if del_tab == 2:
             '''
             self.temp_tab_items = 0
