@@ -25,6 +25,14 @@ class WorkGui(main.Gui):
         self.today = QtCore.QDate.currentDate()
         self.ui.DE_temp.setDate(self.today)
 
+        self.sel_item = ''
+        self.sel_item_str = ''
+        self.sel_item_int = -1
+        print('START selected item is ', self.sel_item)
+
+        # сообщение для кнопки удалить студента
+        self.message_error_del_item = "Вы не выбрали строку!\nПожалуйста, выберите строку для удаления"
+
         # Загрузка таблиц 2 и 3
         if main.frirst_update_on_start == 0:
             self.download_tab(tab=2, refresh=0)
@@ -67,8 +75,10 @@ class WorkGui(main.Gui):
         # https://www.youtube.com/watch?v=82v2ZR-g6wY
         # https://www.youtube.com/watch?v=dqg0L7Qw3ko
         # https://ru.stackoverflow.com/questions/1056619/pyqt5-qtreewidget-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B8%D0%BA%D0%B0-%D0%BF%D0%BE-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BC-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0
+        # не забудь по умолчанию отключить кнопку удаления до тех пор пока пользователь не выберет строку или выведи предупреждение "вы не выбрали строку"
         self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
-        self.ui.delete_stud_btn.clicked.connect(lambda del_tab, id_sel_item: self.delete_item_in_tab(del_tab=3, id_sel_item))
+        self.ui.delete_stud_btn.clicked.connect(
+            lambda del_tab: self.delete_item_in_tab(del_tab=3))
         self.ui.refresh_btn_tab3.clicked.connect(
             lambda tab: self.download_tab(tab=3, refresh=1))
         self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
@@ -80,34 +90,43 @@ class WorkGui(main.Gui):
         ''' Функции '''
 
     def onItemClicked(self):
-        sel_item = self.ui.stud_tab.currentItem()
-        print(sel_item.text(0))
+        self.sel_item = self.ui.stud_tab.currentItem()
+        if self.sel_item.text(0) != '':
+            self.sel_item_int = int(self.sel_item.text(0))
+            print('selected item is ', self.sel_item_int)
+        else:
+            self.sel_item_str = str(self.sel_item.text(0))
+            self.sel_item_int = -1
+            print('selected item is null')
+            return
+
+            
 
     # https://stackoverflow.com/questions/13062327/how-to-delete-qtreewidgetitem Доделай на удаление определённой строки
     def delete_item_in_tab(self, del_tab):
-        if del_tab == 2:
-            '''
-            self.temp_tab_items = 0
-            for temp_tab_items in range(0, self.count_temp):
-                self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 0)
-                self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 1)
-                self.temp_tab_items += 1
-            '''
-            return
-        elif del_tab == 3:
-            '''
-            self.stud_tab_items = 0
-            for stud_tab_items in range(0, self.count_stud):
-                self.ui.stud_tab.clear()
-
-                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 0)
-                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 1)
-                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 2)
-                #self.ui.stud_tab.removeItemWidget(self.stud_tab_items, 3)
-
-                self.stud_tab_items += 1
-            '''
-            return
+        if self.sel_item_int >= 0:
+            if del_tab == 2:
+                '''
+                self.temp_tab_items = 0
+                for temp_tab_items in range(0, self.count_temp):
+                    self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 0)
+                    self.ui.TW_temp.removeItemWidget(self.temp_tab_items, 1)
+                    self.temp_tab_items += 1
+                '''
+                return
+            elif del_tab == 3:
+                cursor_delete_tab3_item = self.client.cursor()
+                cursor_delete_tab3_item.execute(
+                    """DELETE FROM students WHERE id_students = (?)""", (self.sel_item_int,))
+                print('***', 'Succesful delete item = ', self.sel_item_int, '***')
+                self.client.commit()
+                cursor_delete_tab3_item.close()
+                self.download_tab(tab=3, refresh=1)
+                return
+        elif self.sel_item_str == '':
+            QtWidgets.QMessageBox.critical(self, "Ошибка", self.message_error_del_item)
+        else:
+            QtWidgets.QMessageBox.critical(self, "Ошибка", self.message_error_del_item)
 
     def open_window_add_stud(self):
         if all_students == True:
