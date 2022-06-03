@@ -4,4 +4,4 @@
 * Qt Designer
 * Visual Studio Code - python 3
 * MongoDB
-На данный момент развивается мной ветка "dev_change_sql"
+<p>На данный момент развивается мной ветка "dev_change_sql"
