@@ -319,144 +319,79 @@ class WorkGui(main.Gui):
         return
 
     def get_day(self, day, parity):
+        cursor_get_day = self.client.cursor()
         if day == 1:
             if parity == 0:
                 self.current_id = 10
                 self.ui.l_day.setText('Понедельник (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 11
                 self.ui.l_day.setText('Понедельник (нечётная неделя)')
                 cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
         elif day == 2:
             if parity == 0:
                 self.current_id = 20
                 self.ui.l_day.setText('Вторник (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 21
                 self.ui.l_day.setText('Вторник (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
         elif day == 3:
             if parity == 0:
                 self.current_id = 30
                 self.ui.l_day.setText('Среда (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 31
                 self.ui.l_day.setText('Среда (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
         elif day == 4:
             if parity == 0:
                 self.current_id = 40
                 self.ui.l_day.setText('Четверг (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 41
                 self.ui.l_day.setText('Четверг (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
         elif day == 5:
             if parity == 0:
                 self.current_id = 50
                 self.ui.l_day.setText('Пятница (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 51
                 self.ui.l_day.setText('Пятница (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
         elif day == 6:
             if parity == 0:
                 self.current_id = 60
                 self.ui.l_day.setText('Суббота (чётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
             elif parity == 1:
                 self.current_id = 61
                 self.ui.l_day.setText('Суббота (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
                 cursor_get_day.execute(
                     """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-                self.res_timetable = cursor_get_day.fetchone()
-                print('***', self.res_timetable, '***')
-                cursor_get_day.close()
-                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-            self.base_changes()
-            return
+        self.res_timetable = cursor_get_day.fetchone()
+        print('***', self.res_timetable, '***')
+        cursor_get_day.close()
+        self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+        self.base_changes()
 
 
 if __name__ == '__main__':
