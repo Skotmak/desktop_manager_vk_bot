@@ -8,7 +8,6 @@ from window_add_stud import *
 all_students = False
 
 
-
 class WorkGui(main.Gui):
     def __init__(self, parent=None):
         self.add_stud = add_stud.AddStudGui()
@@ -43,20 +42,32 @@ class WorkGui(main.Gui):
             main.frirst_update_on_start += 1
 
         ''' TAB 1 '''
-        ''' 0 - чётная неделя   1 - не чётная неделя '''
-        self.ui.b_mon_0.clicked.connect(lambda day: self.get_monday(day=0))
-        self.ui.b_tue_0.clicked.connect(lambda day: self.get_tuesday(day=0))
-        self.ui.b_wed_0.clicked.connect(lambda day: self.get_wednesday(day=0))
-        self.ui.b_thu_0.clicked.connect(lambda day: self.get_thursday(day=0))
-        self.ui.b_fri_0.clicked.connect(lambda day: self.get_friday(day=0))
-        self.ui.b_sat_0.clicked.connect(lambda day: self.get_saturday(day=0))
+        '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
+        self.ui.b_mon_0.clicked.connect(
+            lambda day: self.get_day(day=1, parity=0))
+        self.ui.b_tue_0.clicked.connect(
+            lambda day: self.get_day(day=2, parity=0))
+        self.ui.b_wed_0.clicked.connect(
+            lambda day: self.get_day(day=3, parity=0))
+        self.ui.b_thu_0.clicked.connect(
+            lambda day: self.get_day(day=4, parity=0))
+        self.ui.b_fri_0.clicked.connect(
+            lambda day: self.get_day(day=5, parity=0))
+        self.ui.b_sat_0.clicked.connect(
+            lambda day: self.get_day(day=6, parity=0))
 
-        self.ui.b_mon_1.clicked.connect(lambda day: self.get_monday(day=1))
-        self.ui.b_tue_1.clicked.connect(lambda day: self.get_tuesday(day=1))
-        self.ui.b_wed_1.clicked.connect(lambda day: self.get_wednesday(day=1))
-        self.ui.b_thu_1.clicked.connect(lambda day: self.get_thursday(day=1))
-        self.ui.b_fri_1.clicked.connect(lambda day: self.get_friday(day=1))
-        self.ui.b_sat_1.clicked.connect(lambda day: self.get_saturday(day=1))
+        self.ui.b_mon_1.clicked.connect(
+            lambda day: self.get_day(day=1, parity=1))
+        self.ui.b_tue_1.clicked.connect(
+            lambda day: self.get_day(day=2, parity=1))
+        self.ui.b_wed_1.clicked.connect(
+            lambda day: self.get_day(day=3, parity=1))
+        self.ui.b_thu_1.clicked.connect(
+            lambda day: self.get_day(day=4, parity=1))
+        self.ui.b_fri_1.clicked.connect(
+            lambda day: self.get_day(day=5, parity=1))
+        self.ui.b_sat_1.clicked.connect(
+            lambda day: self.get_day(day=6, parity=1))
 
         self.ui.plainTextEdit.textChanged.connect(
             lambda lab_stat=self.ui.l_status: self.get_focus(lab_stat))
@@ -74,11 +85,7 @@ class WorkGui(main.Gui):
         self.ui.refresh_btn_tab2.clicked.connect(
             lambda tab: self.download_tab(tab=2, refresh=1))
 
-        ''' TAB 3 '''  # настрой удаление по айди когда кликаешь. нужно настроить кнопку, в функции удаления написать запрос и сделать чтобы удалялось
-        # https://www.youtube.com/watch?v=82v2ZR-g6wY
-        # https://www.youtube.com/watch?v=dqg0L7Qw3ko
-        # https://ru.stackoverflow.com/questions/1056619/pyqt5-qtreewidget-%D0%BE%D1%82%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B8%D0%BA%D0%B0-%D0%BF%D0%BE-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BC-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B0
-        # не забудь по умолчанию отключить кнопку удаления до тех пор пока пользователь не выберет строку или выведи предупреждение "вы не выбрали строку"
+        ''' TAB 3 '''
         self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
         self.ui.delete_stud_btn.clicked.connect(
             lambda del_tab: self.delete_item_in_tab(del_tab=3))
@@ -86,11 +93,9 @@ class WorkGui(main.Gui):
             lambda tab: self.download_tab(tab=3, refresh=1))
         self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
 
-        # self.ui.delete_stud_btn.clicked.connect(lambda tab: self.delete_all_items_in_tab(del_tab=3)) Доделай функцию delete_all_items_in_tab на удаление определённой строки
-
         ''' End tab '''
 
-        ''' Функции '''
+        ''' Functions '''
 
     def onItemClicked(self):
         self.sel_item_tab3 = self.ui.stud_tab.currentItem()
@@ -99,16 +104,13 @@ class WorkGui(main.Gui):
             print('selected item is ', self.sel_item_tab3_int)
             self.del_item_tab3_status = True
             print(self.del_item_tab3_status)
-            
+
         else:
             self.sel_item_tab3_str = str(self.sel_item_tab3.text(0))
             self.sel_item_tab3_int = -1
             print('selected item is null')
             return
 
-            
-
-    # https://stackoverflow.com/questions/13062327/how-to-delete-qtreewidgetitem Доделай на удаление определённой строки
     def delete_item_in_tab(self, del_tab):
         if self.sel_item_tab3_int >= 0:
             if del_tab == 2:
@@ -125,18 +127,22 @@ class WorkGui(main.Gui):
                     cursor_delete_tab3_item = self.client.cursor()
                     cursor_delete_tab3_item.execute(
                         """DELETE FROM students WHERE id_students = (?)""", (self.sel_item_tab3_int,))
-                    print('***', 'Succesful delete item = ', self.sel_item_tab3_int, '***')
+                    print('***', 'Succesful delete item = ',
+                          self.sel_item_tab3_int, '***')
                     self.client.commit()
                     cursor_delete_tab3_item.close()
                     self.download_tab(tab=3, refresh=1)
                     self.del_item_tab3_status = False
                     return
                 elif self.del_item_tab3_status == False:
-                    QtWidgets.QMessageBox.critical(self, "Ошибка", self.message_error_del_item)
+                    QtWidgets.QMessageBox.critical(
+                        self, "Ошибка", self.message_error_del_item)
         elif self.sel_item_tab3_str == '':
-            QtWidgets.QMessageBox.critical(self, "Ошибка", self.message_error_del_item)
+            QtWidgets.QMessageBox.critical(
+                self, "Ошибка", self.message_error_del_item)
         else:
-            QtWidgets.QMessageBox.critical(self, "Ошибка", self.message_error_del_item)
+            QtWidgets.QMessageBox.critical(
+                self, "Ошибка", self.message_error_del_item)
 
     def open_window_add_stud(self):
         if all_students == True:
@@ -312,252 +318,146 @@ class WorkGui(main.Gui):
         self.ui.plainTextEdit.setReadOnly(False)
         return
 
-    # 0 - чётная неделя, 1 - не чётная неделя
-    def get_monday(self, day):
-        if day == 0:
-            self.current_id = 10
-            self.ui.l_day.setText('Понедельник (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 11
-            self.ui.l_day.setText('Понедельник (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
+    def get_day(self, day, parity):
+        if day == 1:
+            if parity == 0:
+                self.current_id = 10
+                self.ui.l_day.setText('Понедельник (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 11
+                self.ui.l_day.setText('Понедельник (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
+        elif day == 2:
+            if parity == 0:
+                self.current_id = 20
+                self.ui.l_day.setText('Вторник (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 21
+                self.ui.l_day.setText('Вторник (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
+        elif day == 3:
+            if parity == 0:
+                self.current_id = 30
+                self.ui.l_day.setText('Среда (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 31
+                self.ui.l_day.setText('Среда (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
+        elif day == 4:
+            if parity == 0:
+                self.current_id = 40
+                self.ui.l_day.setText('Четверг (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 41
+                self.ui.l_day.setText('Четверг (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
+        elif day == 5:
+            if parity == 0:
+                self.current_id = 50
+                self.ui.l_day.setText('Пятница (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 51
+                self.ui.l_day.setText('Пятница (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
+        elif day == 6:
+            if parity == 0:
+                self.current_id = 60
+                self.ui.l_day.setText('Суббота (чётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            elif parity == 1:
+                self.current_id = 61
+                self.ui.l_day.setText('Суббота (нечётная неделя)')
+                cursor_get_day = self.client.cursor()
+                cursor_get_day.execute(
+                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+                self.res_timetable = cursor_get_day.fetchone()
+                print('***', self.res_timetable, '***')
+                cursor_get_day.close()
+                self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+            self.base_changes()
+            return
 
-    def get_tuesday(self, day):
-        if day == 0:
-            self.current_id = 20
-            self.ui.l_day.setText('Вторник (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 21
-            self.ui.l_day.setText('Вторник (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
-
-    def get_wednesday(self, day):
-        if day == 0:
-            self.current_id = 30
-            self.ui.l_day.setText('Среда (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 31
-            self.ui.l_day.setText('Среда (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
-
-    def get_thursday(self, day):
-        if day == 0:
-            self.current_id = 40
-            self.ui.l_day.setText('Четверг (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 41
-            self.ui.l_day.setText('Четверг (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
-
-    def get_friday(self, day):
-        if day == 0:
-            self.current_id = 50
-            self.ui.l_day.setText('Пятница (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 51
-            self.ui.l_day.setText('Пятница (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
-
-    def get_saturday(self, day):
-        if day == 0:
-            self.current_id = 60
-            self.ui.l_day.setText('Суббота (чётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        elif day == 1:
-            self.current_id = 61
-            self.ui.l_day.setText('Суббота (нечётная неделя)')
-            cursor_get_day = self.client.cursor()
-            cursor_get_day.execute(
-                """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            self.res_timetable = cursor_get_day.fetchone()
-            print('***', self.res_timetable, '***')
-            cursor_get_day.close()
-            self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
-        self.base_changes()
-        return
-
-    ''' TAB 3 '''
-
-
-'''
-def download_tab_add(tab, refresh):
-    if tab == 2:         
-        timetable_temp_cursor = WorkGui().client.cursor()
-        timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
-        temp_results = timetable_temp_cursor.fetchall()
-        count_temp_event = len(temp_results)
-        #print("count temp event: ", self.count_temp_event)
-        timetable_temp_cursor.close()
-        if refresh == 1:
-            WorkGui().ui.TW_temp.clear()
-            print("--- --- ---")
-            print('deteted tab 2')
-            print("--- --- ---")
-        for n_stud_tab2 in range(0, WorkGui().count_temp_event):
-            item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.TW_temp)
-            WorkGui().ui.TW_temp.addTopLevelItem(item_1)
-            cursor_download_tab2 = WorkGui().client.cursor()
-            cursor_download_tab2.execute(
-                """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
-            WorkGui().res_stud_tab2 = cursor_download_tab2.fetchone()
-            #print('***', self.res_stud_tab2, '***')
-            cursor_download_tab2.close()
-            #print('-----------------')
-            #print(n_stud_tab2, " = ", self.res_stud_tab2[0])
-            #print('-----------------')
-            if WorkGui().res_stud_tab2 == None:
-                n_stud_tab2 += 1
-            else:
-                WorkGui().text_event_temp = WorkGui().res_stud_tab2[1]
-                #print('text_event_temp = ' + self.text_event_temp)
-                WorkGui().date_event_temp = WorkGui().res_stud_tab2[2]
-                #print('date_event_temp = ' + self.date_event_temp)
-                WorkGui().ui.TW_temp.topLevelItem(
-                    n_stud_tab2).setText(0, WorkGui().res_stud_tab2[2])
-                WorkGui().ui.TW_temp.topLevelItem(
-                    n_stud_tab2).setText(1, WorkGui().res_stud_tab2[1])
-                n_stud_tab2 += 1
-        print('downloaded tab 2')
-    elif tab == 3:
-        stud_cursor = WorkGui().client.cursor()
-        stud_cursor.execute("""SELECT * FROM students""")
-        results = stud_cursor.fetchall()
-        WorkGui().count_stud = len(results)
-        #print("count students: ", self.count_stud)
-        stud_cursor.close()
-        if WorkGui().count_stud >= 50:
-            WorkGui().all_students = True
-        if refresh == 1:
-            WorkGui().ui.stud_tab.clear()
-            print("--- --- ---")
-            print('deteted tab 3')
-            print("--- --- ---")
-        WorkGui().true_count_stud = 0
-        WorkGui().res_stud_tab3 = 0
-        while WorkGui().true_count_stud != WorkGui().count_stud:
-            for n_stud_tab3 in range(0, 50):
-                item_1 = QtWidgets.QTreeWidgetItem(WorkGui().ui.stud_tab)
-                WorkGui().ui.stud_tab.addTopLevelItem(item_1)
-                cursor_download_tab3 = WorkGui().client.cursor()
-                #print(n_stud_tab3)
-                cursor_download_tab3.execute(
-                    """SELECT * FROM students WHERE id_students = (?)""", (n_stud_tab3,))
-                WorkGui().res_stud_tab3 = cursor_download_tab3.fetchone()
-                #print('***', self.res_stud_tab3, '***')
-                cursor_download_tab3.close()
-                if WorkGui().res_stud_tab3 == None:
-                    n_stud_tab3 += 1
-                else:
-                    #print('-----------------')
-                    #print(n_stud_tab3, " = ", self.res_stud_tab3[0])
-                    #print('-----------------')
-                    WorkGui().l_nameSQL = str(WorkGui().res_stud_tab3[2])
-                    #print('l_name = ' + self.l_nameSQL)
-                    WorkGui().f_nameSQL = str(WorkGui().res_stud_tab3[1])
-                    #print('f_name = ' + self.f_nameSQL)
-                    WorkGui().m_nameSQL = str(WorkGui().res_stud_tab3[3])
-                    #print('m_name = ' + self.m_nameSQL)
-                    WorkGui().numberSQL = str(WorkGui().res_stud_tab3[4])
-                    #print('number = ', self.numberSQL)
-                    WorkGui().ui.stud_tab.topLevelItem(
-                        n_stud_tab3).setText(0, WorkGui().l_nameSQL)
-                    WorkGui().ui.stud_tab.topLevelItem(
-                        n_stud_tab3).setText(1, WorkGui().f_nameSQL)
-                    WorkGui().ui.stud_tab.topLevelItem(
-                        n_stud_tab3).setText(2, WorkGui().m_nameSQL)
-                    WorkGui().ui.stud_tab.topLevelItem(
-                        n_stud_tab3).setText(3, WorkGui().numberSQL)
-                    n_stud_tab3 += 1
-                    WorkGui().true_count_stud += 1
-                    if WorkGui().true_count_stud == WorkGui().count_stud:
-                        break
-        print('downloaded tab 3')
-    return
-'''
 
 if __name__ == '__main__':
     self_work = WorkGui()
-    #self_work.download_tab(tab=2, refresh=0)
-
-    #download_tab(tab=3, refresh=0)
