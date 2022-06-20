@@ -11,12 +11,16 @@ import sys
 
 frirst_update_on_start = 0
 
+#global authorization_status
+#authorization_status = False
+
 
 class Gui(QtWidgets.QMainWindow):
     client = sqlite3.connect('vk_bot_db.db')
 
     def __init__(self, parent=None):
         super().__init__()
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("Авторизация в \"Бот РУДН\"")
@@ -43,6 +47,7 @@ class Gui(QtWidgets.QMainWindow):
                   int(resolution.height() // 2) - int(self.frameSize().height()) // 2)
 
     def check_data(self):
+        #global search_login
         login = self.ui.lineEdit.text()
         passw = self.ui.lineEdit_2.text()
         cur1 = self.client.cursor()
@@ -63,7 +68,12 @@ class Gui(QtWidgets.QMainWindow):
             return "no_data_avaliable"
 
     def login(self):
+        #global user_document
+        #global user_name_db
+        #global work
+        #self.work = work.WorkGui()
         if self.authorization_status is False:
+            # if authorization_status is False:
             result = self.check_data()
             if result == "value_exists":
                 login = self.ui.lineEdit.text()
@@ -81,12 +91,21 @@ class Gui(QtWidgets.QMainWindow):
                     self.close()
                     self.auth_win_status = False
                     work.show()
-                    if login == "max":
-                        work.ui.l_name.setText("Привет, Макс!")
-                    elif login == "maftuna":
-                        work.ui.l_name.setText("Привет, Мафтуна!")
-                    elif login == "sergo":
-                        work.ui.l_name.setText("Привет, Серега!")
+                    # self.work.show()
+                    '''
+                    if self.work is None: 
+                        self.work = work.WorkGui()
+                    else:
+                        self.work.show()
+                    '''
+
+                    cur_login_name = self.client.cursor()
+                    for user_name_db in cur_login_name.execute("""SELECT user_name FROM users WHERE password = ?""", (passw,)):
+                        print('***', user_name_db, '***')
+                    user_name = str(user_name_db[0])
+                    work.ui.l_name.setText(user_name)
+                    cur_login_name.close()
+                    cur1.close()
                 else:
                     message = "Данные введены некорректно!"
                     QtWidgets.QMessageBox.about(self, "Ошибка", message)
@@ -144,8 +163,8 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
-    window.close()  # ! это закрывает первое окно с авторизацией
-    work = work.WorkGui()
-    work.show()  # ! это открывает второе окно с рабочей областью
 
+    # window.close()  # ! это закрывает первое окно с авторизацией
+    work = work.WorkGui()
+    # work.show()  # ! это открывает второе окно с рабочей областью
     sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'work.ui'
+# Form implementation generated from reading ui file 'work_test3.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -14,141 +14,386 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow2(object):
     def setupUi(self, MainWindow2):
         MainWindow2.setObjectName("MainWindow2")
-        MainWindow2.resize(801, 690)
+        MainWindow2.resize(840, 800)
+        MainWindow2.setMinimumSize(QtCore.QSize(840, 800))
+        MainWindow2.setMaximumSize(QtCore.QSize(840, 800))
+        MainWindow2.setStyleSheet("background-color: rgb(245, 247, 250);\n"
+"opacity: 1;")
         self.centralwidget = QtWidgets.QWidget(MainWindow2)
+        self.centralwidget.setStyleSheet("background: #F5F7FA;\n"
+"opacity: 1;")
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(9, 8, 791, 681))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.l_name = QtWidgets.QLabel(self.verticalLayoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.l_name.sizePolicy().hasHeightForWidth())
-        self.l_name.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("MS Shell Dlg 2")
-        font.setPointSize(14)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(9)
-        self.l_name.setFont(font)
-        self.l_name.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.l_name.setAutoFillBackground(False)
-        self.l_name.setStyleSheet("font: 75 14pt \"MS Shell Dlg 2\";")
-        self.l_name.setTextFormat(QtCore.Qt.AutoText)
-        self.l_name.setAlignment(QtCore.Qt.AlignCenter)
-        self.l_name.setWordWrap(False)
-        self.l_name.setObjectName("l_name")
-        self.verticalLayout.addWidget(self.l_name)
-        self.tabWidget = QtWidgets.QTabWidget(self.verticalLayoutWidget)
+        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setGeometry(QtCore.QRect(10, 80, 820, 711))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.tabWidget.setFont(font)
+        self.tabWidget.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.tabWidget.setObjectName("tabWidget")
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
         self.b_thu_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_thu_1.setGeometry(QtCore.QRect(170, 310, 170, 100))
+        self.b_thu_1.setGeometry(QtCore.QRect(190, 340, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_thu_1.setFont(font)
+        self.b_thu_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_thu_1.setObjectName("b_thu_1")
         self.b_tue_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_tue_0.setGeometry(QtCore.QRect(0, 110, 170, 100))
-        self.b_tue_0.setStyleSheet("font: 14pt \"MS Shell Dlg 2\";")
+        self.b_tue_0.setGeometry(QtCore.QRect(10, 120, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_tue_0.setFont(font)
+        self.b_tue_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_tue_0.setObjectName("b_tue_0")
         self.b_fri_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_fri_1.setGeometry(QtCore.QRect(170, 410, 170, 100))
+        self.b_fri_1.setGeometry(QtCore.QRect(190, 450, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_fri_1.setFont(font)
+        self.b_fri_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_fri_1.setObjectName("b_fri_1")
         self.b_fri_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_fri_0.setGeometry(QtCore.QRect(0, 410, 170, 100))
-        self.b_fri_0.setStyleSheet("font: 75 14pt \"MS Shell Dlg 2\";")
+        self.b_fri_0.setGeometry(QtCore.QRect(10, 450, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_fri_0.setFont(font)
+        self.b_fri_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_fri_0.setObjectName("b_fri_0")
         self.b_sat_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_sat_1.setGeometry(QtCore.QRect(170, 510, 170, 100))
+        self.b_sat_1.setGeometry(QtCore.QRect(190, 560, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_sat_1.setFont(font)
+        self.b_sat_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_sat_1.setObjectName("b_sat_1")
         self.b_tue_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_tue_1.setGeometry(QtCore.QRect(170, 110, 170, 100))
+        self.b_tue_1.setGeometry(QtCore.QRect(190, 120, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_tue_1.setFont(font)
+        self.b_tue_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_tue_1.setObjectName("b_tue_1")
         self.b_wed_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_wed_0.setGeometry(QtCore.QRect(0, 210, 170, 100))
-        self.b_wed_0.setStyleSheet("font: 14pt \"MS Shell Dlg 2\";")
+        self.b_wed_0.setGeometry(QtCore.QRect(10, 230, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_wed_0.setFont(font)
+        self.b_wed_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_wed_0.setObjectName("b_wed_0")
         self.b_mon_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_mon_0.setGeometry(QtCore.QRect(0, 10, 170, 100))
-        self.b_mon_0.setStyleSheet("font: 14pt \"MS Shell Dlg 2\";")
+        self.b_mon_0.setGeometry(QtCore.QRect(10, 10, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_mon_0.setFont(font)
+        self.b_mon_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_mon_0.setObjectName("b_mon_0")
         self.b_wed_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_wed_1.setGeometry(QtCore.QRect(170, 210, 170, 100))
+        self.b_wed_1.setGeometry(QtCore.QRect(190, 230, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_wed_1.setFont(font)
+        self.b_wed_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_wed_1.setObjectName("b_wed_1")
         self.b_mon_1 = QtWidgets.QPushButton(self.tab_1)
-        self.b_mon_1.setGeometry(QtCore.QRect(170, 10, 170, 100))
+        self.b_mon_1.setGeometry(QtCore.QRect(190, 10, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.b_mon_1.setFont(font)
+        self.b_mon_1.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_mon_1.setObjectName("b_mon_1")
         self.b_sat_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_sat_0.setGeometry(QtCore.QRect(0, 510, 170, 100))
-        self.b_sat_0.setStyleSheet("font: 75 14pt \"MS Shell Dlg 2\";")
+        self.b_sat_0.setGeometry(QtCore.QRect(10, 560, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_sat_0.setFont(font)
+        self.b_sat_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_sat_0.setObjectName("b_sat_0")
         self.b_thu_0 = QtWidgets.QPushButton(self.tab_1)
-        self.b_thu_0.setGeometry(QtCore.QRect(0, 310, 170, 100))
-        self.b_thu_0.setStyleSheet("font: 75 14pt \"MS Shell Dlg 2\";")
+        self.b_thu_0.setGeometry(QtCore.QRect(10, 340, 170, 100))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
+        self.b_thu_0.setFont(font)
+        self.b_thu_0.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 14px;\n"
+"font-weight: bold; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.b_thu_0.setObjectName("b_thu_0")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.tab_1)
-        self.plainTextEdit.setGeometry(QtCore.QRect(350, 80, 431, 451))
+        self.plainTextEdit.setGeometry(QtCore.QRect(370, 80, 431, 501))
+        self.plainTextEdit.setStyleSheet("font-size: 16px;")
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.clear_PTE = QtWidgets.QPushButton(self.tab_1)
-        self.clear_PTE.setGeometry(QtCore.QRect(349, 575, 211, 35))
-        self.clear_PTE.setStyleSheet("background-color: rgb(255, 125, 125);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
+        self.clear_PTE.setGeometry(QtCore.QRect(369, 625, 211, 35))
+        self.clear_PTE.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #0079C2;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.clear_PTE.setObjectName("clear_PTE")
         self.send_changes = QtWidgets.QPushButton(self.tab_1)
-        self.send_changes.setGeometry(QtCore.QRect(560, 575, 220, 35))
-        self.send_changes.setStyleSheet("background-color: rgb(125, 255, 125);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
+        self.send_changes.setGeometry(QtCore.QRect(590, 625, 220, 35))
+        self.send_changes.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.send_changes.setObjectName("send_changes")
         self.label_5 = QtWidgets.QLabel(self.tab_1)
-        self.label_5.setGeometry(QtCore.QRect(350, 10, 160, 30))
+        self.label_5.setGeometry(QtCore.QRect(370, 10, 160, 30))
+        self.label_5.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_5.setObjectName("label_5")
         self.l_day = QtWidgets.QLabel(self.tab_1)
-        self.l_day.setGeometry(QtCore.QRect(510, 10, 271, 30))
+        self.l_day.setGeometry(QtCore.QRect(530, 10, 271, 30))
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setPointSize(-1)
         self.l_day.setFont(font)
+        self.l_day.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 15px;\n"
+"font-weight: medium; ")
         self.l_day.setText("")
         self.l_day.setObjectName("l_day")
         self.label_6 = QtWidgets.QLabel(self.tab_1)
-        self.label_6.setGeometry(QtCore.QRect(350, 540, 170, 30))
+        self.label_6.setGeometry(QtCore.QRect(370, 590, 170, 30))
+        self.label_6.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_6.setObjectName("label_6")
         self.l_status = QtWidgets.QLabel(self.tab_1)
-        self.l_status.setGeometry(QtCore.QRect(520, 540, 250, 30))
+        self.l_status.setGeometry(QtCore.QRect(540, 590, 250, 30))
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setPointSize(-1)
         self.l_status.setFont(font)
+        self.l_status.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 15px;\n"
+"font-weight: medium; ")
         self.l_status.setText("")
         self.l_status.setObjectName("l_status")
         self.label_7 = QtWidgets.QLabel(self.tab_1)
-        self.label_7.setGeometry(QtCore.QRect(350, 50, 241, 30))
+        self.label_7.setGeometry(QtCore.QRect(370, 50, 241, 30))
+        self.label_7.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_7.setObjectName("label_7")
         self.line = QtWidgets.QFrame(self.tab_1)
-        self.line.setGeometry(QtCore.QRect(350, 40, 431, 20))
+        self.line.setGeometry(QtCore.QRect(370, 40, 431, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
@@ -156,54 +401,137 @@ class Ui_MainWindow2(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.PTE_temp = QtWidgets.QPlainTextEdit(self.tab_2)
-        self.PTE_temp.setGeometry(QtCore.QRect(0, 300, 650, 171))
+        self.PTE_temp.setGeometry(QtCore.QRect(10, 310, 650, 211))
+        self.PTE_temp.setStyleSheet("font-size: 16px;")
         self.PTE_temp.setObjectName("PTE_temp")
         self.DE_temp = QtWidgets.QDateEdit(self.tab_2)
-        self.DE_temp.setGeometry(QtCore.QRect(0, 510, 771, 51))
+        self.DE_temp.setGeometry(QtCore.QRect(10, 570, 771, 51))
+        self.DE_temp.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.DE_temp.setObjectName("DE_temp")
         self.clear_PTE_temp = QtWidgets.QPushButton(self.tab_2)
-        self.clear_PTE_temp.setGeometry(QtCore.QRect(660, 390, 120, 80))
-        self.clear_PTE_temp.setStyleSheet("background-color: rgb(255, 125, 125);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
+        self.clear_PTE_temp.setGeometry(QtCore.QRect(670, 400, 120, 80))
+        self.clear_PTE_temp.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #0079C2;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.clear_PTE_temp.setObjectName("clear_PTE_temp")
         self.send_chages_temp = QtWidgets.QPushButton(self.tab_2)
-        self.send_chages_temp.setGeometry(QtCore.QRect(660, 300, 120, 80))
-        self.send_chages_temp.setStyleSheet("background-color: rgb(125, 255, 125);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
+        self.send_chages_temp.setGeometry(QtCore.QRect(670, 310, 120, 80))
+        self.send_chages_temp.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.send_chages_temp.setObjectName("send_chages_temp")
         self.label = QtWidgets.QLabel(self.tab_2)
-        self.label.setGeometry(QtCore.QRect(0, 570, 171, 20))
+        self.label.setGeometry(QtCore.QRect(10, 630, 171, 20))
+        self.label.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label.setObjectName("label")
         self.l_status_2 = QtWidgets.QLabel(self.tab_2)
-        self.l_status_2.setGeometry(QtCore.QRect(170, 565, 250, 31))
+        self.l_status_2.setGeometry(QtCore.QRect(180, 630, 250, 21))
+        self.l_status_2.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 15px;\n"
+"font-weight: medium; ")
         self.l_status_2.setText("")
         self.l_status_2.setObjectName("l_status_2")
         self.label_3 = QtWidgets.QLabel(self.tab_2)
-        self.label_3.setGeometry(QtCore.QRect(0, 270, 251, 31))
+        self.label_3.setGeometry(QtCore.QRect(10, 280, 250, 30))
+        self.label_3.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.tab_2)
-        self.label_4.setGeometry(QtCore.QRect(0, 10, 250, 20))
+        self.label_4.setGeometry(QtCore.QRect(10, 5, 250, 20))
+        self.label_4.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_4.setObjectName("label_4")
         self.delete_temp_note = QtWidgets.QPushButton(self.tab_2)
-        self.delete_temp_note.setGeometry(QtCore.QRect(660, 30, 120, 80))
-        self.delete_temp_note.setStyleSheet("background-color: rgb(255, 125, 125);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
+        self.delete_temp_note.setGeometry(QtCore.QRect(670, 30, 120, 80))
+        self.delete_temp_note.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.delete_temp_note.setObjectName("delete_temp_note")
         self.label_8 = QtWidgets.QLabel(self.tab_2)
-        self.label_8.setGeometry(QtCore.QRect(0, 470, 251, 31))
+        self.label_8.setGeometry(QtCore.QRect(10, 530, 251, 31))
+        self.label_8.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
         self.label_8.setObjectName("label_8")
         self.TW_temp = QtWidgets.QTreeWidget(self.tab_2)
-        self.TW_temp.setGeometry(QtCore.QRect(0, 30, 651, 241))
+        self.TW_temp.setGeometry(QtCore.QRect(10, 30, 651, 241))
+        self.TW_temp.setStyleSheet("font-size: 16px;")
         self.TW_temp.setObjectName("TW_temp")
         self.TW_temp.header().setSortIndicatorShown(True)
         self.refresh_btn_tab2 = QtWidgets.QPushButton(self.tab_2)
-        self.refresh_btn_tab2.setGeometry(QtCore.QRect(660, 120, 120, 80))
+        self.refresh_btn_tab2.setGeometry(QtCore.QRect(670, 120, 120, 80))
+        self.refresh_btn_tab2.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #0079C2;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.refresh_btn_tab2.setObjectName("refresh_btn_tab2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.stud_tab = QtWidgets.QTreeWidget(self.tab)
-        self.stud_tab.setGeometry(QtCore.QRect(0, 0, 611, 611))
+        self.stud_tab.setGeometry(QtCore.QRect(0, 0, 641, 661))
+        self.stud_tab.setStyleSheet("font-size: 16px;")
         self.stud_tab.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.stud_tab.setColumnCount(5)
         self.stud_tab.setObjectName("stud_tab")
@@ -212,29 +540,176 @@ class Ui_MainWindow2(object):
         self.stud_tab.header().setSortIndicatorShown(False)
         self.stud_tab.header().setStretchLastSection(True)
         self.add_stud_btn = QtWidgets.QPushButton(self.tab)
-        self.add_stud_btn.setGeometry(QtCore.QRect(620, 20, 120, 80))
+        self.add_stud_btn.setGeometry(QtCore.QRect(649, 20, 141, 80))
+        self.add_stud_btn.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.add_stud_btn.setObjectName("add_stud_btn")
         self.delete_stud_btn = QtWidgets.QPushButton(self.tab)
-        self.delete_stud_btn.setGeometry(QtCore.QRect(620, 110, 120, 80))
+        self.delete_stud_btn.setGeometry(QtCore.QRect(649, 110, 141, 80))
+        self.delete_stud_btn.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.delete_stud_btn.setObjectName("delete_stud_btn")
         self.refresh_btn_tab3 = QtWidgets.QPushButton(self.tab)
-        self.refresh_btn_tab3.setGeometry(QtCore.QRect(620, 200, 120, 80))
+        self.refresh_btn_tab3.setGeometry(QtCore.QRect(649, 200, 141, 80))
+        self.refresh_btn_tab3.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.refresh_btn_tab3.setObjectName("refresh_btn_tab3")
         self.pushButton = QtWidgets.QPushButton(self.tab)
-        self.pushButton.setGeometry(QtCore.QRect(620, 290, 120, 80))
+        self.pushButton.setGeometry(QtCore.QRect(649, 290, 141, 80))
+        self.pushButton.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
         self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(self.tab)
+        self.pushButton_2.setGeometry(QtCore.QRect(649, 380, 141, 80))
+        self.pushButton_2.setStyleSheet("background: #0079C2 ;\n"
+"border-radius: 4px;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"opacity: 1;\n"
+"font-size: 16px;\n"
+"font-weight: medium; ")
+        self.pushButton_2.setObjectName("pushButton_2")
         self.tabWidget.addTab(self.tab, "")
-        self.verticalLayout.addWidget(self.tabWidget)
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(10, 10, 381, 60))
+        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border: 1px solid #e5e5e5;\n"
+"border-radius: 10px;")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 161, 40))
+        self.label_2.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);")
+        self.label_2.setObjectName("label_2")
+        self.group_comboBox = QtWidgets.QComboBox(self.frame)
+        self.group_comboBox.setGeometry(QtCore.QRect(180, 15, 185, 31))
+        self.group_comboBox.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border-radius: 0px;")
+        self.group_comboBox.setFrame(True)
+        self.group_comboBox.setObjectName("group_comboBox")
+        self.group_comboBox.addItem("")
+        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
+        self.frame_2.setGeometry(QtCore.QRect(589, 10, 241, 60))
+        self.frame_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border: 1px solid #e5e5e5;\n"
+"border-radius: 10px;")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.exit_btn = QtWidgets.QPushButton(self.frame_2)
+        self.exit_btn.setGeometry(QtCore.QRect(190, 10, 40, 40))
+        self.exit_btn.setStyleSheet("QPushButton{\n"
+"background: #ff4b4b ; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #ff0000;\n"
+"}")
+        self.exit_btn.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("logout.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.exit_btn.setIcon(icon)
+        self.exit_btn.setIconSize(QtCore.QSize(20, 20))
+        self.exit_btn.setFlat(True)
+        self.exit_btn.setObjectName("exit_btn")
+        self.label_9 = QtWidgets.QLabel(self.frame_2)
+        self.label_9.setGeometry(QtCore.QRect(155, 10, 31, 39))
+        self.label_9.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_9.setStyleSheet("border: 1px solid rgb(255, 255, 255);")
+        self.label_9.setObjectName("label_9")
+        self.l_name = QtWidgets.QLabel(self.frame_2)
+        self.l_name.setEnabled(True)
+        self.l_name.setGeometry(QtCore.QRect(14, 10, 141, 39))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.l_name.sizePolicy().hasHeightForWidth())
+        self.l_name.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.l_name.setFont(font)
+        self.l_name.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.l_name.setAutoFillBackground(False)
+        self.l_name.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"text-align: right")
+        self.l_name.setTextFormat(QtCore.Qt.AutoText)
+        self.l_name.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.l_name.setWordWrap(False)
+        self.l_name.setObjectName("l_name")
         MainWindow2.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow2)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow2)
 
     def retranslateUi(self, MainWindow2):
         _translate = QtCore.QCoreApplication.translate
         MainWindow2.setWindowTitle(_translate("MainWindow2", "Управление ботом РУДН"))
-        self.l_name.setText(_translate("MainWindow2", "Привет, пользователь!"))
         self.b_thu_1.setText(_translate("MainWindow2", "Четверг\n"
 "(нечётная неделя)"))
         self.b_tue_0.setText(_translate("MainWindow2", "Вторник\n"
@@ -294,4 +769,12 @@ class Ui_MainWindow2(object):
         self.refresh_btn_tab3.setText(_translate("MainWindow2", "Обновить"))
         self.pushButton.setText(_translate("MainWindow2", "Изменение\n"
 "данных"))
+        self.pushButton_2.setText(_translate("MainWindow2", "Обзор\n"
+"успеваемости"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow2", "Список студентов"))
+        self.label_2.setText(_translate("MainWindow2", "Выберите группу:"))
+        self.group_comboBox.setCurrentText(_translate("MainWindow2", "НПв-181"))
+        self.group_comboBox.setItemText(0, _translate("MainWindow2", "НПв-181"))
+        self.exit_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))
+        self.label_9.setText(_translate("MainWindow2", "<img src=\'account.svg\' />"))
+        self.l_name.setText(_translate("MainWindow2", "Пользователь"))

@@ -11,6 +11,7 @@ all_students = False
 class WorkGui(main.Gui):
     def __init__(self, parent=None):
         self.add_stud = add_stud.AddStudGui()
+        self.main = main.Gui()
         super().__init__()
         self.ui = window_work.Ui_MainWindow2()
         self.ui.setupUi(self)
@@ -40,6 +41,10 @@ class WorkGui(main.Gui):
             self.download_tab(tab=2, refresh=0)
             self.download_tab(tab=3, refresh=0)
             main.frirst_update_on_start += 1
+
+
+        # logout
+        self.ui.exit_btn.clicked.connect(self.logout)
 
         ''' TAB 1 '''
         '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
@@ -96,6 +101,21 @@ class WorkGui(main.Gui):
         ''' End tab '''
 
         ''' Functions '''
+
+
+    def logout(self):
+        print('---start logout---')
+        self.close()
+        main.Gui.authorization_status = False
+        '''
+        main.search_login = None
+        main.user_document = None
+        main.user_name_db = None
+        '''
+        main.work = None
+        self.main.show()
+        print('---end logout---')
+        
 
     def onItemClicked(self):
         self.sel_item_tab3 = self.ui.stud_tab.currentItem()
@@ -392,7 +412,3 @@ class WorkGui(main.Gui):
         cursor_get_day.close()
         self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
         self.base_changes()
-
-
-if __name__ == '__main__':
-    self_work = WorkGui()
