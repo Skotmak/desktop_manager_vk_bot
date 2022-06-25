@@ -24,6 +24,7 @@ class Ui_MainWindow2(object):
 "opacity: 1;")
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setEnabled(True)
         self.tabWidget.setGeometry(QtCore.QRect(10, 80, 820, 711))
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -35,9 +36,7 @@ class Ui_MainWindow2(object):
         self.b_thu_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_thu_1.setGeometry(QtCore.QRect(190, 340, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_thu_1.setFont(font)
         self.b_thu_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -46,8 +45,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -58,9 +55,7 @@ class Ui_MainWindow2(object):
         self.b_tue_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_tue_0.setGeometry(QtCore.QRect(10, 120, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_tue_0.setFont(font)
         self.b_tue_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -69,8 +64,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -81,9 +74,7 @@ class Ui_MainWindow2(object):
         self.b_fri_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_fri_1.setGeometry(QtCore.QRect(190, 450, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_fri_1.setFont(font)
         self.b_fri_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -92,8 +83,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -104,9 +93,7 @@ class Ui_MainWindow2(object):
         self.b_fri_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_fri_0.setGeometry(QtCore.QRect(10, 450, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_fri_0.setFont(font)
         self.b_fri_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -115,8 +102,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -127,9 +112,7 @@ class Ui_MainWindow2(object):
         self.b_sat_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_sat_1.setGeometry(QtCore.QRect(190, 560, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_sat_1.setFont(font)
         self.b_sat_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -138,8 +121,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -150,9 +131,7 @@ class Ui_MainWindow2(object):
         self.b_tue_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_tue_1.setGeometry(QtCore.QRect(190, 120, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_tue_1.setFont(font)
         self.b_tue_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -161,8 +140,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -173,9 +150,7 @@ class Ui_MainWindow2(object):
         self.b_wed_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_wed_0.setGeometry(QtCore.QRect(10, 230, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_wed_0.setFont(font)
         self.b_wed_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -184,8 +159,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -196,9 +169,7 @@ class Ui_MainWindow2(object):
         self.b_mon_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_mon_0.setGeometry(QtCore.QRect(10, 10, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_mon_0.setFont(font)
         self.b_mon_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -207,8 +178,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -219,9 +188,7 @@ class Ui_MainWindow2(object):
         self.b_wed_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_wed_1.setGeometry(QtCore.QRect(190, 230, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_wed_1.setFont(font)
         self.b_wed_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -230,8 +197,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -242,9 +207,7 @@ class Ui_MainWindow2(object):
         self.b_mon_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_mon_1.setGeometry(QtCore.QRect(190, 10, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_mon_1.setFont(font)
         self.b_mon_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -253,8 +216,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -265,9 +226,7 @@ class Ui_MainWindow2(object):
         self.b_sat_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_sat_0.setGeometry(QtCore.QRect(10, 560, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_sat_0.setFont(font)
         self.b_sat_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -276,8 +235,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -288,9 +245,7 @@ class Ui_MainWindow2(object):
         self.b_thu_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_thu_0.setGeometry(QtCore.QRect(10, 340, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
+        font.setPointSize(12)
         self.b_thu_0.setFont(font)
         self.b_thu_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -299,8 +254,6 @@ class Ui_MainWindow2(object):
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 14px;\n"
-"font-weight: bold; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
 "\n"
@@ -310,10 +263,16 @@ class Ui_MainWindow2(object):
         self.b_thu_0.setObjectName("b_thu_0")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.tab_1)
         self.plainTextEdit.setGeometry(QtCore.QRect(370, 80, 431, 501))
-        self.plainTextEdit.setStyleSheet("font-size: 16px;")
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setStyleSheet("")
         self.plainTextEdit.setObjectName("plainTextEdit")
         self.clear_PTE = QtWidgets.QPushButton(self.tab_1)
         self.clear_PTE.setGeometry(QtCore.QRect(369, 625, 211, 35))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.clear_PTE.setFont(font)
         self.clear_PTE.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
 "border-radius: 4px;\n"
@@ -402,7 +361,10 @@ class Ui_MainWindow2(object):
         self.tab_2.setObjectName("tab_2")
         self.PTE_temp = QtWidgets.QPlainTextEdit(self.tab_2)
         self.PTE_temp.setGeometry(QtCore.QRect(10, 310, 650, 211))
-        self.PTE_temp.setStyleSheet("font-size: 16px;")
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.PTE_temp.setFont(font)
+        self.PTE_temp.setStyleSheet("")
         self.PTE_temp.setObjectName("PTE_temp")
         self.DE_temp = QtWidgets.QDateEdit(self.tab_2)
         self.DE_temp.setGeometry(QtCore.QRect(10, 570, 771, 51))
@@ -504,7 +466,11 @@ class Ui_MainWindow2(object):
         self.label_8.setObjectName("label_8")
         self.TW_temp = QtWidgets.QTreeWidget(self.tab_2)
         self.TW_temp.setGeometry(QtCore.QRect(10, 30, 651, 241))
-        self.TW_temp.setStyleSheet("font-size: 16px;")
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(14)
+        self.TW_temp.setFont(font)
+        self.TW_temp.setStyleSheet("")
         self.TW_temp.setObjectName("TW_temp")
         self.TW_temp.header().setSortIndicatorShown(True)
         self.refresh_btn_tab2 = QtWidgets.QPushButton(self.tab_2)
@@ -531,7 +497,10 @@ class Ui_MainWindow2(object):
         self.tab.setObjectName("tab")
         self.stud_tab = QtWidgets.QTreeWidget(self.tab)
         self.stud_tab.setGeometry(QtCore.QRect(0, 0, 641, 661))
-        self.stud_tab.setStyleSheet("font-size: 16px;")
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.stud_tab.setFont(font)
+        self.stud_tab.setStyleSheet("")
         self.stud_tab.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.stud_tab.setColumnCount(5)
         self.stud_tab.setObjectName("stud_tab")
@@ -593,9 +562,9 @@ class Ui_MainWindow2(object):
 "background: #0079C2;\n"
 "}")
         self.refresh_btn_tab3.setObjectName("refresh_btn_tab3")
-        self.pushButton = QtWidgets.QPushButton(self.tab)
-        self.pushButton.setGeometry(QtCore.QRect(649, 290, 141, 80))
-        self.pushButton.setStyleSheet("QPushButton{\n"
+        self.edit_stud_btn = QtWidgets.QPushButton(self.tab)
+        self.edit_stud_btn.setGeometry(QtCore.QRect(649, 290, 141, 80))
+        self.edit_stud_btn.setStyleSheet("QPushButton{\n"
 "background: #03A9F4 ;\n"
 "border-radius: 4px;\n"
 "opacity: 1;\n"
@@ -610,10 +579,10 @@ class Ui_MainWindow2(object):
 "QPushButton::hover{\n"
 "background: #0079C2;\n"
 "}")
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.tab)
-        self.pushButton_2.setGeometry(QtCore.QRect(649, 380, 141, 80))
-        self.pushButton_2.setStyleSheet("background: #0079C2 ;\n"
+        self.edit_stud_btn.setObjectName("edit_stud_btn")
+        self.open_stud_marks = QtWidgets.QPushButton(self.tab)
+        self.open_stud_marks.setGeometry(QtCore.QRect(649, 380, 141, 80))
+        self.open_stud_marks.setStyleSheet("background: #0079C2 ;\n"
 "border-radius: 4px;\n"
 "text-align: center;\n"
 "letter-spacing: 0px;\n"
@@ -622,10 +591,10 @@ class Ui_MainWindow2(object):
 "opacity: 1;\n"
 "font-size: 16px;\n"
 "font-weight: medium; ")
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.open_stud_marks.setObjectName("open_stud_marks")
         self.tabWidget.addTab(self.tab, "")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(10, 10, 381, 60))
+        self.frame.setGeometry(QtCore.QRect(10, 10, 481, 60))
         self.frame.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: 1px solid #e5e5e5;\n"
 "border-radius: 10px;")
@@ -641,15 +610,41 @@ class Ui_MainWindow2(object):
 "border: 1px solid rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.group_comboBox = QtWidgets.QComboBox(self.frame)
-        self.group_comboBox.setGeometry(QtCore.QRect(180, 15, 185, 31))
+        self.group_comboBox.setGeometry(QtCore.QRect(180, 15, 241, 31))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.group_comboBox.setFont(font)
         self.group_comboBox.setStyleSheet("letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 16px;\n"
-"font-weight: medium; \n"
 "border-radius: 0px;")
         self.group_comboBox.setFrame(True)
         self.group_comboBox.setObjectName("group_comboBox")
         self.group_comboBox.addItem("")
+        self.goups_setting_btn = QtWidgets.QPushButton(self.frame)
+        self.goups_setting_btn.setGeometry(QtCore.QRect(430, 10, 40, 40))
+        self.goups_setting_btn.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #0079C2;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
+        self.goups_setting_btn.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("cog.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.goups_setting_btn.setIcon(icon)
+        self.goups_setting_btn.setIconSize(QtCore.QSize(20, 20))
+        self.goups_setting_btn.setFlat(True)
+        self.goups_setting_btn.setObjectName("goups_setting_btn")
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
         self.frame_2.setGeometry(QtCore.QRect(589, 10, 241, 60))
         self.frame_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
@@ -668,9 +663,9 @@ class Ui_MainWindow2(object):
 "background: #ff0000;\n"
 "}")
         self.exit_btn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("logout.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.exit_btn.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("logout.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.exit_btn.setIcon(icon1)
         self.exit_btn.setIconSize(QtCore.QSize(20, 20))
         self.exit_btn.setFlat(True)
         self.exit_btn.setObjectName("exit_btn")
@@ -767,14 +762,15 @@ class Ui_MainWindow2(object):
         self.delete_stud_btn.setText(_translate("MainWindow2", "Удалить\n"
 "студента"))
         self.refresh_btn_tab3.setText(_translate("MainWindow2", "Обновить"))
-        self.pushButton.setText(_translate("MainWindow2", "Изменение\n"
+        self.edit_stud_btn.setText(_translate("MainWindow2", "Изменение\n"
 "данных"))
-        self.pushButton_2.setText(_translate("MainWindow2", "Обзор\n"
+        self.open_stud_marks.setText(_translate("MainWindow2", "Обзор\n"
 "успеваемости"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow2", "Список студентов"))
         self.label_2.setText(_translate("MainWindow2", "Выберите группу:"))
-        self.group_comboBox.setCurrentText(_translate("MainWindow2", "НПв-181"))
-        self.group_comboBox.setItemText(0, _translate("MainWindow2", "НПв-181"))
+        self.group_comboBox.setCurrentText(_translate("MainWindow2", "Выберите группу"))
+        self.group_comboBox.setItemText(0, _translate("MainWindow2", "Выберите группу"))
+        self.goups_setting_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))
         self.exit_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))
         self.label_9.setText(_translate("MainWindow2", "<img src=\'account.svg\' />"))
         self.l_name.setText(_translate("MainWindow2", "Пользователь"))

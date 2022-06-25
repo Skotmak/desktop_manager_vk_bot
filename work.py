@@ -4,6 +4,8 @@ import window_work
 from PyQt5.QtWidgets import QTableWidgetItem
 import add_stud
 from window_add_stud import *
+import numpy
+
 
 all_students = False
 
@@ -21,6 +23,10 @@ class WorkGui(main.Gui):
         self.current_id = 0
         self.n = 0
         self.ui.plainTextEdit.setReadOnly(True)
+        # Отключение взаимодействия с вкладками пока пользователь не выберет группу
+        self.ui.tabWidget.setEnabled(False)
+        # Сообщение для кнопки удалить студента
+        self.message_error_del_item = "Вы не выбрали строку!\nПожалуйста, выберите строку для удаления"
 
         # Ставит дату по умолчанию на текущую дату
         self.today = QtCore.QDate.currentDate()
@@ -33,8 +39,27 @@ class WorkGui(main.Gui):
         self.sel_item_tab3_int = -1
         print('START selected item is ', self.sel_item_tab3)
 
-        # сообщение для кнопки удалить студента
-        self.message_error_del_item = "Вы не выбрали строку!\nПожалуйста, выберите строку для удаления"
+        # загрузка данных в список групп
+        self.group_combobox_cursor = self.client.cursor()
+        self.group_combobox_cursor.execute("""SELECT * FROM groups""")
+        self.group_list = self.group_combobox_cursor.fetchall()
+        self.count_group_list = len(self.group_list)
+        self.group_combobox_cursor.close()
+        print('list groups: ', self.group_list)  # дебаг
+
+        # превращаем многомерный массив в одномерный
+        flatlist_group = list(numpy.concatenate(self.group_list).flat)
+        # print('The Flattened list:', flatlist_group) # дебаг
+        transp_array_groups = flatlist_group[::-2]
+        formated_transp_array_groups = transp_array_groups[::-1]
+        print('The removed list:', formated_transp_array_groups)
+        # добавляем элементы в список
+        self.ui.group_comboBox.addItems(formated_transp_array_groups)
+
+        # Вызов айди группы по выбоору combobox
+        self.ui.group_comboBox.activated[str].connect(self.select_id_group)
+        # Выход из пользователя
+        self.ui.exit_btn.clicked.connect(self.logout)
 
         # Загрузка таблиц 2 и 3
         if main.frirst_update_on_start == 0:
@@ -42,9 +67,7 @@ class WorkGui(main.Gui):
             self.download_tab(tab=3, refresh=0)
             main.frirst_update_on_start += 1
 
-
-        # logout
-        self.ui.exit_btn.clicked.connect(self.logout)
+        
 
         ''' TAB 1 '''
         '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
@@ -102,6 +125,26 @@ class WorkGui(main.Gui):
 
         ''' Functions '''
 
+    def select_id_group(self, txtVal):
+        txtVal_res = "\nYou have selected: " + txtVal
+        # Проверка на выбор элемента из combobox
+        if txtVal == "Выберите группу":
+            self.ui.tabWidget.setEnabled(False)
+            self.ui.plainTextEdit.setPlainText('')
+            self.ui.plainTextEdit.setReadOnly(True)
+            self.ui.l_day.setText('')
+            self.current_id = 0
+            self.ui.l_status.setText('')
+            self.ui.PTE_temp.setPlainText('')
+            self.ui.l_status_2.setText('')
+            self.ui.stud_tab.clear()
+            self.ui.TW_temp.clear()
+        else:
+            self.ui.tabWidget.setEnabled(True)
+            self.download_tab(tab=2, refresh=0)
+            self.download_tab(tab=3, refresh=0)
+
+        print(txtVal_res)
 
     def logout(self):
         print('---start logout---')
@@ -115,7 +158,6 @@ class WorkGui(main.Gui):
         main.work = None
         self.main.show()
         print('---end logout---')
-        
 
     def onItemClicked(self):
         self.sel_item_tab3 = self.ui.stud_tab.currentItem()
