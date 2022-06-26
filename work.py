@@ -22,6 +22,9 @@ class WorkGui(main.Gui):
                             QtCore.Qt.WindowCloseButtonHint)
         self.current_id = 0
         self.n = 0
+
+        #print('!!!!!!!!', main.Gui.user_role_and_group_id, '!!!!!!!!')
+
         self.ui.plainTextEdit.setReadOnly(True)
         # Отключение взаимодействия с вкладками пока пользователь не выберет группу
         self.ui.tabWidget.setEnabled(False)
@@ -47,6 +50,45 @@ class WorkGui(main.Gui):
         self.group_combobox_cursor.close()
         print('list groups: ', self.group_list)  # дебаг
 
+        model = QtGui.QStandardItemModel()
+        for i1, text1 in self.group_list:
+            it = QtGui.QStandardItem(text1)
+            it.setData(i1)
+            model.appendRow(it)
+
+        @QtCore.pyqtSlot(int)
+        def on_currentIndexChanged_for_combobox(row):
+            it = model.item(row)
+            _id_group = it.data()
+            name_group = it.text()
+            print("selected name: ",name_group, ", id:", _id_group)
+            # Проверка на выбор элемента из combobox
+            if name_group == "Выберите группу":
+                self.ui.tabWidget.setEnabled(False)
+                self.ui.plainTextEdit.setPlainText('')
+                self.ui.plainTextEdit.setReadOnly(True)
+                self.ui.l_day.setText('')
+                self.current_id = 0
+                self.ui.l_status.setText('')
+                self.ui.PTE_temp.setPlainText('')
+                self.ui.l_status_2.setText('')
+                self.ui.stud_tab.clear()
+                self.ui.TW_temp.clear()
+            else:
+                self.ui.tabWidget.setEnabled(True)
+                self.ui.plainTextEdit.setPlainText('')
+                self.ui.plainTextEdit.setReadOnly(True)
+                self.ui.l_day.setText('')
+                self.current_id = 0
+                self.ui.l_status.setText('')
+                self.ui.PTE_temp.setPlainText('')
+                self.ui.l_status_2.setText('')
+                self.ui.stud_tab.clear()
+                self.ui.TW_temp.clear()
+                self.download_tab(tab=2, refresh=0, group_id_tab=_id_group)
+                self.download_tab(tab=3, refresh=0, group_id_tab=_id_group)
+
+        '''
         # превращаем многомерный массив в одномерный
         flatlist_group = list(numpy.concatenate(self.group_list).flat)
         # print('The Flattened list:', flatlist_group) # дебаг
@@ -55,16 +97,19 @@ class WorkGui(main.Gui):
         print('The removed list:', formated_transp_array_groups)
         # добавляем элементы в список
         self.ui.group_comboBox.addItems(formated_transp_array_groups)
+        '''
 
         # Вызов айди группы по выбоору combobox
-        self.ui.group_comboBox.activated[str].connect(self.select_id_group)
+        #self.ui.group_comboBox.activated[str].connect(self.select_id_group)
+        self.ui.group_comboBox.currentIndexChanged[int].connect(on_currentIndexChanged_for_combobox)
+        self.ui.group_comboBox.setModel(model)
         # Выход из пользователя
         self.ui.exit_btn.clicked.connect(self.logout)
 
         # Загрузка таблиц 2 и 3
         if main.frirst_update_on_start == 0:
-            self.download_tab(tab=2, refresh=0)
-            self.download_tab(tab=3, refresh=0)
+            self.download_tab(tab=2, refresh=0, group_id_tab=0)
+            self.download_tab(tab=3, refresh=0, group_id_tab=0)
             main.frirst_update_on_start += 1
 
         
@@ -125,6 +170,8 @@ class WorkGui(main.Gui):
 
         ''' Functions '''
 
+
+    ''' # Эта функция не используется. Раньше она использовалась для combobox. Теперь её заменила функция выше on_currentIndexChanged_for_combobox
     def select_id_group(self, txtVal):
         txtVal_res = "\nYou have selected: " + txtVal
         # Проверка на выбор элемента из combobox
@@ -145,6 +192,9 @@ class WorkGui(main.Gui):
             self.download_tab(tab=3, refresh=0)
 
         print(txtVal_res)
+    '''
+
+
 
     def logout(self):
         print('---start logout---')
@@ -213,7 +263,7 @@ class WorkGui(main.Gui):
         else:
             self.add_stud.show()
 
-    def download_tab(self, tab, refresh):
+    def download_tab(self, tab, refresh, group_id_tab):
         if tab == 2:
             timetable_temp_cursor = self.client.cursor()
             timetable_temp_cursor.execute("""SELECT * FROM timetable_temp""")
@@ -229,27 +279,30 @@ class WorkGui(main.Gui):
             for n_stud_tab2 in range(0, self.count_temp_event):
                 item_1 = QtWidgets.QTreeWidgetItem(self.ui.TW_temp)
                 self.ui.TW_temp.addTopLevelItem(item_1)
-                cursor_download_tab2 = self.client.cursor()
-                cursor_download_tab2.execute(
-                    """SELECT * FROM timetable_temp WHERE id_event_temp = (?)""", (n_stud_tab2,))
-                self.res_stud_tab2 = cursor_download_tab2.fetchone()
-                #print('***', self.res_stud_tab2, '***')
-                cursor_download_tab2.close()
-                # print('-----------------')
-                #print(n_stud_tab2, " = ", self.res_stud_tab2[0])
-                # print('-----------------')
-                if self.res_stud_tab2 == None:
-                    n_stud_tab2 += 1
+                if group_id_tab != 0:
+                    cursor_download_tab2 = self.client.cursor()
+                    cursor_download_tab2.execute(
+                        """SELECT * FROM timetable_temp WHERE id_event_temp = (?) AND group_temp_id = (?)""", (n_stud_tab2, group_id_tab))
+                    self.res_stud_tab2 = cursor_download_tab2.fetchone()
+                    #print('***', self.res_stud_tab2, '***')
+                    cursor_download_tab2.close()
+                    # print('-----------------')
+                    #print(n_stud_tab2, " = ", self.res_stud_tab2[0])
+                    # print('-----------------')
+                    if self.res_stud_tab2 == None:
+                        n_stud_tab2 += 1
+                    else:
+                        self.text_event_temp = self.res_stud_tab2[1]
+                        #print('text_event_temp = ' + self.text_event_temp)
+                        self.date_event_temp = self.res_stud_tab2[2]
+                        #print('date_event_temp = ' + self.date_event_temp)
+                        self.ui.TW_temp.topLevelItem(
+                            n_stud_tab2).setText(0, self.res_stud_tab2[2])
+                        self.ui.TW_temp.topLevelItem(
+                            n_stud_tab2).setText(1, self.res_stud_tab2[1])
+                        n_stud_tab2 += 1
                 else:
-                    self.text_event_temp = self.res_stud_tab2[1]
-                    #print('text_event_temp = ' + self.text_event_temp)
-                    self.date_event_temp = self.res_stud_tab2[2]
-                    #print('date_event_temp = ' + self.date_event_temp)
-                    self.ui.TW_temp.topLevelItem(
-                        n_stud_tab2).setText(0, self.res_stud_tab2[2])
-                    self.ui.TW_temp.topLevelItem(
-                        n_stud_tab2).setText(1, self.res_stud_tab2[1])
-                    n_stud_tab2 += 1
+                    return
             print('downloaded tab 2')
         elif tab == 3:
             stud_cursor = self.client.cursor()
@@ -272,43 +325,46 @@ class WorkGui(main.Gui):
                 for n_stud_tab3 in range(0, 50):
                     item_1 = QtWidgets.QTreeWidgetItem(self.ui.stud_tab)
                     self.ui.stud_tab.addTopLevelItem(item_1)
-                    cursor_download_tab3 = self.client.cursor()
-                    # print(n_stud_tab3)
-                    cursor_download_tab3.execute(
-                        """SELECT * FROM students WHERE id_students = (?)""", (n_stud_tab3,))
-                    self.res_stud_tab3 = cursor_download_tab3.fetchone()
-                    #print('***', self.res_stud_tab3, '***')
-                    cursor_download_tab3.close()
-                    if self.res_stud_tab3 == None:
-                        n_stud_tab3 += 1
+                    if group_id_tab != 0:
+                        cursor_download_tab3 = self.client.cursor()
+                        # print(n_stud_tab3)
+                        cursor_download_tab3.execute(
+                            """SELECT * FROM students WHERE id_students = (?) AND group_students_id = (?)""", (n_stud_tab3, group_id_tab))
+                        self.res_stud_tab3 = cursor_download_tab3.fetchone()
+                        #print('***', self.res_stud_tab3, '***')
+                        cursor_download_tab3.close()
+                        if self.res_stud_tab3 == None:
+                            n_stud_tab3 += 1
+                        else:
+                            # print('-----------------')
+                            #print(n_stud_tab3, " = ", self.res_stud_tab3[0])
+                            # print('-----------------')
+                            self.ID_SQL = str(self.res_stud_tab3[0])
+                            #print('ID = ' + self.ID_SQL)
+                            self.l_nameSQL = str(self.res_stud_tab3[2])
+                            #print('l_name = ' + self.l_nameSQL)
+                            self.f_nameSQL = str(self.res_stud_tab3[1])
+                            #print('f_name = ' + self.f_nameSQL)
+                            self.m_nameSQL = str(self.res_stud_tab3[3])
+                            #print('m_name = ' + self.m_nameSQL)
+                            self.numberSQL = str(self.res_stud_tab3[4])
+                            #print('number = ', self.numberSQL)
+                            self.ui.stud_tab.topLevelItem(
+                                n_stud_tab3).setText(0, self.ID_SQL)
+                            self.ui.stud_tab.topLevelItem(
+                                n_stud_tab3).setText(1, self.l_nameSQL)
+                            self.ui.stud_tab.topLevelItem(
+                                n_stud_tab3).setText(2, self.f_nameSQL)
+                            self.ui.stud_tab.topLevelItem(
+                                n_stud_tab3).setText(3, self.m_nameSQL)
+                            self.ui.stud_tab.topLevelItem(
+                                n_stud_tab3).setText(4, self.numberSQL)
+                            n_stud_tab3 += 1
+                            self.true_count_stud += 1
+                            if self.true_count_stud == self.count_stud:
+                                break
                     else:
-                        # print('-----------------')
-                        #print(n_stud_tab3, " = ", self.res_stud_tab3[0])
-                        # print('-----------------')
-                        self.ID_SQL = str(self.res_stud_tab3[0])
-                        #print('ID = ' + self.ID_SQL)
-                        self.l_nameSQL = str(self.res_stud_tab3[2])
-                        #print('l_name = ' + self.l_nameSQL)
-                        self.f_nameSQL = str(self.res_stud_tab3[1])
-                        #print('f_name = ' + self.f_nameSQL)
-                        self.m_nameSQL = str(self.res_stud_tab3[3])
-                        #print('m_name = ' + self.m_nameSQL)
-                        self.numberSQL = str(self.res_stud_tab3[4])
-                        #print('number = ', self.numberSQL)
-                        self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(0, self.ID_SQL)
-                        self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(1, self.l_nameSQL)
-                        self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(2, self.f_nameSQL)
-                        self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(3, self.m_nameSQL)
-                        self.ui.stud_tab.topLevelItem(
-                            n_stud_tab3).setText(4, self.numberSQL)
-                        n_stud_tab3 += 1
-                        self.true_count_stud += 1
-                        if self.true_count_stud == self.count_stud:
-                            break
+                        return
             print('downloaded tab 3')
         return
 

@@ -32,6 +32,8 @@ class Gui(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.login)
         self.ui.pushButton.setAutoDefault(True)
         self.ui.pushButton_2.clicked.connect(self.register)
+        #self.user_role_and_group_id = None
+        
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if self.auth_win_status == True and event.type() == QtCore.QEvent.KeyPress:
@@ -47,7 +49,7 @@ class Gui(QtWidgets.QMainWindow):
                   int(resolution.height() // 2) - int(self.frameSize().height()) // 2)
 
     def check_data(self):
-        #global search_login
+        global login
         login = self.ui.lineEdit.text()
         passw = self.ui.lineEdit_2.text()
         cur1 = self.client.cursor()
@@ -71,6 +73,7 @@ class Gui(QtWidgets.QMainWindow):
         #global user_document
         #global user_name_db
         #global work
+        global user_role_and_group_id
         #self.work = work.WorkGui()
         if self.authorization_status is False:
             # if authorization_status is False:
@@ -85,6 +88,9 @@ class Gui(QtWidgets.QMainWindow):
                 if user_document and passw == user_document[0]:
                     message_log = "Успешная авторизация!"
                     print('----- success login -----')
+
+                    for self.user_role_and_group_id in cur1.execute("""SELECT login, user_role, user_group_id FROM users WHERE login = ?""", (login,)):
+                        print('***', self.user_role_and_group_id, '***')
                     QtWidgets.QMessageBox.about(
                         self, "Уведомление", message_log)
                     self.authorization_status = True
@@ -163,7 +169,7 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
-
+    ## Для решение проблемы с повторной авторизацией необходимо за коментить window.close() и work.show()
     # window.close()  # ! это закрывает первое окно с авторизацией
     work = work.WorkGui()
     # work.show()  # ! это открывает второе окно с рабочей областью
