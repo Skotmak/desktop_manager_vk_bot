@@ -14,130 +14,229 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow3(object):
     def setupUi(self, MainWindow3):
         MainWindow3.setObjectName("MainWindow3")
-        MainWindow3.resize(714, 333)
+        MainWindow3.resize(640, 370)
         self.centralwidget = QtWidgets.QWidget(MainWindow3)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 711, 332))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.l_1 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.l_1.setFont(font)
-        self.l_1.setObjectName("l_1")
-        self.verticalLayout.addWidget(self.l_1)
-        self.line = QtWidgets.QFrame(self.verticalLayoutWidget)
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(0, 0, 640, 370))
+        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.line = QtWidgets.QFrame(self.frame)
+        self.line.setGeometry(QtCore.QRect(0, 240, 842, 3))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.verticalLayout.addWidget(self.line)
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
-        self.gridLayout.setContentsMargins(10, 10, 10, 10)
-        self.gridLayout.setHorizontalSpacing(6)
-        self.gridLayout.setVerticalSpacing(10)
-        self.gridLayout.setObjectName("gridLayout")
-        self.label_8 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.add_btn = QtWidgets.QPushButton(self.frame)
+        self.add_btn.setGeometry(QtCore.QRect(125, 310, 180, 40))
         font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_8.setFont(font)
-        self.label_8.setObjectName("label_8")
-        self.gridLayout.addWidget(self.label_8, 2, 1, 1, 1)
-        self.label_6 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font.setPointSize(-1)
+        self.add_btn.setFont(font)
+        self.add_btn.setStyleSheet("QPushButton{\n"
+"background: #03A9F4 ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #FFFFFF;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #0079C2;\n"
+"}")
+        self.add_btn.setObjectName("add_btn")
+        self.label_9 = QtWidgets.QLabel(self.frame)
+        self.label_9.setGeometry(QtCore.QRect(20, 120, 86, 30))
         font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 3, 1, 1, 1)
-        self.label_9 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
         self.label_9.setFont(font)
+        self.label_9.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
         self.label_9.setObjectName("label_9")
-        self.gridLayout.addWidget(self.label_9, 1, 1, 1, 1)
-        self.label_7 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(190, 250, 71, 30))
         font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_7.setFont(font)
-        self.label_7.setObjectName("label_7")
-        self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
-        self.pte_l_name = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.pte_l_name.setFont(font)
-        self.pte_l_name.setObjectName("pte_l_name")
-        self.gridLayout.addWidget(self.pte_l_name, 0, 2, 1, 1)
-        self.pte_f_name = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.pte_f_name.setFont(font)
-        self.pte_f_name.setObjectName("pte_f_name")
-        self.gridLayout.addWidget(self.pte_f_name, 1, 2, 1, 1)
-        self.pte_m_name = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.pte_m_name.setFont(font)
-        self.pte_m_name.setObjectName("pte_m_name")
-        self.gridLayout.addWidget(self.pte_m_name, 2, 2, 1, 1)
-        self.pte_number = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.pte_number.setFont(font)
-        self.pte_number.setObjectName("pte_number")
-        self.gridLayout.addWidget(self.pte_number, 3, 2, 1, 1)
-        self.verticalLayout.addLayout(self.gridLayout)
-        self.line_2 = QtWidgets.QFrame(self.verticalLayoutWidget)
-        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line_2.setObjectName("line_2")
-        self.verticalLayout.addWidget(self.line_2)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
         self.label.setFont(font)
+        self.label.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
         self.label.setObjectName("label")
-        self.horizontalLayout_2.addWidget(self.label)
-        self.status_new_stud = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.label_6 = QtWidgets.QLabel(self.frame)
+        self.label_6.setGeometry(QtCore.QRect(20, 200, 171, 30))
         font = QtGui.QFont()
-        font.setPointSize(14)
-        self.status_new_stud.setFont(font)
-        self.status_new_stud.setText("")
-        self.status_new_stud.setObjectName("status_new_stud")
-        self.horizontalLayout_2.addWidget(self.status_new_stud)
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.line_3 = QtWidgets.QFrame(self.verticalLayoutWidget)
+        font.setPointSize(-1)
+        self.label_6.setFont(font)
+        self.label_6.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
+        self.label_6.setObjectName("label_6")
+        self.label_7 = QtWidgets.QLabel(self.frame)
+        self.label_7.setGeometry(QtCore.QRect(20, 80, 86, 30))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.label_7.setFont(font)
+        self.label_7.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_7.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
+        self.label_7.setObjectName("label_7")
+        self.line_3 = QtWidgets.QFrame(self.frame)
+        self.line_3.setGeometry(QtCore.QRect(0, 290, 842, 3))
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
-        self.verticalLayout.addWidget(self.line_3)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(10, 10, 10, 10)
-        self.horizontalLayout.setSpacing(80)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.add_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.clean_pte_btn = QtWidgets.QPushButton(self.frame)
+        self.clean_pte_btn.setGeometry(QtCore.QRect(335, 310, 180, 40))
         font = QtGui.QFont()
-        font.setPointSize(14)
-        self.add_btn.setFont(font)
-        self.add_btn.setObjectName("add_btn")
-        self.horizontalLayout.addWidget(self.add_btn)
-        self.clean_pte_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(-1)
         self.clean_pte_btn.setFont(font)
+        self.clean_pte_btn.setStyleSheet("QPushButton{\n"
+"background: #FFFFFF ;\n"
+"border-radius: 4px;\n"
+"opacity: 1;\n"
+"text-align: center;\n"
+"letter-spacing: 0px;\n"
+"color: #0079C2;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid #e5e5e5;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #e8e8e8;\n"
+"}")
         self.clean_pte_btn.setObjectName("clean_pte_btn")
-        self.horizontalLayout.addWidget(self.clean_pte_btn)
-        self.close_btn = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.label_8 = QtWidgets.QLabel(self.frame)
+        self.label_8.setGeometry(QtCore.QRect(20, 160, 87, 30))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.label_8.setFont(font)
+        self.label_8.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
+        self.label_8.setObjectName("label_8")
+        self.status_new_stud = QtWidgets.QLabel(self.frame)
+        self.status_new_stud.setGeometry(QtCore.QRect(260, 249, 320, 30))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.status_new_stud.setFont(font)
+        self.status_new_stud.setStyleSheet("letter-spacing: 0px;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: white;")
+        self.status_new_stud.setObjectName("status_new_stud")
+        self.frame_2 = QtWidgets.QFrame(self.frame)
+        self.frame_2.setGeometry(QtCore.QRect(-1, -1, 642, 60))
+        self.frame_2.setStyleSheet("background: #0079C2 ;\n"
+"border: 1px solid #e5e5e5;\n"
+"")
+        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.label_2 = QtWidgets.QLabel(self.frame_2)
+        self.label_2.setGeometry(QtCore.QRect(-1, -1, 170, 60))
+        self.label_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #f10909, stop:1 #0079C2);\n"
+"letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: white;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #0079C2;")
+        self.label_2.setObjectName("label_2")
+        self.l_1 = QtWidgets.QLabel(self.frame_2)
+        self.l_1.setGeometry(QtCore.QRect(180, 5, 280, 50))
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.l_1.setFont(font)
+        self.l_1.setStyleSheet("letter-spacing: 0px;\n"
+"text-transform: uppercase;\n"
+"font-size: 16px;\n"
+"font-weight: medium; \n"
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: white;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #0079C2;")
+        self.l_1.setObjectName("l_1")
+        self.pte_l_name = QtWidgets.QLineEdit(self.centralwidget)
+        self.pte_l_name.setGeometry(QtCore.QRect(200, 80, 420, 30))
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.close_btn.setFont(font)
-        self.close_btn.setObjectName("close_btn")
-        self.horizontalLayout.addWidget(self.close_btn)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.pte_l_name.setFont(font)
+        self.pte_l_name.setStyleSheet("border-radius: 4px;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #AFAEAE;")
+        self.pte_l_name.setObjectName("pte_l_name")
+        self.pte_f_name = QtWidgets.QLineEdit(self.centralwidget)
+        self.pte_f_name.setGeometry(QtCore.QRect(200, 120, 420, 30))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.pte_f_name.setFont(font)
+        self.pte_f_name.setStyleSheet("border-radius: 4px;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #AFAEAE;")
+        self.pte_f_name.setObjectName("pte_f_name")
+        self.pte_m_name = QtWidgets.QLineEdit(self.centralwidget)
+        self.pte_m_name.setGeometry(QtCore.QRect(200, 160, 420, 30))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.pte_m_name.setFont(font)
+        self.pte_m_name.setStyleSheet("border-radius: 4px;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #AFAEAE;")
+        self.pte_m_name.setObjectName("pte_m_name")
+        self.pte_number = QtWidgets.QLineEdit(self.centralwidget)
+        self.pte_number.setGeometry(QtCore.QRect(200, 200, 420, 30))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.pte_number.setFont(font)
+        self.pte_number.setStyleSheet("border-radius: 4px;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #AFAEAE;")
+        self.pte_number.setObjectName("pte_number")
         MainWindow3.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow3)
@@ -146,12 +245,13 @@ class Ui_MainWindow3(object):
     def retranslateUi(self, MainWindow3):
         _translate = QtCore.QCoreApplication.translate
         MainWindow3.setWindowTitle(_translate("MainWindow3", "Добавление нового студента"))
-        self.l_1.setText(_translate("MainWindow3", "<html><head/><body><p align=\"center\">Добавление нового студента</p></body></html>"))
-        self.label_8.setText(_translate("MainWindow3", "<html><head/><body><p align=\"right\">Отчество:</p></body></html>"))
-        self.label_6.setText(_translate("MainWindow3", "<html><head/><body><p align=\"right\">Номер студенческого:</p></body></html>"))
-        self.label_9.setText(_translate("MainWindow3", "<html><head/><body><p align=\"right\">Имя:</p></body></html>"))
-        self.label_7.setText(_translate("MainWindow3", "<html><head/><body><p align=\"right\">Фамилия:</p></body></html>"))
-        self.label.setText(_translate("MainWindow3", "<html><head/><body><p align=\"right\">Статус:</p></body></html>"))
         self.add_btn.setText(_translate("MainWindow3", "Добавить"))
+        self.label_9.setText(_translate("MainWindow3", "<html><head/><body><p>Имя:</p></body></html>"))
+        self.label.setText(_translate("MainWindow3", "<html><head/><body><p>Статус:</p></body></html>"))
+        self.label_6.setText(_translate("MainWindow3", "<html><head/><body><p>Номер студенческого:</p></body></html>"))
+        self.label_7.setText(_translate("MainWindow3", "<html><head/><body><p>Фамилия:</p></body></html>"))
         self.clean_pte_btn.setText(_translate("MainWindow3", "Очистить"))
-        self.close_btn.setText(_translate("MainWindow3", "Закрыть"))
+        self.label_8.setText(_translate("MainWindow3", "<html><head/><body><p>Отчество:</p></body></html>"))
+        self.status_new_stud.setText(_translate("MainWindow3", "<html><head/><body><p><br/></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow3", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">KMV Develepment</span></p></body></html>"))
+        self.l_1.setText(_translate("MainWindow3", "<html><head/><body><p align=\"center\">Добавление нового студента</p></body></html>"))

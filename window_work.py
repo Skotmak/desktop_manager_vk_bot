@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'work_test3.ui'
+# Form implementation generated from reading ui file 'work.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -36,7 +36,6 @@ class Ui_MainWindow2(object):
         self.b_thu_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_thu_1.setGeometry(QtCore.QRect(190, 340, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_thu_1.setFont(font)
         self.b_thu_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -55,7 +54,6 @@ class Ui_MainWindow2(object):
         self.b_tue_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_tue_0.setGeometry(QtCore.QRect(10, 120, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_tue_0.setFont(font)
         self.b_tue_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -74,7 +72,6 @@ class Ui_MainWindow2(object):
         self.b_fri_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_fri_1.setGeometry(QtCore.QRect(190, 450, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_fri_1.setFont(font)
         self.b_fri_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -93,7 +90,6 @@ class Ui_MainWindow2(object):
         self.b_fri_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_fri_0.setGeometry(QtCore.QRect(10, 450, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_fri_0.setFont(font)
         self.b_fri_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -112,7 +108,6 @@ class Ui_MainWindow2(object):
         self.b_sat_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_sat_1.setGeometry(QtCore.QRect(190, 560, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_sat_1.setFont(font)
         self.b_sat_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -131,7 +126,6 @@ class Ui_MainWindow2(object):
         self.b_tue_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_tue_1.setGeometry(QtCore.QRect(190, 120, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_tue_1.setFont(font)
         self.b_tue_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -150,7 +144,6 @@ class Ui_MainWindow2(object):
         self.b_wed_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_wed_0.setGeometry(QtCore.QRect(10, 230, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_wed_0.setFont(font)
         self.b_wed_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -169,7 +162,6 @@ class Ui_MainWindow2(object):
         self.b_mon_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_mon_0.setGeometry(QtCore.QRect(10, 10, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_mon_0.setFont(font)
         self.b_mon_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -188,7 +180,6 @@ class Ui_MainWindow2(object):
         self.b_wed_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_wed_1.setGeometry(QtCore.QRect(190, 230, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_wed_1.setFont(font)
         self.b_wed_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -207,7 +198,6 @@ class Ui_MainWindow2(object):
         self.b_mon_1 = QtWidgets.QPushButton(self.tab_1)
         self.b_mon_1.setGeometry(QtCore.QRect(190, 10, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_mon_1.setFont(font)
         self.b_mon_1.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -226,7 +216,6 @@ class Ui_MainWindow2(object):
         self.b_sat_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_sat_0.setGeometry(QtCore.QRect(10, 560, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_sat_0.setFont(font)
         self.b_sat_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -245,7 +234,6 @@ class Ui_MainWindow2(object):
         self.b_thu_0 = QtWidgets.QPushButton(self.tab_1)
         self.b_thu_0.setGeometry(QtCore.QRect(10, 340, 170, 100))
         font = QtGui.QFont()
-        font.setPointSize(12)
         self.b_thu_0.setFont(font)
         self.b_thu_0.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
@@ -496,7 +484,7 @@ class Ui_MainWindow2(object):
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.stud_tab = QtWidgets.QTreeWidget(self.tab)
-        self.stud_tab.setGeometry(QtCore.QRect(0, 0, 641, 661))
+        self.stud_tab.setGeometry(QtCore.QRect(0, 0, 641, 671))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.stud_tab.setFont(font)
@@ -594,29 +582,39 @@ class Ui_MainWindow2(object):
         self.open_stud_marks.setObjectName("open_stud_marks")
         self.tabWidget.addTab(self.tab, "")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(10, 10, 481, 60))
-        self.frame.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        self.frame.setGeometry(QtCore.QRect(-1, -1, 842, 60))
+        self.frame.setStyleSheet("background: #0079C2 ;\n"
 "border: 1px solid #e5e5e5;\n"
-"border-radius: 10px;")
+"")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label_2 = QtWidgets.QLabel(self.frame)
-        self.label_2.setGeometry(QtCore.QRect(10, 10, 161, 40))
-        self.label_2.setStyleSheet("letter-spacing: 0px;\n"
+        self.label_2.setGeometry(QtCore.QRect(-1, -1, 170, 60))
+        self.label_2.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #f10909, stop:1 #0079C2);\n"
+"letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
 "font-size: 16px;\n"
 "font-weight: medium; \n"
-"border: 1px solid rgb(255, 255, 255);")
+"border: 1px solid rgb(255, 255, 255);\n"
+"color: white;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #0079C2;")
+        self.label_2.setLineWidth(0)
         self.label_2.setObjectName("label_2")
         self.group_comboBox = QtWidgets.QComboBox(self.frame)
         self.group_comboBox.setGeometry(QtCore.QRect(180, 15, 241, 31))
         font = QtGui.QFont()
-        font.setPointSize(14)
         self.group_comboBox.setFont(font)
         self.group_comboBox.setStyleSheet("letter-spacing: 0px;\n"
+"background-color: rgb(255, 255, 255);\n"
 "text-transform: uppercase;\n"
-"border-radius: 0px;")
+"border-radius: 0px;\n"
+"color: black;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: black;")
         self.group_comboBox.setFrame(True)
         self.group_comboBox.setObjectName("group_comboBox")
         self.group_comboBox.addItem("")
@@ -645,38 +643,9 @@ class Ui_MainWindow2(object):
         self.goups_setting_btn.setIconSize(QtCore.QSize(20, 20))
         self.goups_setting_btn.setFlat(True)
         self.goups_setting_btn.setObjectName("goups_setting_btn")
-        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_2.setGeometry(QtCore.QRect(589, 10, 241, 60))
-        self.frame_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 10px;")
-        self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.exit_btn = QtWidgets.QPushButton(self.frame_2)
-        self.exit_btn.setGeometry(QtCore.QRect(190, 10, 40, 40))
-        self.exit_btn.setStyleSheet("QPushButton{\n"
-"background: #ff4b4b ; \n"
-"}\n"
-"\n"
-"QPushButton::hover{\n"
-"background: #ff0000;\n"
-"}")
-        self.exit_btn.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("logout.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.exit_btn.setIcon(icon1)
-        self.exit_btn.setIconSize(QtCore.QSize(20, 20))
-        self.exit_btn.setFlat(True)
-        self.exit_btn.setObjectName("exit_btn")
-        self.label_9 = QtWidgets.QLabel(self.frame_2)
-        self.label_9.setGeometry(QtCore.QRect(155, 10, 31, 39))
-        self.label_9.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_9.setStyleSheet("border: 1px solid rgb(255, 255, 255);")
-        self.label_9.setObjectName("label_9")
-        self.l_name = QtWidgets.QLabel(self.frame_2)
+        self.l_name = QtWidgets.QLabel(self.frame)
         self.l_name.setEnabled(True)
-        self.l_name.setGeometry(QtCore.QRect(14, 10, 141, 39))
+        self.l_name.setGeometry(QtCore.QRect(610, 10, 141, 39))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -691,11 +660,42 @@ class Ui_MainWindow2(object):
 "font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid rgb(255, 255, 255);\n"
-"text-align: right")
+"text-align: right;\n"
+"color: white;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #0079C2;")
         self.l_name.setTextFormat(QtCore.Qt.AutoText)
         self.l_name.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.l_name.setWordWrap(False)
         self.l_name.setObjectName("l_name")
+        self.label_9 = QtWidgets.QLabel(self.frame)
+        self.label_9.setGeometry(QtCore.QRect(750, 10, 31, 39))
+        self.label_9.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_9.setStyleSheet("border: 1px solid rgb(255, 255, 255);\n"
+"color: white;\n"
+"border-style: solid;\n"
+"border-width: 1px; \n"
+"border-color: #0079C2;")
+        self.label_9.setObjectName("label_9")
+        self.exit_btn = QtWidgets.QPushButton(self.frame)
+        self.exit_btn.setGeometry(QtCore.QRect(790, 10, 40, 40))
+        self.exit_btn.setStyleSheet("QPushButton{\n"
+"background: #ff4b4b ; \n"
+"border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton::hover{\n"
+"background: #ff0000;\n"
+"border-radius: 10px;\n"
+"}")
+        self.exit_btn.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("logout.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.exit_btn.setIcon(icon1)
+        self.exit_btn.setIconSize(QtCore.QSize(20, 20))
+        self.exit_btn.setFlat(True)
+        self.exit_btn.setObjectName("exit_btn")
         MainWindow2.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow2)
@@ -704,7 +704,7 @@ class Ui_MainWindow2(object):
 
     def retranslateUi(self, MainWindow2):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow2.setWindowTitle(_translate("MainWindow2", "Управление ботом РУДН"))
+        MainWindow2.setWindowTitle(_translate("MainWindow2", "Управление обучением"))
         self.b_thu_1.setText(_translate("MainWindow2", "Четверг\n"
 "(нечётная неделя)"))
         self.b_tue_0.setText(_translate("MainWindow2", "Вторник\n"
@@ -767,10 +767,10 @@ class Ui_MainWindow2(object):
         self.open_stud_marks.setText(_translate("MainWindow2", "Обзор\n"
 "успеваемости"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow2", "Список студентов"))
-        self.label_2.setText(_translate("MainWindow2", "Выберите группу:"))
+        self.label_2.setText(_translate("MainWindow2", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">KMV Development</span></p></body></html>"))
         self.group_comboBox.setCurrentText(_translate("MainWindow2", "Выберите группу"))
         self.group_comboBox.setItemText(0, _translate("MainWindow2", "Выберите группу"))
         self.goups_setting_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))
-        self.exit_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))
-        self.label_9.setText(_translate("MainWindow2", "<img src=\'account.svg\' />"))
         self.l_name.setText(_translate("MainWindow2", "Пользователь"))
+        self.label_9.setText(_translate("MainWindow2", "<img src=\'account.svg\' />"))
+        self.exit_btn.setWhatsThis(_translate("MainWindow2", "Выход из учётной записи"))

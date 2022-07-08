@@ -1,12 +1,10 @@
 from http import client
 import sys
-import pymongo  # pip install pymongo[srv]
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from window_auth import *
-import work  # from work import *
+import work
 import sqlite3
-import traceback
 import sys
 
 frirst_update_on_start = 0
@@ -33,7 +31,6 @@ class Gui(QtWidgets.QMainWindow):
         self.ui.pushButton.setAutoDefault(True)
         self.ui.pushButton_2.clicked.connect(self.register)
         #self.user_role_and_group_id = None
-        
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         if self.auth_win_status == True and event.type() == QtCore.QEvent.KeyPress:
@@ -50,8 +47,8 @@ class Gui(QtWidgets.QMainWindow):
 
     def check_data(self):
         global login
-        login = self.ui.lineEdit.text()
-        passw = self.ui.lineEdit_2.text()
+        login = self.ui.lineEdit_2.text()
+        passw = self.ui.lineEdit.text()
         cur1 = self.client.cursor()
         search_login = 0
         # Пытаемся найти ник в коллекции
@@ -79,8 +76,8 @@ class Gui(QtWidgets.QMainWindow):
             # if authorization_status is False:
             result = self.check_data()
             if result == "value_exists":
-                login = self.ui.lineEdit.text()
-                passw = self.ui.lineEdit_2.text()
+                login = self.ui.lineEdit_2.text()
+                passw = self.ui.lineEdit.text()
                 cur1 = self.client.cursor()
                 user_document = 0
                 for user_document in cur1.execute("""SELECT password FROM users WHERE password = ?""", (passw,)):
@@ -169,7 +166,7 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
     window.show()
-    ## Для решение проблемы с повторной авторизацией необходимо за коментить window.close() и work.show()
+    # Для решение проблемы с повторной авторизацией необходимо за коментить window.close() и work.show()
     # window.close()  # ! это закрывает первое окно с авторизацией
     work = work.WorkGui()
     # work.show()  # ! это открывает второе окно с рабочей областью

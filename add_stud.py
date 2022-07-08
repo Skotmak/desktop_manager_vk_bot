@@ -12,11 +12,11 @@ class AddStudGui(main.Gui):
         self.ui = Ui_MainWindow3()
         self.ui.setupUi(self)
         self.centerOnScreen()
+        self._closable = False
         # эта функция блокирует использование другого окна пока это окно работает
         self.setWindowModality(Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
 
-        self.ui.close_btn.clicked.connect(self.close_add_stud)
         self.ui.add_btn.clicked.connect(self.add_new_stud)
         self.ui.clean_pte_btn.clicked.connect(self.clear_button_stud)
 
@@ -25,8 +25,13 @@ class AddStudGui(main.Gui):
         self.ui.pte_m_name.textChanged.connect(self.get_focus_stud)
         self.ui.pte_number.textChanged.connect(self.get_focus_stud)
 
-    def close_add_stud(self):
-        self.close()
+    def closeEvent(self, evnt):
+        if self._closable:
+            return
+        else:
+            print('Close window add_stud')
+            self.clear_button_stud()
+            self.close()
 
     '''
     def keyPressEvent(self, e):  # Классная штука. Закрывает окно по нажатию Esc

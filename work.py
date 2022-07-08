@@ -61,7 +61,7 @@ class WorkGui(main.Gui):
             it = model.item(row)
             _id_group = it.data()
             name_group = it.text()
-            print("selected name: ",name_group, ", id:", _id_group)
+            print("selected name: ", name_group, ", id:", _id_group)
             # Проверка на выбор элемента из combobox
             if name_group == "Выберите группу":
                 self.ui.tabWidget.setEnabled(False)
@@ -100,8 +100,9 @@ class WorkGui(main.Gui):
         '''
 
         # Вызов айди группы по выбоору combobox
-        #self.ui.group_comboBox.activated[str].connect(self.select_id_group)
-        self.ui.group_comboBox.currentIndexChanged[int].connect(on_currentIndexChanged_for_combobox)
+        # self.ui.group_comboBox.activated[str].connect(self.select_id_group)
+        self.ui.group_comboBox.currentIndexChanged[int].connect(
+            on_currentIndexChanged_for_combobox)
         self.ui.group_comboBox.setModel(model)
         # Выход из пользователя
         self.ui.exit_btn.clicked.connect(self.logout)
@@ -111,8 +112,6 @@ class WorkGui(main.Gui):
             self.download_tab(tab=2, refresh=0, group_id_tab=0)
             self.download_tab(tab=3, refresh=0, group_id_tab=0)
             main.frirst_update_on_start += 1
-
-        
 
         ''' TAB 1 '''
         '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
@@ -170,7 +169,6 @@ class WorkGui(main.Gui):
 
         ''' Functions '''
 
-
     ''' # Эта функция не используется. Раньше она использовалась для combobox. Теперь её заменила функция выше on_currentIndexChanged_for_combobox
     def select_id_group(self, txtVal):
         txtVal_res = "\nYou have selected: " + txtVal
@@ -193,8 +191,6 @@ class WorkGui(main.Gui):
 
         print(txtVal_res)
     '''
-
-
 
     def logout(self):
         print('---start logout---')
