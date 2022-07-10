@@ -60,6 +60,7 @@ class AddStudGui(main.Gui):
 
     def add_new_stud(self):
         print('!!! start adding student !!!')
+        # print('!!!!!!!!!!!!', work._id_group, '!!!!!!!!!!!!') # Дебаг переменной группы
         y = 0
         x = 1
         # print('y=1')
@@ -83,13 +84,13 @@ class AddStudGui(main.Gui):
                 self.new_m_name = self.ui.pte_m_name.text()
                 self.new_number = self.ui.pte_number.text()
                 self.data = [(x, self.new_f_name, self.new_l_name,
-                              self.new_m_name, self.new_number)]
+                              self.new_m_name, self.new_number, work._id_group)]
                 cursor_add_student = self.client.cursor()
                 cursor_add_student.executemany(
-                    """INSERT INTO students (id_students, name, surname, patronymic, student_number) VALUES(?, ?, ?, ?, ?);""", self.data)
+                    """INSERT INTO students (id_students, name, surname, patronymic, student_number, group_students_id) VALUES(?, ?, ?, ?, ?, ?);""", self.data)
                 self.client.commit()
                 cursor_add_student.close()
-                #print('x = ', x)
+                # print('x = ', x)
                 # print('Success!')
                 visual_x = x
                 message_add_stud = "Добавлен студент с номером: " + \
@@ -104,6 +105,16 @@ class AddStudGui(main.Gui):
                 self.ui.pte_m_name.setText('')
                 self.ui.pte_number.setText('')
                 self.ui.status_new_stud.setText('')
+
+                # ''' # вариант добавления непосрелственно в таблицу
+                item_2 = QtWidgets.QTreeWidgetItem(work.WorkGui().ui.stud_tab)
+                work.WorkGui().ui.stud_tab.addTopLevelItem(item_2)
+                work.WorkGui().ui.stud_tab.topLevelItem(x).setText(0, x)
+                work.WorkGui().ui.stud_tab.topLevelItem(x).setText(1, self.new_l_name)
+                work.WorkGui().ui.stud_tab.topLevelItem(x).setText(2, self.new_f_name)
+                work.WorkGui().ui.stud_tab.topLevelItem(x).setText(3, self.new_m_name)
+                work.WorkGui().ui.stud_tab.topLevelItem(x).setText(4, self.new_number)
+                # '''
                 break
             else:
                 print('debag')
@@ -111,7 +122,8 @@ class AddStudGui(main.Gui):
                 #print('y = ', y)
                 # print('no')
                 # print('---------------')
-        work.WorkGui().download_tab(tab=3, refresh=1)
+        # закоментил на время использования другого метода (добавление непосредственно в таблицу студента)
+        #work.WorkGui().download_tab(tab=3, refresh=1, group_id_tab=work._id_group)
         # проблем никаких нет вроде,но прога после добавления студента проходит 2 раза обновление и не обновляет
         print("Обновление прошло успешно")
 

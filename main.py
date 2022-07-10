@@ -9,9 +9,6 @@ import sys
 
 frirst_update_on_start = 0
 
-#global authorization_status
-#authorization_status = False
-
 
 class Gui(QtWidgets.QMainWindow):
     client = sqlite3.connect('vk_bot_db.db')
@@ -21,7 +18,6 @@ class Gui(QtWidgets.QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle("Авторизация в \"Бот РУДН\"")
         self.centerOnScreen()
         self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint |
                             QtCore.Qt.WindowCloseButtonHint)
@@ -67,11 +63,7 @@ class Gui(QtWidgets.QMainWindow):
             return "no_data_avaliable"
 
     def login(self):
-        #global user_document
-        #global user_name_db
-        #global work
         global user_role_and_group_id
-        #self.work = work.WorkGui()
         if self.authorization_status is False:
             # if authorization_status is False:
             result = self.check_data()
@@ -85,7 +77,6 @@ class Gui(QtWidgets.QMainWindow):
                 if user_document and passw == user_document[0]:
                     message_log = "Успешная авторизация!"
                     print('----- success login -----')
-
                     for self.user_role_and_group_id in cur1.execute("""SELECT login, user_role, user_group_id FROM users WHERE login = ?""", (login,)):
                         print('***', self.user_role_and_group_id, '***')
                     QtWidgets.QMessageBox.about(
@@ -94,13 +85,6 @@ class Gui(QtWidgets.QMainWindow):
                     self.close()
                     self.auth_win_status = False
                     work.show()
-                    # self.work.show()
-                    '''
-                    if self.work is None: 
-                        self.work = work.WorkGui()
-                    else:
-                        self.work.show()
-                    '''
 
                     cur_login_name = self.client.cursor()
                     for user_name_db in cur_login_name.execute("""SELECT user_name FROM users WHERE password = ?""", (passw,)):

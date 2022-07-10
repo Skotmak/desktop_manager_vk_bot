@@ -55,7 +55,7 @@ opacity: 1;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -474,7 +474,7 @@ background: #e8e8e8;
       </property>
       <property name="font">
        <font>
-        <pointsize>-1</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -486,7 +486,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #0079C2;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid #e5e5e5;
 }
@@ -508,6 +507,11 @@ background: #e8e8e8;
         <height>35</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -517,7 +521,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -538,10 +541,12 @@ background: #0079C2;
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -558,14 +563,11 @@ font-weight: medium; </string>
        </rect>
       </property>
       <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-       </font>
+       <font/>
       </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 15px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -581,10 +583,12 @@ font-weight: medium; </string>
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -601,14 +605,11 @@ font-weight: medium; </string>
        </rect>
       </property>
       <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-       </font>
+       <font/>
       </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 15px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -624,10 +625,12 @@ font-weight: medium; </string>
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -679,10 +682,12 @@ font-weight: medium; </string>
         <height>51</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
      </widget>
@@ -695,6 +700,11 @@ font-weight: medium; </string>
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #FFFFFF ;
@@ -704,7 +714,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #0079C2;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid #e5e5e5;
 }
@@ -728,6 +737,11 @@ background: #e8e8e8;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -737,7 +751,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -760,10 +773,12 @@ background: #0079C2;
         <height>20</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -779,10 +794,12 @@ font-weight: medium; </string>
         <height>21</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 15px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -798,10 +815,12 @@ font-weight: medium; </string>
         <height>30</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -817,10 +836,12 @@ font-weight: medium; </string>
         <height>20</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -836,6 +857,11 @@ font-weight: medium; </string>
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -845,7 +871,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -867,10 +892,12 @@ background: #0079C2;
         <height>31</height>
        </rect>
       </property>
+      <property name="font">
+       <font/>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -918,6 +945,11 @@ font-weight: medium; </string>
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #FFFFFF ;
@@ -927,7 +959,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #0079C2;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid #e5e5e5;
 }
@@ -966,6 +997,9 @@ background: #e8e8e8;
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
       <property name="sortingEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="animated">
        <bool>false</bool>
       </property>
       <property name="columnCount">
@@ -1018,6 +1052,11 @@ background: #e8e8e8;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -1027,7 +1066,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -1049,6 +1087,11 @@ background: #0079C2;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -1058,7 +1101,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -1080,6 +1122,11 @@ background: #0079C2;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -1089,7 +1136,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -1110,6 +1156,11 @@ background: #0079C2;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -1119,7 +1170,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -1141,6 +1191,11 @@ background: #0079C2;
         <height>80</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">background: #0079C2 ;
 border-radius: 4px;
@@ -1149,7 +1204,6 @@ letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
 opacity: 1;
-font-size: 16px;
 font-weight: medium; </string>
       </property>
       <property name="text">
@@ -1188,11 +1242,13 @@ border: 1px solid #e5e5e5;
        <height>60</height>
       </rect>
      </property>
+     <property name="font">
+      <font/>
+     </property>
      <property name="styleSheet">
       <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #f10909, stop:1 #0079C2);
 letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 color: white;
@@ -1262,7 +1318,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #0079C2;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid #e5e5e5;
 }
@@ -1308,7 +1363,7 @@ background: #e8e8e8;
      </property>
      <property name="font">
       <font>
-       <pointsize>-1</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
@@ -1319,7 +1374,6 @@ background: #e8e8e8;
      </property>
      <property name="styleSheet">
       <string notr="true">letter-spacing: 0px;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 text-align: right;

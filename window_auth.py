@@ -25,6 +25,9 @@ class Ui_MainWindow(object):
         self.frame_2.setObjectName("frame_2")
         self.pushButton = QtWidgets.QPushButton(self.frame_2)
         self.pushButton.setGeometry(QtCore.QRect(160, 160, 280, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("QPushButton{\n"
 "background: #03A9F4 ;\n"
 "border-radius: 4px;\n"
@@ -33,7 +36,6 @@ class Ui_MainWindow(object):
 "letter-spacing: 0px;\n"
 "color: #FFFFFF;\n"
 "text-transform: uppercase;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "}\n"
 "\n"
@@ -43,6 +45,9 @@ class Ui_MainWindow(object):
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.frame_2)
         self.pushButton_2.setGeometry(QtCore.QRect(160, 210, 280, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("QPushButton{\n"
 "background: #FFFFFF ;\n"
 "border-radius: 4px;\n"
@@ -51,7 +56,6 @@ class Ui_MainWindow(object):
 "letter-spacing: 0px;\n"
 "color: #0079C2;\n"
 "text-transform: uppercase;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid #e5e5e5;\n"
 "}\n"
@@ -92,10 +96,12 @@ class Ui_MainWindow(object):
         self.frame.setObjectName("frame")
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setGeometry(QtCore.QRect(-1, -1, 170, 60))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label.setFont(font)
         self.label.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #f10909, stop:1 #0079C2);\n"
 "letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid rgb(255, 255, 255);\n"
 "color: white;\n"
@@ -105,9 +111,11 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.frame)
         self.label_2.setGeometry(QtCore.QRect(210, 10, 180, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_2.setFont(font)
         self.label_2.setStyleSheet("letter-spacing: 0px;\n"
 "text-transform: uppercase;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid rgb(255, 255, 255);\n"
 "color: white;\n"
@@ -117,8 +125,10 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.frame_2)
         self.label_3.setGeometry(QtCore.QRect(10, 70, 121, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_3.setFont(font)
         self.label_3.setStyleSheet("letter-spacing: 0px;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid rgb(255, 255, 255);\n"
 "color: black;\n"
@@ -128,8 +138,10 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.frame_2)
         self.label_4.setGeometry(QtCore.QRect(10, 110, 131, 40))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.label_4.setFont(font)
         self.label_4.setStyleSheet("letter-spacing: 0px;\n"
-"font-size: 16px;\n"
 "font-weight: medium; \n"
 "border: 1px solid rgb(255, 255, 255);\n"
 "color: black;\n"

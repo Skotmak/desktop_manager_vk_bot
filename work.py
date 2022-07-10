@@ -11,196 +11,165 @@ all_students = False
 
 
 class WorkGui(main.Gui):
+
     def __init__(self, parent=None):
         self.add_stud = add_stud.AddStudGui()
         self.main = main.Gui()
         super().__init__()
         self.ui = window_work.Ui_MainWindow2()
         self.ui.setupUi(self)
-        self.centerOnScreen()
-        self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint |
-                            QtCore.Qt.WindowCloseButtonHint)
-        self.current_id = 0
-        self.n = 0
-
-        #print('!!!!!!!!', main.Gui.user_role_and_group_id, '!!!!!!!!')
-
-        self.ui.plainTextEdit.setReadOnly(True)
-        # Отключение взаимодействия с вкладками пока пользователь не выберет группу
-        self.ui.tabWidget.setEnabled(False)
-        # Сообщение для кнопки удалить студента
-        self.message_error_del_item = "Вы не выбрали строку!\nПожалуйста, выберите строку для удаления"
-
-        # Ставит дату по умолчанию на текущую дату
-        self.today = QtCore.QDate.currentDate()
-        self.ui.DE_temp.setDate(self.today)
-
-        self.del_item_tab3_status = True
-
-        self.sel_item_tab3 = ''
-        self.sel_item_tab3_str = ''
-        self.sel_item_tab3_int = -1
-        print('START selected item is ', self.sel_item_tab3)
-
-        # загрузка данных в список групп
-        self.group_combobox_cursor = self.client.cursor()
-        self.group_combobox_cursor.execute("""SELECT * FROM groups""")
-        self.group_list = self.group_combobox_cursor.fetchall()
-        self.count_group_list = len(self.group_list)
-        self.group_combobox_cursor.close()
-        print('list groups: ', self.group_list)  # дебаг
-
-        model = QtGui.QStandardItemModel()
-        for i1, text1 in self.group_list:
-            it = QtGui.QStandardItem(text1)
-            it.setData(i1)
-            model.appendRow(it)
-
-        @QtCore.pyqtSlot(int)
-        def on_currentIndexChanged_for_combobox(row):
-            it = model.item(row)
-            _id_group = it.data()
-            name_group = it.text()
-            print("selected name: ", name_group, ", id:", _id_group)
-            # Проверка на выбор элемента из combobox
-            if name_group == "Выберите группу":
-                self.ui.tabWidget.setEnabled(False)
-                self.ui.plainTextEdit.setPlainText('')
-                self.ui.plainTextEdit.setReadOnly(True)
-                self.ui.l_day.setText('')
-                self.current_id = 0
-                self.ui.l_status.setText('')
-                self.ui.PTE_temp.setPlainText('')
-                self.ui.l_status_2.setText('')
-                self.ui.stud_tab.clear()
-                self.ui.TW_temp.clear()
-            else:
-                self.ui.tabWidget.setEnabled(True)
-                self.ui.plainTextEdit.setPlainText('')
-                self.ui.plainTextEdit.setReadOnly(True)
-                self.ui.l_day.setText('')
-                self.current_id = 0
-                self.ui.l_status.setText('')
-                self.ui.PTE_temp.setPlainText('')
-                self.ui.l_status_2.setText('')
-                self.ui.stud_tab.clear()
-                self.ui.TW_temp.clear()
-                self.download_tab(tab=2, refresh=0, group_id_tab=_id_group)
-                self.download_tab(tab=3, refresh=0, group_id_tab=_id_group)
-
-        '''
-        # превращаем многомерный массив в одномерный
-        flatlist_group = list(numpy.concatenate(self.group_list).flat)
-        # print('The Flattened list:', flatlist_group) # дебаг
-        transp_array_groups = flatlist_group[::-2]
-        formated_transp_array_groups = transp_array_groups[::-1]
-        print('The removed list:', formated_transp_array_groups)
-        # добавляем элементы в список
-        self.ui.group_comboBox.addItems(formated_transp_array_groups)
-        '''
-
-        # Вызов айди группы по выбоору combobox
-        # self.ui.group_comboBox.activated[str].connect(self.select_id_group)
-        self.ui.group_comboBox.currentIndexChanged[int].connect(
-            on_currentIndexChanged_for_combobox)
-        self.ui.group_comboBox.setModel(model)
-        # Выход из пользователя
-        self.ui.exit_btn.clicked.connect(self.logout)
-
-        # Загрузка таблиц 2 и 3
+        self.ui.stud_tab.setColumnWidth(0, 1)
+        self.ui.stud_tab.setColumnWidth(1, 150)
+        self.ui.stud_tab.setColumnWidth(2, 130)
+        self.ui.stud_tab.setColumnWidth(3, 150)
         if main.frirst_update_on_start == 0:
-            self.download_tab(tab=2, refresh=0, group_id_tab=0)
-            self.download_tab(tab=3, refresh=0, group_id_tab=0)
-            main.frirst_update_on_start += 1
+            self.centerOnScreen()
+            self.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint |
+                                QtCore.Qt.WindowCloseButtonHint)
+            self.current_id = 0
+            self.n = 0
+            #_id_group = None
 
-        ''' TAB 1 '''
-        '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
-        self.ui.b_mon_0.clicked.connect(
-            lambda day: self.get_day(day=1, parity=0))
-        self.ui.b_tue_0.clicked.connect(
-            lambda day: self.get_day(day=2, parity=0))
-        self.ui.b_wed_0.clicked.connect(
-            lambda day: self.get_day(day=3, parity=0))
-        self.ui.b_thu_0.clicked.connect(
-            lambda day: self.get_day(day=4, parity=0))
-        self.ui.b_fri_0.clicked.connect(
-            lambda day: self.get_day(day=5, parity=0))
-        self.ui.b_sat_0.clicked.connect(
-            lambda day: self.get_day(day=6, parity=0))
+            #print('!!!!!!!!', main.Gui.user_role_and_group_id, '!!!!!!!!')
 
-        self.ui.b_mon_1.clicked.connect(
-            lambda day: self.get_day(day=1, parity=1))
-        self.ui.b_tue_1.clicked.connect(
-            lambda day: self.get_day(day=2, parity=1))
-        self.ui.b_wed_1.clicked.connect(
-            lambda day: self.get_day(day=3, parity=1))
-        self.ui.b_thu_1.clicked.connect(
-            lambda day: self.get_day(day=4, parity=1))
-        self.ui.b_fri_1.clicked.connect(
-            lambda day: self.get_day(day=5, parity=1))
-        self.ui.b_sat_1.clicked.connect(
-            lambda day: self.get_day(day=6, parity=1))
+            self.ui.plainTextEdit.setReadOnly(True)
+            # Отключение взаимодействия с вкладками пока пользователь не выберет группу
+            self.ui.tabWidget.setEnabled(False)
+            # Сообщение для кнопки удалить студента
+            self.message_error_del_item = "Вы не выбрали строку!\nПожалуйста, выберите строку для удаления"
 
-        self.ui.plainTextEdit.textChanged.connect(
-            lambda lab_stat=self.ui.l_status: self.get_focus(lab_stat))
-        self.ui.clear_PTE.clicked.connect(
-            lambda tab_num: self.clear_button(tab_num=1))
-        self.ui.send_changes.clicked.connect(self.send_changes_to_db)
+            # Ставит дату по умолчанию на текущую дату
+            self.today = QtCore.QDate.currentDate()
+            self.ui.DE_temp.setDate(self.today)
 
-        ''' TAB 2 '''
-        self.ui.PTE_temp.textChanged.connect(
-            lambda lab_stat=self.ui.l_status_2: self.get_focus(lab_stat))
-        self.ui.send_chages_temp.clicked.connect(self.send_temp)
-        self.ui.clear_PTE_temp.clicked.connect(
-            lambda tab_num: self.clear_button(tab_num=2))
-        self.ui.delete_temp_note.clicked.connect(self.delete_temp)
-        self.ui.refresh_btn_tab2.clicked.connect(
-            lambda tab: self.download_tab(tab=2, refresh=1))
+            self.del_item_tab3_status = True
 
-        ''' TAB 3 '''
-        self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
-        self.ui.delete_stud_btn.clicked.connect(
-            lambda del_tab: self.delete_item_in_tab(del_tab=3))
-        self.ui.refresh_btn_tab3.clicked.connect(
-            lambda tab: self.download_tab(tab=3, refresh=1))
-        self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
+            self.sel_item_tab3 = ''
+            self.sel_item_tab3_str = ''
+            self.sel_item_tab3_int = -1
+            print('START selected item is ', self.sel_item_tab3)
 
-        ''' End tab '''
+            # загрузка данных в список групп
+            self.group_combobox_cursor = self.client.cursor()
+            self.group_combobox_cursor.execute("""SELECT * FROM groups""")
+            self.group_list = self.group_combobox_cursor.fetchall()
+            self.count_group_list = len(self.group_list)
+            self.group_combobox_cursor.close()
+            print('list groups: ', self.group_list)  # дебаг
+
+            model = QtGui.QStandardItemModel()
+            for i1, text1 in self.group_list:
+                it = QtGui.QStandardItem(text1)
+                it.setData(i1)
+                model.appendRow(it)
+
+            @QtCore.pyqtSlot(int)
+            def on_currentIndexChanged_for_combobox(row):
+                global _id_group
+                it = model.item(row)
+                _id_group = it.data()
+                name_group = it.text()
+                print("selected name: ", name_group, ", id:", _id_group)
+                # Проверка на выбор элемента из combobox
+                if name_group == "Выберите группу":
+                    self.ui.tabWidget.setEnabled(False)
+                    self.ui.plainTextEdit.setPlainText('')
+                    self.ui.plainTextEdit.setReadOnly(True)
+                    self.ui.l_day.setText('')
+                    self.current_id = 0
+                    self.ui.l_status.setText('')
+                    self.ui.PTE_temp.setPlainText('')
+                    self.ui.l_status_2.setText('')
+                    self.ui.stud_tab.clear()
+                    self.ui.TW_temp.clear()
+                else:
+                    self.ui.tabWidget.setEnabled(True)
+                    self.ui.plainTextEdit.setPlainText('')
+                    self.ui.plainTextEdit.setReadOnly(True)
+                    self.ui.l_day.setText('')
+                    self.current_id = 0
+                    self.ui.l_status.setText('')
+                    self.ui.PTE_temp.setPlainText('')
+                    self.ui.l_status_2.setText('')
+                    self.ui.stud_tab.clear()
+                    self.ui.TW_temp.clear()
+                    self.download_tab(tab=2, refresh=0, group_id_tab=_id_group)
+                    self.download_tab(tab=3, refresh=0, group_id_tab=_id_group)
+
+            # Вызов айди группы по выбоору combobox
+            self.ui.group_comboBox.currentIndexChanged[int].connect(
+                on_currentIndexChanged_for_combobox)
+            self.ui.group_comboBox.setModel(model)
+            # Выход из пользователя
+            self.ui.exit_btn.clicked.connect(self.logout)
+
+            # Загрузка таблиц 2 и 3
+            if main.frirst_update_on_start == 0:
+                self.download_tab(tab=2, refresh=0, group_id_tab=0)
+                self.download_tab(tab=3, refresh=0, group_id_tab=0)
+                main.frirst_update_on_start += 1
+
+            ''' TAB 1 '''
+            '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
+            print('this is _id_group:', _id_group)
+            self.ui.b_mon_0.clicked.connect(
+                lambda day: self.get_day(day=1, parity=0, group_id_tab=_id_group))
+            self.ui.b_tue_0.clicked.connect(
+                lambda day: self.get_day(day=2, parity=0, group_id_tab=_id_group))
+            self.ui.b_wed_0.clicked.connect(
+                lambda day: self.get_day(day=3, parity=0, group_id_tab=_id_group))
+            self.ui.b_thu_0.clicked.connect(
+                lambda day: self.get_day(day=4, parity=0, group_id_tab=_id_group))
+            self.ui.b_fri_0.clicked.connect(
+                lambda day: self.get_day(day=5, parity=0, group_id_tab=_id_group))
+            self.ui.b_sat_0.clicked.connect(
+                lambda day: self.get_day(day=6, parity=0, group_id_tab=_id_group))
+
+            self.ui.b_mon_1.clicked.connect(
+                lambda day: self.get_day(day=1, parity=1, group_id_tab=_id_group))
+            self.ui.b_tue_1.clicked.connect(
+                lambda day: self.get_day(day=2, parity=1, group_id_tab=_id_group))
+            self.ui.b_wed_1.clicked.connect(
+                lambda day: self.get_day(day=3, parity=1, group_id_tab=_id_group))
+            self.ui.b_thu_1.clicked.connect(
+                lambda day: self.get_day(day=4, parity=1, group_id_tab=_id_group))
+            self.ui.b_fri_1.clicked.connect(
+                lambda day: self.get_day(day=5, parity=1, group_id_tab=_id_group))
+            self.ui.b_sat_1.clicked.connect(
+                lambda day: self.get_day(day=6, parity=1, group_id_tab=_id_group))
+
+            self.ui.plainTextEdit.textChanged.connect(
+                lambda lab_stat=self.ui.l_status: self.get_focus(lab_stat))
+            self.ui.clear_PTE.clicked.connect(
+                lambda tab_num: self.clear_button(tab_num=1))
+            self.ui.send_changes.clicked.connect(self.send_changes_to_db)
+
+            ''' TAB 2 '''
+            self.ui.PTE_temp.textChanged.connect(
+                lambda lab_stat=self.ui.l_status_2: self.get_focus(lab_stat))
+            self.ui.send_chages_temp.clicked.connect(self.send_temp)
+            self.ui.clear_PTE_temp.clicked.connect(
+                lambda tab_num: self.clear_button(tab_num=2))
+            self.ui.delete_temp_note.clicked.connect(self.delete_temp)
+            self.ui.refresh_btn_tab2.clicked.connect(
+                lambda tab: self.download_tab(tab=2, refresh=1))
+
+            ''' TAB 3 '''
+            self.ui.add_stud_btn.clicked.connect(self.open_window_add_stud)
+            self.ui.delete_stud_btn.clicked.connect(
+                lambda del_tab: self.delete_item_in_tab(del_tab=3))
+            self.ui.refresh_btn_tab3.clicked.connect(
+                lambda tab: self.download_tab(tab=3, refresh=1, group_id_tab=_id_group))
+            self.ui.stud_tab.itemClicked.connect(self.onItemClicked)
+
+            ''' End tab '''
 
         ''' Functions '''
-
-    ''' # Эта функция не используется. Раньше она использовалась для combobox. Теперь её заменила функция выше on_currentIndexChanged_for_combobox
-    def select_id_group(self, txtVal):
-        txtVal_res = "\nYou have selected: " + txtVal
-        # Проверка на выбор элемента из combobox
-        if txtVal == "Выберите группу":
-            self.ui.tabWidget.setEnabled(False)
-            self.ui.plainTextEdit.setPlainText('')
-            self.ui.plainTextEdit.setReadOnly(True)
-            self.ui.l_day.setText('')
-            self.current_id = 0
-            self.ui.l_status.setText('')
-            self.ui.PTE_temp.setPlainText('')
-            self.ui.l_status_2.setText('')
-            self.ui.stud_tab.clear()
-            self.ui.TW_temp.clear()
-        else:
-            self.ui.tabWidget.setEnabled(True)
-            self.download_tab(tab=2, refresh=0)
-            self.download_tab(tab=3, refresh=0)
-
-        print(txtVal_res)
-    '''
 
     def logout(self):
         print('---start logout---')
         self.close()
         main.Gui.authorization_status = False
-        '''
-        main.search_login = None
-        main.user_document = None
-        main.user_name_db = None
-        '''
         main.work = None
         self.main.show()
         print('---end logout---')
@@ -239,7 +208,7 @@ class WorkGui(main.Gui):
                           self.sel_item_tab3_int, '***')
                     self.client.commit()
                     cursor_delete_tab3_item.close()
-                    self.download_tab(tab=3, refresh=1)
+                    self.download_tab(tab=3, refresh=1, group_id_tab=_id_group)
                     self.del_item_tab3_status = False
                     return
                 elif self.del_item_tab3_status == False:
@@ -310,7 +279,6 @@ class WorkGui(main.Gui):
             if self.count_stud >= 50:
                 self.all_students = True
             if refresh == 1:
-                # self.ui.stud_tab.takeTopLevelItem(self.ui.stud_tab.indexOfTopLevelItem(0))
                 self.ui.stud_tab.clear()
                 print("--- --- ---")
                 print('deteted tab 3')
@@ -361,6 +329,8 @@ class WorkGui(main.Gui):
                                 break
                     else:
                         return
+            # self.ui.stud_tab.repaint()
+            print('group_id: ', _id_group)
             print('downloaded tab 3')
         return
 
@@ -432,77 +402,81 @@ class WorkGui(main.Gui):
         self.ui.plainTextEdit.setReadOnly(False)
         return
 
-    def get_day(self, day, parity):
+    def get_day(self, day, parity, group_id_tab):
         cursor_get_day = self.client.cursor()
-        if day == 1:
-            if parity == 0:
-                self.current_id = 10
-                self.ui.l_day.setText('Понедельник (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 11
-                self.ui.l_day.setText('Понедельник (нечётная неделя)')
-                cursor_get_day = self.client.cursor()
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-        elif day == 2:
-            if parity == 0:
-                self.current_id = 20
-                self.ui.l_day.setText('Вторник (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 21
-                self.ui.l_day.setText('Вторник (нечётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-        elif day == 3:
-            if parity == 0:
-                self.current_id = 30
-                self.ui.l_day.setText('Среда (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 31
-                self.ui.l_day.setText('Среда (нечётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-        elif day == 4:
-            if parity == 0:
-                self.current_id = 40
-                self.ui.l_day.setText('Четверг (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 41
-                self.ui.l_day.setText('Четверг (нечётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-        elif day == 5:
-            if parity == 0:
-                self.current_id = 50
-                self.ui.l_day.setText('Пятница (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 51
-                self.ui.l_day.setText('Пятница (нечётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-        elif day == 6:
-            if parity == 0:
-                self.current_id = 60
-                self.ui.l_day.setText('Суббота (чётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
-            elif parity == 1:
-                self.current_id = 61
-                self.ui.l_day.setText('Суббота (нечётная неделя)')
-                cursor_get_day.execute(
-                    """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?)""", (self.current_id,))
+        print('!!!@@@!!!', group_id_tab, '!!!@@@!!!')
+        if group_id_tab != None:
+            if day == 1:
+                if parity == 0:
+                    self.current_id = 10
+                    self.ui.l_day.setText('Понедельник (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 11
+                    self.ui.l_day.setText('Понедельник (нечётная неделя)')
+                    cursor_get_day = self.client.cursor()
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+            elif day == 2:
+                if parity == 0:
+                    self.current_id = 20
+                    self.ui.l_day.setText('Вторник (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 21
+                    self.ui.l_day.setText('Вторник (нечётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+            elif day == 3:
+                if parity == 0:
+                    self.current_id = 30
+                    self.ui.l_day.setText('Среда (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 31
+                    self.ui.l_day.setText('Среда (нечётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+            elif day == 4:
+                if parity == 0:
+                    self.current_id = 40
+                    self.ui.l_day.setText('Четверг (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 41
+                    self.ui.l_day.setText('Четверг (нечётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+            elif day == 5:
+                if parity == 0:
+                    self.current_id = 50
+                    self.ui.l_day.setText('Пятница (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 51
+                    self.ui.l_day.setText('Пятница (нечётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+            elif day == 6:
+                if parity == 0:
+                    self.current_id = 60
+                    self.ui.l_day.setText('Суббота (чётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+                elif parity == 1:
+                    self.current_id = 61
+                    self.ui.l_day.setText('Суббота (нечётная неделя)')
+                    cursor_get_day.execute(
+                        """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
+        else:
+            print('this is _id_group:', _id_group, '| result: NO')
         self.res_timetable = cursor_get_day.fetchone()
         print('***', self.res_timetable, '***')
         cursor_get_day.close()
-        self.ui.plainTextEdit.setPlainText(self.res_timetable[1])
+        self.ui.plainTextEdit.setPlainText(self.res_timetable[2])
         self.base_changes()

@@ -41,6 +41,11 @@
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
 background: #03A9F4 ;
@@ -50,7 +55,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #FFFFFF;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 }
 
@@ -71,6 +75,11 @@ background: #0079C2;
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
 background: #FFFFFF ;
@@ -80,7 +89,6 @@ text-align: center;
 letter-spacing: 0px;
 color: #0079C2;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid #e5e5e5;
 }
@@ -184,11 +192,15 @@ border: 1px solid #e5e5e5;
         <height>60</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #f10909, stop:1 #0079C2);
 letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 color: white;
@@ -209,10 +221,14 @@ border-color: #0079C2;</string>
         <height>40</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">letter-spacing: 0px;
 text-transform: uppercase;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 color: white;
@@ -234,9 +250,13 @@ border-color: #0079C2;</string>
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">letter-spacing: 0px;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 color: black;
@@ -257,9 +277,13 @@ border-color: white;</string>
        <height>40</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">letter-spacing: 0px;
-font-size: 16px;
 font-weight: medium; 
 border: 1px solid rgb(255, 255, 255);
 color: black;
