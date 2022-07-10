@@ -106,7 +106,7 @@ class AddStudGui(main.Gui):
                 self.ui.pte_number.setText('')
                 self.ui.status_new_stud.setText('')
 
-                # ''' # вариант добавления непосрелственно в таблицу
+                ''' # вариант добавления непосрелственно в таблицу
                 item_2 = QtWidgets.QTreeWidgetItem(work.WorkGui().ui.stud_tab)
                 work.WorkGui().ui.stud_tab.addTopLevelItem(item_2)
                 work.WorkGui().ui.stud_tab.topLevelItem(x).setText(0, x)
@@ -114,7 +114,7 @@ class AddStudGui(main.Gui):
                 work.WorkGui().ui.stud_tab.topLevelItem(x).setText(2, self.new_f_name)
                 work.WorkGui().ui.stud_tab.topLevelItem(x).setText(3, self.new_m_name)
                 work.WorkGui().ui.stud_tab.topLevelItem(x).setText(4, self.new_number)
-                # '''
+                '''
                 break
             else:
                 print('debag')

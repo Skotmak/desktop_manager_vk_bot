@@ -12,7 +12,7 @@ all_students = False
 
 class WorkGui(main.Gui):
 
-    def __init__(self, parent=None):
+    def __init__(self, user_role_and_group_id_status):
         self.add_stud = add_stud.AddStudGui()
         self.main = main.Gui()
         super().__init__()
@@ -28,9 +28,7 @@ class WorkGui(main.Gui):
                                 QtCore.Qt.WindowCloseButtonHint)
             self.current_id = 0
             self.n = 0
-            #_id_group = None
 
-            #print('!!!!!!!!', main.Gui.user_role_and_group_id, '!!!!!!!!')
 
             self.ui.plainTextEdit.setReadOnly(True)
             # Отключение взаимодействия с вкладками пока пользователь не выберет группу
@@ -47,15 +45,28 @@ class WorkGui(main.Gui):
             self.sel_item_tab3 = ''
             self.sel_item_tab3_str = ''
             self.sel_item_tab3_int = -1
-            print('START selected item is ', self.sel_item_tab3)
+            # print('START selected item is ', self.sel_item_tab3) # Дебаг
 
             # загрузка данных в список групп
+            
+            #self.check_user_group_id_cursor = self.client.cursor()
+            #for check_user_group_id in self.check_user_group_id_cursor.execute("""SELECT user_group_id FROM users WHERE login = (?)""", (main.Gui().login,)):
+            #    print('***', check_user_group_id, '***')
+            #self.check_user_group_id_cursor.close()
+            #a = main.Gui().user_role_and_group_id[2]
+            
+            '''
             self.group_combobox_cursor = self.client.cursor()
             self.group_combobox_cursor.execute("""SELECT * FROM groups""")
             self.group_list = self.group_combobox_cursor.fetchall()
             self.count_group_list = len(self.group_list)
             self.group_combobox_cursor.close()
             print('list groups: ', self.group_list)  # дебаг
+            '''
+            self.check_user_group_id(user_role_and_group_id_status)
+            print('list groups: ', self.group_list)  # дебаг
+
+        
 
             model = QtGui.QStandardItemModel()
             for i1, text1 in self.group_list:
@@ -66,6 +77,8 @@ class WorkGui(main.Gui):
             @QtCore.pyqtSlot(int)
             def on_currentIndexChanged_for_combobox(row):
                 global _id_group
+                #global a
+                #print('user_group_id: ', a)
                 it = model.item(row)
                 _id_group = it.data()
                 name_group = it.text()
@@ -111,7 +124,7 @@ class WorkGui(main.Gui):
 
             ''' TAB 1 '''
             '''day - день недели; parity - четность недели: 0 - чётная неделя   1 - не чётная неделя '''
-            print('this is _id_group:', _id_group)
+            # print('this is _id_group:', _id_group) # Дебаг
             self.ui.b_mon_0.clicked.connect(
                 lambda day: self.get_day(day=1, parity=0, group_id_tab=_id_group))
             self.ui.b_tue_0.clicked.connect(
@@ -165,8 +178,34 @@ class WorkGui(main.Gui):
             ''' End tab '''
 
         ''' Functions '''
+    def check_user_group_id (self, user_role_and_group_id):
+        '''
+        check_user_group_id_cursor = self.client.cursor()
+        print('!!!!!!!!!!!!!!!!!!!')
+        print('***from auth - user_role_and_group_id: ', user_role_and_group_id, '***')
+        for check_user_group_id in check_user_group_id_cursor.execute("""SELECT user_group_id FROM users WHERE login = (?)""", (login_var,)):
+            print('***check_user_group_id: ', check_user_group_id[0], '***')
+        self.group_list = check_user_group_id[0]
+        #return self.group_list # старый кусок
+        return user_role_and_group_id
+        '''
+        if user_role_and_group_id != None:
+            self.group_combobox_cursor = self.client.cursor()
+            self.group_combobox_cursor.execute("""SELECT * FROM groups WHERE  id_group = (?)""", (user_role_and_group_id,))
+            self.group_list = self.group_combobox_cursor.fetchall()
+            self.count_group_list = len(self.group_list)
+            self.group_combobox_cursor.close()
+            return self.group_list
+        elif user_role_and_group_id == None:
+            self.group_combobox_cursor = self.client.cursor()
+            self.group_combobox_cursor.execute("""SELECT * FROM groups""")
+            self.group_list = self.group_combobox_cursor.fetchall()
+            self.count_group_list = len(self.group_list)
+            self.group_combobox_cursor.close()
+            #print('list groups: ', self.group_list)
+            return self.group_list
 
-    def logout(self):
+    def logout(self): # плохо работает. Нужна доработка
         print('---start logout---')
         self.close()
         main.Gui.authorization_status = False
@@ -474,7 +513,8 @@ class WorkGui(main.Gui):
                     cursor_get_day.execute(
                         """SELECT * FROM timetable_ussual WHERE id_event_ussual = (?) AND group_ussual_id = (?)""", (self.current_id, group_id_tab))
         else:
-            print('this is _id_group:', _id_group, '| result: NO')
+            #print('this is _id_group:', _id_group, '| result: NO')
+            return
         self.res_timetable = cursor_get_day.fetchone()
         print('***', self.res_timetable, '***')
         cursor_get_day.close()
