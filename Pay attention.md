@@ -1,0 +1,1 @@
+Hi! Today 07 may 2022 year and now I make a decision to change a type of database (Earlier it was MongoDB) And now it will be something SQL with relational database. Mongodb was closed for Russian region and i can't use it
