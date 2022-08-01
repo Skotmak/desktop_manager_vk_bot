@@ -7,14 +7,117 @@ import work
 import sqlite3
 import sys
 
+from socket import *
+from getpass import getpass
+from cryptography.fernet import Fernet
+import base64
+
 frirst_update_on_start = 0
 login_var = 1
 # user_role_and_group_id = 2
 
+
+class Client:
+    def __init__(self, ip, port):
+        self.cli = socket(AF_INET, SOCK_STREAM)
+        self.cli.connect(
+            (ip, port)
+        )
+
+        symbols = {
+            '0': 'Q', '1': 'W', '2': 'E', '3': 'R', '4': 'T', '5': 'Y', '6': 'U', '7': 'I', '8': 'O', '9': 'P',
+        }
+        p = self.cli.getsockname()[0].replace('.', '')
+        i = 0
+        key = ''
+        while len(key) != 32:
+            key = f'{key}{symbols[p[i]]}'
+            i += 1
+            if i == len(p):
+                i = 0
+        key = key.encode()
+        key = base64.urlsafe_b64encode(key)
+        self.f = Fernet(key)
+
+    def sender(self, text):
+        text = text.encode()
+        text = self.f.encrypt(text)
+        try:
+            self.cli.send(text)
+        except Exception as e:
+            pass
+
+    def get_msg(self):
+        data = self.cli.recv(1024)
+        data = self.f.decrypt(data)
+        msg = data.decode()
+        return msg
+
+    def auth(self):
+        server_answer = self.get_msg()
+
+        if server_answer == 'Type you password.':
+            self.sender('root')
+
+            answer = self.get_msg()
+
+            if answer == 'Access is allowed!':
+                return 1
+
+            if answer == 'Access denied!':
+                return 0
+
+        elif server_answer == 'Access is allowed!':
+            return 1
+
+        elif server_answer == 'Access denied!':
+            return 0
+
+    def connect(self):
+
+        connection = self.auth()
+        if connection:
+            print('Connected!')
+            # self.listen()
+        else:
+            print('Access denied!')
+
+    def listen(self):
+        while True:
+            data = input('Enter request to server: ')
+            if not(data in ('disconnect', 'exit')):
+                try:
+                    self.sender(data)
+                    msg = self.get_msg()
+                except Exception as e:
+                    print(e)
+                    print('Server disconnected!')
+                    msg = 'Server disconnected!'
+
+                if msg != 'default answer':
+                    if msg == 'Server disconnected!':
+                        exit()
+
+                    else:
+                        # server message processing
+                        text1 = msg.split('\n')
+                        text = '\t'
+                        for i in text1:
+                            text = f'{text}{i}\n\t'
+                        text = text.rstrip()
+
+                        print(f'SERVER ANSWER:\n{text}')
+
+            else:
+                self.sender('disconnect')
+                self.cli.close()
+                print('Exiting...')
+                exit()
+
+
 class Gui(QtWidgets.QMainWindow):
     client = sqlite3.connect('vk_bot_db.db')
     user_role_and_group_id = (0, 0, 0)
-    
 
     def __init__(self, parent=None):
         super().__init__()
@@ -84,7 +187,8 @@ class Gui(QtWidgets.QMainWindow):
                     message_log = "Успешная авторизация!"
                     print('----- success login -----')
                     for user_role_and_group_id in cur1.execute("""SELECT login, user_role, user_group_id FROM users WHERE login = (?) AND password = (?)""", (login_var, passw,)):
-                        print('***user_role_and_group_id: ', user_role_and_group_id, '***')
+                        print('***user_role_and_group_id: ',
+                              user_role_and_group_id, '***')
                     flag_check_user_group_id = True
                     user_role_and_group_id_status = user_role_and_group_id[2]
                     QtWidgets.QMessageBox.about(
@@ -95,13 +199,13 @@ class Gui(QtWidgets.QMainWindow):
                     work.WorkGui(user_role_and_group_id_status).show()
                     #work.WorkGui.check_user_group_id(work.WorkGui(), user_role_and_group_id_status, login_var)
                     #work = work.WorkGui()
-                    #work.show()
+                    # work.show()
 
                     cur_login_name = self.client.cursor()
                     for user_name_db in cur_login_name.execute("""SELECT user_name FROM users WHERE login = (?) AND password = (?)""", (login_var, passw,)):
                         print('***', user_name_db, '***')
                     #user_name = str(user_name_db[0])
-                    #work.WorkGui().ui.l_name.setText(user_name)
+                    # work.WorkGui().ui.l_name.setText(user_name)
                     cur_login_name.close()
                     cur1.close()
                     return user_role_and_group_id
@@ -158,7 +262,6 @@ class Gui(QtWidgets.QMainWindow):
     '''
 
 
-
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = Gui()
@@ -167,4 +270,5 @@ if __name__ == '__main__':
     # window.close()  # ! это закрывает первое окно с авторизацией
     #work = work.WorkGui()
     # work.show()  # ! это открывает второе окно с рабочей областью
+    Client('192.168.0.110', 7000).connect()
     sys.exit(app.exec_())
